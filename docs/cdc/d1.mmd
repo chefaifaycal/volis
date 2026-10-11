@@ -1,0 +1,38 @@
+flowchart LR
+  subgraph Clients
+    APP["App Expo<br/>iOS · Android · web"]
+  end
+  subgraph Supabase["Backend Supabase"]
+    AUTH["Supabase Auth<br/>(PKCE, MFA)"]
+    API["API PostgREST + RLS"]
+    FN["Edge Functions<br/>(logique sensible, webhooks)"]
+    DB[("PostgreSQL")]
+    ST[("Storage privé<br/>photos")]
+    RT["Realtime<br/>messagerie"]
+  end
+  subgraph Stripe
+    SC["Stripe Connect<br/>paiements, transferts, versements"]
+    SI["Stripe Identity"]
+    SO["Onboarding hébergé /<br/>composants intégrés"]
+  end
+  PUSH["Service push Expo<br/>→ APNs / FCM"]
+  SEN["Sentry"]
+
+  APP -- "HTTPS + jeton" --> AUTH
+  APP -- "HTTPS + jeton" --> API
+  APP -- "HTTPS" --> FN
+  APP -- "URL signées" --> ST
+  APP <-- "WebSocket" --> RT
+  APP -- "PaymentSheet / Payment Element" --> SC
+  APP -- "session de vérification" --> SI
+  APP -- "lien d'onboarding" --> SO
+  API --> DB
+  FN --> DB
+  RT --> DB
+  FN -- "clé secrète (serveur seulement)" --> SC
+  FN --> SI
+  SC -- "webhooks signés" --> FN
+  SI -- "webhooks signés" --> FN
+  FN --> PUSH
+  PUSH --> APP
+  APP -. "plantages (données masquées)" .-> SEN

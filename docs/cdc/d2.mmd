@@ -1,0 +1,28 @@
+stateDiagram-v2
+  state "Créée" as Creee
+  state "Réservée" as Reservee
+  state "Payée / retenue" as PayeeRetenue
+  state "Remise au voyageur" as RemiseAuVoyageur
+  state "En transit" as EnTransit
+  state "Livrée" as Livree
+  state "Fonds libérés" as FondsLiberes
+  state "Litige" as Litige
+  state "Remboursée" as Remboursee
+  state "Annulée" as Annulee
+  [*] --> Creee : demande d'envoi + colis créés
+  Creee --> Reservee : voyageur accepte (ou expéditeur réserve un trajet)
+  Reservee --> PayeeRetenue : payment_intent.succeeded (webhook)
+  Reservee --> Annulee : annulation avant paiement
+  PayeeRetenue --> RemiseAuVoyageur : preuve de remise (photo + confirmation des deux parties)
+  PayeeRetenue --> Remboursee : annulation / non-remise (refund)
+  RemiseAuVoyageur --> EnTransit : départ confirmé par le voyageur
+  EnTransit --> Livree : confirmation du destinataire (code ou photo)
+  Livree --> FondsLiberes : serveur crée le transfert (délai de contestation écoulé, à définir)
+  RemiseAuVoyageur --> Litige : signalement
+  EnTransit --> Litige : signalement
+  Livree --> Litige : signalement dans le délai prévu
+  Litige --> FondsLiberes : décision en faveur du voyageur
+  Litige --> Remboursee : décision en faveur de l'expéditeur (remboursement total ou partiel)
+  FondsLiberes --> [*]
+  Remboursee --> [*]
+  Annulee --> [*]

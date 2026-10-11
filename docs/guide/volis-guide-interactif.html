@@ -1,0 +1,694 @@
+<!doctype html>
+<html lang="fr-CA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Volis — Guide interactif de développement avec Grok</title>
+<meta name="description" content="Guide étape par étape pour développer et lancer Volis avec les assistants Grok Bot : Ui Designer, App Dev & Security et Legal Team.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20rx%3D%2222.37%22%20fill%3D%22%230F766E%22/%3E%3Cg%20transform%3D%22translate%280.00%200.00%29%20scale%281.0%29%22%3E%3Cpath%20d%3D%22M30.5%2080.0%209.0%2025.4H25.200000000000003L40.1%2066.7H33.9L48.800000000000004%2025.4H65.0L43.5%2080.0Z%22%20fill%3D%22%23F5F1E8%22/%3E%3Cmask%20id%3D%22k66%22%20maskUnits%3D%22userSpaceOnUse%22%20x%3D%22-1000%22%20y%3D%22-1000%22%20width%3D%223000%22%20height%3D%223000%22%3E%3Crect%20x%3D%22-1000%22%20y%3D%22-1000%22%20width%3D%223000%22%20height%3D%223000%22%20fill%3D%22%23fff%22/%3E%3Cpath%20d%3D%22M89.79%2021.62%20L72.27%2024.77%20L79.63%2027.97Z%22%20fill%3D%22%23000%22%20stroke%3D%22%23000%22%20stroke-width%3D%221.22%22%20stroke-linejoin%3D%22round%22/%3E%3Cpath%20d%3D%22M89.58%2022.69%20L80.31%2029.20%20L79.73%2034.01Z%22%20fill%3D%22%23000%22%20stroke%3D%22%23000%22%20stroke-width%3D%221.22%22%20stroke-linejoin%3D%22round%22/%3E%3C/mask%3E%3Ccircle%20cx%3D%2281.00%22%20cy%3D%2226.00%22%20r%3D%2213.00%22%20fill%3D%22%23FF7A59%22%20mask%3D%22url%28%23k66%29%22/%3E%3C/g%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --cream:#F5F1E8; --paper:#FFFDF8; --sand:#EAE3D3; --line:#D9D0BC;
+  --ink:#1E2A3A; --ink2:#3F4B5C; --muted:#56606E;
+  --teal:#0F766E; --teal-d:#0B5A54; --teal-l:#D7ECE8;
+  --coral:#FF7A59; --coral-l:#FFE3DA; --coral-ink:#8A2E16;
+  --ok:#16794A; --ok-l:#DDF1E5;
+  --warn-l:#FFF1D1; --warn-ink:#6B4A00;
+  --r:14px; --r-s:10px;
+  --sh:0 1px 2px rgba(30,42,58,.06),0 4px 14px rgba(30,42,58,.06);
+  --fh:"Plus Jakarta Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --fb:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --fm:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+body{margin:0;background:var(--cream);color:var(--ink);font:400 16px/1.55 var(--fb);-webkit-text-size-adjust:100%}
+a{color:var(--teal-d);text-underline-offset:2px}
+a:hover{color:var(--ink)}
+:focus-visible{outline:3px solid var(--teal);outline-offset:2px;border-radius:6px}
+.skip{position:absolute;left:-999px;top:8px;background:var(--ink);color:#fff;padding:10px 14px;border-radius:8px;z-index:100}
+.skip:focus{left:8px}
+.sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+h1,h2,h3{font-family:var(--fh);letter-spacing:-.01em;line-height:1.2;margin:0}
+button,input,textarea,select{font:inherit;color:inherit}
+.btn{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border-radius:999px;border:1.5px solid var(--ink);background:var(--paper);color:var(--ink);font-weight:600;font-size:15px;cursor:pointer;white-space:nowrap}
+.btn:hover{background:var(--sand)}
+.btn.pri{background:var(--teal);border-color:var(--teal);color:#fff}
+.btn.pri:hover{background:var(--teal-d)}
+.btn.ghost{border-color:transparent;background:transparent}
+.btn.ghost:hover{background:var(--sand)}
+.btn.danger{border-color:var(--coral-ink);color:var(--coral-ink)}
+.btn.danger:hover{background:var(--coral-l)}
+.btn svg{width:18px;height:18px;flex:none}
+/* en-tête */
+header.top{background:var(--paper);border-bottom:1px solid var(--line)}
+.wrap{max-width:1240px;margin:0 auto;padding:0 20px}
+.hd{display:flex;align-items:center;gap:18px;padding:18px 0 14px;flex-wrap:wrap}
+.hd svg{flex:none}
+.hd .t{flex:1;min-width:240px}
+.hd h1{font-size:26px;font-weight:800}
+.hd p{margin:4px 0 0;color:var(--ink2)}
+.disc{display:flex;gap:12px;align-items:flex-start;background:var(--warn-l);border:1px solid #E9CF8E;color:var(--warn-ink);border-radius:var(--r-s);padding:12px 14px;margin:0 0 16px;font-size:14.5px}
+.disc strong{color:#4A3300}
+.disc svg{flex:none;width:22px;height:22px;margin-top:1px}
+/* tableau de bord */
+.dash{display:grid;grid-template-columns:1.25fr 1fr;gap:16px;margin:20px 0}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--sh);padding:18px}
+.card h2{font-size:17px;font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.big{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.big .pct{font:800 44px/1 var(--fh);color:var(--teal-d)}
+.big .of{color:var(--ink2)}
+.bar{height:12px;background:var(--sand);border-radius:99px;overflow:hidden;margin:12px 0 6px}
+.bar>i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--teal),#14968B);border-radius:99px;transition:width .35s ease}
+.bar.sm{height:8px;margin:8px 0 0}
+.stats{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;color:var(--ink2);margin-top:8px}
+.stats b{color:var(--ink)}
+.phgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:14px}
+.phgrid a{display:block;text-decoration:none;color:var(--ink);background:var(--cream);border:1px solid var(--line);border-radius:10px;padding:8px 10px;font-size:13px;min-height:44px}
+.phgrid a:hover{border-color:var(--teal)}
+.phgrid a b{display:block;font:700 12px var(--fh);color:var(--ink2)}
+.phgrid a .bar{height:5px;margin:6px 0 0}
+.phgrid a.done{background:var(--ok-l);border-color:#9FD2B4}
+.calc label{display:block;font-weight:600;font-size:14px;margin:8px 0 4px}
+.calc .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.calc input[type=date]{width:100%;min-height:44px;border:1.5px solid var(--line);border-radius:10px;background:#fff;padding:0 10px}
+.calc input:focus{border-color:var(--teal)}
+.calc .out{margin-top:12px;font-size:14.5px;display:grid;gap:8px}
+.pill{display:flex;gap:10px;align-items:flex-start;border-radius:10px;padding:9px 12px;background:var(--cream);border:1px solid var(--line)}
+.pill.bad{background:var(--coral-l);border-color:#F3B4A2;color:var(--coral-ink)}
+.pill.good{background:var(--ok-l);border-color:#9FD2B4;color:#0F4F31}
+.pill .dot{width:10px;height:10px;border-radius:50%;flex:none;margin-top:6px;background:var(--muted)}
+.pill.bad .dot{background:var(--coral-ink)} .pill.good .dot{background:var(--ok)}
+.bots{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:0 0 20px}
+.bot{display:flex;gap:10px;align-items:flex-start;background:var(--paper);border:1px solid var(--line);border-radius:var(--r-s);padding:12px;font-size:13.5px;color:var(--ink2)}
+.bot b{display:block;color:var(--ink);font-size:14.5px}
+.av{width:34px;height:34px;border-radius:50%;flex:none;display:grid;place-items:center;font:800 13px var(--fh);color:#fff}
+.av.ui{background:#7A4FB8}.av.dev{background:var(--teal)}.av.leg{background:#9A3C1F}.av.you{background:var(--ink)}
+/* barre d'outils */
+.tools{position:sticky;top:0;z-index:20;background:rgba(245,241,232,.96);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+.tools .wrap{display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding-top:10px;padding-bottom:10px}
+.search{position:relative;flex:1 1 260px;min-width:200px}
+.search input{width:100%;min-height:44px;border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:0 40px 0 42px}
+.search input:focus{border-color:var(--teal);outline:none;box-shadow:0 0 0 3px var(--teal-l)}
+.search svg{position:absolute;left:14px;top:50%;transform:translateY(-50%);width:18px;height:18px;color:var(--muted)}
+input[type=search]::-webkit-search-cancel-button{-webkit-appearance:none;appearance:none}
+.search .clr{position:absolute;right:4px;top:50%;transform:translateY(-50%);width:36px;height:36px;border:0;border-radius:50%;background:transparent;cursor:pointer;display:none}
+.search .clr.on{display:block}
+.seg{display:inline-flex;background:var(--sand);border-radius:999px;padding:3px;gap:2px;flex-wrap:wrap}
+.seg label{position:relative}
+.seg input{position:absolute;opacity:0;inset:0;width:100%;height:100%;margin:0;cursor:pointer}
+.seg span{display:inline-flex;align-items:center;min-height:38px;padding:0 13px;border-radius:999px;font-weight:600;font-size:14px;color:var(--ink2)}
+.seg input:checked+span{background:var(--ink);color:#fff}
+.seg input:focus-visible+span{outline:3px solid var(--teal);outline-offset:1px}
+.tb{display:flex;gap:6px;flex-wrap:wrap}
+.tb .btn{min-height:40px;padding:0 12px;font-size:14px}
+/* corps */
+main{padding-bottom:60px}
+.layout{display:grid;grid-template-columns:240px 1fr;gap:24px;margin-top:20px}
+nav.toc{position:sticky;top:84px;align-self:start;max-height:calc(100vh - 100px);overflow:auto}
+nav.toc h2{font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink2);margin:4px 0 8px}
+nav.toc ol{list-style:none;margin:0;padding:0;display:grid;gap:4px}
+nav.toc a{display:flex;justify-content:space-between;gap:8px;align-items:center;text-decoration:none;color:var(--ink);padding:9px 10px;border-radius:10px;font-size:14px;min-height:44px}
+nav.toc a:hover{background:var(--sand)}
+nav.toc a.cur{background:var(--paper);box-shadow:inset 3px 0 0 var(--teal)}
+nav.toc a span.p{font:600 12px var(--fm);color:var(--ink2)}
+nav.toc a.done span.p{color:var(--ok)}
+section.phase{margin-bottom:34px}
+.phhead{display:flex;gap:14px;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;margin-bottom:6px}
+.phhead .n{font:700 13px var(--fm);color:var(--teal-d);letter-spacing:.04em}
+.phhead h2{font-size:24px;font-weight:800}
+.phhead .pc{font:600 14px var(--fb);color:var(--ink2)}
+.phintro{color:var(--ink2);margin:6px 0 10px;max-width:780px}
+.phase>.bar{margin-bottom:14px}
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.step{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--sh);overflow:hidden}
+.step.crit{border-left:5px solid var(--coral)}
+.step.isdone{background:#FBFAF5}
+.step.isdone .st-title{text-decoration:line-through;text-decoration-color:rgba(30,42,58,.45);color:var(--ink2)}
+.st-h{display:flex;gap:12px;align-items:flex-start;padding:12px 12px 12px 14px}
+.ck{position:relative;flex:none;width:44px;height:44px;display:grid;place-items:center;margin:-4px 0 -4px -6px}
+.ck input{position:absolute;inset:0;opacity:0;margin:0;cursor:pointer;width:44px;height:44px;z-index:1}
+.ck .box,.ck .box *{pointer-events:none}
+.ck .box{width:26px;height:26px;border:2px solid var(--ink);border-radius:8px;background:#fff;display:grid;place-items:center}
+.ck .box svg{width:16px;height:16px;opacity:0;color:#fff}
+.ck input:checked+.box{background:var(--teal);border-color:var(--teal)}
+.ck input:checked+.box svg{opacity:1}
+.ck input:focus-visible+.box{outline:3px solid var(--teal);outline-offset:3px}
+.st-main{flex:1;min-width:0}
+.st-title{display:block;font:700 16.5px/1.35 var(--fh);color:var(--ink);cursor:pointer}
+.st-id{font:500 12px var(--fm);color:var(--ink2);margin-right:6px}
+.badges{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.bdg{display:inline-flex;align-items:center;gap:5px;font-size:12.5px;font-weight:600;padding:3px 9px;border-radius:999px;background:var(--cream);border:1px solid var(--line);color:var(--ink2)}
+.bdg svg{width:13px;height:13px;flex:none}
+.bdg.crit{background:var(--coral-l);border-color:#F3B4A2;color:var(--coral-ink)}
+.bdg.block{background:var(--warn-l);border-color:#E9CF8E;color:var(--warn-ink)}
+.bdg.ok{background:var(--ok-l);border-color:#9FD2B4;color:#0F4F31}
+.bdg.bot-ui{color:#5A3492}.bdg.bot-dev{color:var(--teal-d)}.bdg.bot-leg{color:#7F2F17}.bdg.bot-you{color:var(--ink)}
+.bdg.note{color:var(--ink)}
+.exp{flex:none;width:44px;height:44px;border-radius:50%;border:1.5px solid var(--line);background:#fff;display:grid;place-items:center;cursor:pointer}
+.exp:hover{border-color:var(--ink)}
+.exp svg{width:20px;height:20px;transition:transform .2s}
+.exp[aria-expanded=true] svg{transform:rotate(180deg)}
+.st-b{padding:4px 18px 18px 70px;display:none}
+.step.open .st-b{display:block}
+.st-b h3{font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink2);margin:16px 0 6px;font-family:var(--fb);font-weight:700}
+.st-b p{margin:0}
+.st-b ol{margin:0;padding-left:22px}
+.st-b li{margin:3px 0}
+.alert{display:flex;gap:10px;align-items:flex-start;border-radius:10px;padding:10px 12px;margin-top:12px;font-size:14.5px}
+.alert svg{flex:none;width:20px;height:20px;margin-top:1px}
+.alert.crit{background:var(--coral-l);border:1px solid #F3B4A2;color:var(--coral-ink)}
+.alert.block{background:var(--warn-l);border:1px solid #E9CF8E;color:var(--warn-ink)}
+.deps{display:flex;flex-wrap:wrap;gap:6px;list-style:none;padding:0!important}
+.deps a{display:inline-flex;align-items:center;gap:6px;text-decoration:none;font-size:13.5px;padding:6px 10px;border-radius:999px;border:1px solid var(--line);background:#fff;color:var(--ink);min-height:36px}
+.deps svg{width:14px;height:14px;flex:none}
+.deps a.d-ok{background:var(--ok-l);border-color:#9FD2B4}
+.deps a.d-no{background:var(--warn-l);border-color:#E9CF8E}
+.deliv{background:var(--teal-l);border-radius:10px;padding:10px 12px;color:#073F3A}
+.ask{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff}
+.ask .who{display:flex;gap:10px;align-items:center;padding:10px 12px;background:var(--cream);border-bottom:1px solid var(--line);flex-wrap:wrap}
+.ask .who .av{width:30px;height:30px;font-size:12px}
+.ask .who b{flex:1}
+.ask pre{margin:0;padding:12px 14px;white-space:pre-wrap;word-wrap:break-word;font:400 13.5px/1.55 var(--fm);color:var(--ink);max-height:260px;overflow:auto}
+.links{list-style:none;padding:0!important;display:flex;flex-wrap:wrap;gap:6px 14px}
+.links a{display:inline-flex;align-items:center;gap:5px;min-height:32px}
+.links svg{width:14px;height:14px}
+.meta{font-size:14px;color:var(--ink2)}
+textarea.notes{width:100%;min-height:84px;border:1.5px solid var(--line);border-radius:10px;padding:10px 12px;background:#fff;resize:vertical}
+textarea.notes:focus{border-color:var(--teal);outline:none;box-shadow:0 0 0 3px var(--teal-l)}
+.saved{font-size:12.5px;color:var(--ok);margin-left:8px;opacity:0;transition:opacity .2s}
+.saved.on{opacity:1}
+.empty{display:none;text-align:center;padding:40px 20px;color:var(--ink2);background:var(--paper);border:1px dashed var(--line);border-radius:var(--r)}
+mark{background:#FFE08A;color:inherit;border-radius:3px;padding:0 1px}
+.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%) translateY(20px);opacity:0;pointer-events:none;background:var(--ink);color:#fff;padding:12px 18px;border-radius:12px;font-weight:600;box-shadow:0 8px 24px rgba(0,0,0,.2);transition:.25s;z-index:50;max-width:calc(100% - 32px)}
+.toast.on{opacity:1;transform:translateX(-50%)}
+dialog{border:0;border-radius:16px;padding:22px;max-width:440px;width:calc(100% - 32px);box-shadow:0 20px 60px rgba(0,0,0,.3);background:var(--paper);color:var(--ink)}
+dialog::backdrop{background:rgba(30,42,58,.45)}
+dialog h2{font-size:20px;margin-bottom:8px}
+dialog .act{display:flex;justify-content:flex-end;gap:8px;margin-top:18px;flex-wrap:wrap}
+footer{border-top:1px solid var(--line);padding:22px 0 30px;color:var(--ink2);font-size:14px}
+.printhdr{display:none}
+/* responsive */
+@media (max-width:1020px){.layout{grid-template-columns:1fr}nav.toc{display:none}.phgrid{grid-template-columns:repeat(5,1fr)}.bots{grid-template-columns:1fr 1fr}}
+@media (max-width:760px){
+  .dash{grid-template-columns:1fr}.phgrid{grid-template-columns:repeat(2,1fr)}
+  .hd h1{font-size:21px}.hd svg{width:100px;height:46px}
+  .tools{position:static}html{scroll-padding-top:12px}.tools .wrap{gap:8px}.search{flex-basis:100%}
+  .tb .lbl{display:none}.tb .btn{width:44px;padding:0;justify-content:center;min-height:44px}
+  .st-b{padding:4px 14px 16px 14px}
+  .bots{grid-template-columns:1fr}
+  .calc .row{grid-template-columns:1fr}
+  .phhead h2{font-size:21px}
+  .seg span{padding:0 10px;font-size:13.5px}
+}
+/* impression */
+@media print{
+  @page{margin:14mm}
+  body{background:#fff;font-size:11pt}
+  .tools,nav.toc,.exp,.skip,.toast,.noprint,.calc input,.ask .btn,.search{display:none!important}
+  header.top{border:0}
+  .layout{display:block;margin:0}
+  .card,.step,.bot{box-shadow:none}
+  .step{break-inside:auto;border-radius:8px;margin-bottom:2mm}
+  .st-h,.ask,.alert,.deliv{break-inside:avoid}
+  .st-h{break-after:avoid}
+  h2,h3{break-after:avoid}
+  .st-b{padding:0 10px 8px 12px!important;font-size:9.5pt}
+  .st-b h3{margin:7px 0 3px;font-size:8pt}
+  .steps{gap:4px}
+  .bots{grid-template-columns:repeat(4,1fr);gap:6px}
+  .bot{padding:6px;font-size:8.5pt}
+  .badges .bdg{font-size:8pt;padding:1px 6px}
+  .disc{font-size:9pt}
+  .phase>.bar,.bar{print-color-adjust:exact;-webkit-print-color-adjust:exact}
+  .card{padding:10px}
+  .phgrid a{min-height:0;padding:4px 6px}
+  .calc .out{font-size:9pt}
+  .st-b{display:block!important;padding-left:18px}
+  .step[hidden],section.phase[hidden]{display:block!important}
+  .ask pre{max-height:none;overflow:visible;font-size:9pt}
+  a{color:var(--ink)}
+  .links a::after{content:" — " attr(href);font-size:8.5pt;color:#444;word-break:break-all}
+  .ck .box{border-color:#000}
+  .dash{grid-template-columns:1fr 1fr}
+  textarea.notes{border:1px solid #999;min-height:0;height:auto}
+  textarea.notes.emptyn,h3.emptyn{display:none}
+  .printhdr{display:block;font-size:10pt;color:#333;margin-bottom:6px}
+  section.phase{break-before:auto}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#contenu">Aller au contenu</a>
+<header class="top">
+  <div class="wrap">
+    <div class="hd">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="-4 -116 266 122" role="img" aria-label="Volis" width="132" height="60"><path d="M26.668 0.0 1.298 -64.428H20.413999999999998L37.995999999999995 -15.693999999999999H30.68L48.262 -64.428H67.378L42.007999999999996 0.0Z" fill="#1E2A3A"/><mask id="lg-k1" maskUnits="userSpaceOnUse" x="-1000" y="-1000" width="3000" height="3000"><rect x="-1000" y="-1000" width="3000" height="3000" fill="#fff"/><path d="M99.68 -49.50 L113.10 -41.75 L113.10 -26.25 L99.68 -18.50 L86.25 -26.25 L86.25 -41.75Z" fill="#000" stroke="#000" stroke-width="2.5" stroke-linejoin="round"/></mask><circle cx="99.68" cy="-34.00" r="34" fill="#1E2A3A" mask="url(#lg-k1)"/><path d="M86.25 -41.75 L99.68 -34.00 L113.10 -41.75 M99.68 -34.00 L99.68 -18.50" fill="none" stroke="#FF7A59" stroke-width="3.6" stroke-linecap="butt" stroke-linejoin="miter" /><path d="M144.166 0.0V-89.326H161.86599999999999V0.0ZM174.728 0.0V-64.428H192.428V0.0Z" fill="#1E2A3A"/><path d="M231.36199999999997 1.416Q220.74199999999996 1.416 212.89499999999998 -3.5989999999999993Q205.04799999999997 -8.613999999999999 202.21599999999998 -17.11L215.19599999999997 -23.246Q217.67399999999998 -18.054 221.92199999999997 -15.104Q226.16999999999996 -12.154 231.36199999999997 -12.154Q235.13799999999998 -12.154 237.14399999999998 -13.687999999999999Q239.14999999999998 -15.222 239.14999999999998 -17.936Q239.14999999999998 -19.352 238.44199999999998 -20.355Q237.73399999999998 -21.358 236.31799999999998 -22.183999999999997Q234.902 -23.009999999999998 232.77799999999996 -23.599999999999998L221.80399999999997 -26.668Q213.89799999999997 -28.91 209.64999999999998 -33.925Q205.402 -38.94 205.402 -45.784Q205.402 -51.802 208.46999999999997 -56.286Q211.53799999999998 -60.769999999999996 217.08399999999997 -63.306999999999995Q222.62999999999997 -65.844 229.82799999999997 -65.844Q239.26799999999997 -65.844 246.40699999999998 -61.419Q253.54599999999996 -56.994 256.496 -48.97L243.39799999999997 -42.833999999999996Q241.98199999999997 -46.846 238.265 -49.265Q234.54799999999997 -51.684 229.82799999999997 -51.684Q226.40599999999998 -51.684 224.45899999999997 -50.268Q222.51199999999997 -48.852 222.51199999999997 -46.373999999999995Q222.51199999999997 -45.076 223.21999999999997 -44.013999999999996Q223.92799999999997 -42.952 225.52099999999996 -42.126Q227.11399999999998 -41.3 229.474 -40.592L239.73999999999998 -37.524Q247.76399999999998 -35.164 252.012 -30.384999999999998Q256.26 -25.605999999999998 256.26 -18.644Q256.26 -12.626 253.13299999999998 -8.142Q250.00599999999997 -3.658 244.45999999999998 -1.121Q238.914 1.416 231.36199999999997 1.416Z" fill="#1E2A3A"/><mask id="lg-k2" maskUnits="userSpaceOnUse" x="-1000" y="-1000" width="3000" height="3000"><rect x="-1000" y="-1000" width="3000" height="3000" fill="#fff"/><path d="M195.07 -100.82 L172.17 -96.70 L181.79 -92.52Z" fill="#000" stroke="#000" stroke-width="1.6" stroke-linejoin="round"/><path d="M194.80 -99.41 L182.67 -90.90 L181.91 -84.62Z" fill="#000" stroke="#000" stroke-width="1.6" stroke-linejoin="round"/></mask><circle cx="183.6" cy="-95.1" r="17" fill="#FF7A59" mask="url(#lg-k2)"/></svg>
+      <div class="t">
+        <h1>Guide de développement Volis, avec Grok</h1>
+        <p>10 phases, 77 étapes pour concevoir, développer et lancer Volis avec vos assistants Grok Bot. Votre progression est enregistrée dans ce navigateur.</p>
+      </div>
+    </div>
+    <div class="disc" role="note">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3 2 20h20L12 3z"/><path d="M12 10v4M12 17h.01" stroke-linecap="round"/></svg>
+      <div><strong>Ceci n’est pas un avis juridique.</strong> Les étapes légales reprennent la partie C du cahier des charges et doivent être validées par un avocat membre du Barreau du Québec. Les montants et délais marqués « à décider » sont vos décisions d’affaires; ceux des maquettes sont des exemples. Les durées sont des estimations.</div>
+    </div>
+  </div>
+</header>
+
+<div class="tools" role="region" aria-label="Recherche, filtres et actions">
+  <div class="wrap">
+    <div class="search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5" stroke-linecap="round"/></svg>
+      <label for="q" class="sr">Rechercher une étape</label>
+      <input id="q" type="search" placeholder="Rechercher (ex. Stripe, CAI, RLS, TestFlight)" autocomplete="off">
+      <button class="clr" id="qclr" type="button" aria-label="Effacer la recherche">✕</button>
+    </div>
+    <fieldset class="seg" style="border:0;margin:0" id="filters">
+      <legend class="sr">Filtrer les étapes</legend>
+      <label><input type="radio" name="f" value="all" checked><span>Toutes</span></label>
+      <label><input type="radio" name="f" value="todo"><span>À faire</span></label>
+      <label><input type="radio" name="f" value="done"><span>Faites</span></label>
+      <label><input type="radio" name="f" value="crit"><span>Chemin critique</span></label>
+    </fieldset>
+    <div class="tb">
+      <button class="btn ghost" type="button" id="bExpand" aria-label="Tout déplier"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m7 10 5 5 5-5M7 4l5 5 5-5" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="lbl">Déplier</span></button>
+      <button class="btn ghost" type="button" id="bCollapse" aria-label="Tout replier"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m7 14 5-5 5 5M7 20l5-5 5 5" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="lbl">Replier</span></button>
+      <button class="btn" type="button" id="bExport" aria-label="Exporter la progression (JSON)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 17v3h16v-3" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="lbl">Exporter</span></button>
+      <button class="btn" type="button" id="bImport" aria-label="Importer une progression (JSON)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 15V3m0 0 4 4m-4-4-4 4M4 17v3h16v-3" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="lbl">Importer</span></button>
+      <input type="file" id="fImport" accept="application/json,.json" class="sr" tabindex="-1" aria-hidden="true">
+      <button class="btn" type="button" id="bPrint" aria-label="Imprimer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9V3h12v6M6 18H4v-7h16v7h-2M8 14h8v7H8z" stroke-linejoin="round"/></svg><span class="lbl">Imprimer</span></button>
+      <button class="btn danger" type="button" id="bReset" aria-label="Réinitialiser la progression"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7M3 4v5h5" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="lbl">Réinitialiser</span></button>
+    </div>
+  </div>
+</div>
+
+<main id="contenu" tabindex="-1">
+  <div class="wrap">
+    <div class="dash">
+      <section class="card" aria-labelledby="h-prog">
+        <h2 id="h-prog">Progression globale</h2>
+        <div class="big"><span class="pct" id="gPct">0 %</span><span class="of" id="gOf">0 étape faite sur 77</span></div>
+        <div class="bar" role="progressbar" aria-labelledby="h-prog" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="gBar"><i></i></div>
+        <div class="stats" id="gStats"></div>
+        <div class="phgrid" id="phgrid"></div>
+      </section>
+      <section class="card calc" aria-labelledby="h-calc">
+        <h2 id="h-calc">Chemin critique : biométrie et lancement</h2>
+        <p class="meta" style="margin:0">Stripe Identity ne peut passer en production que si la déclaration biométrique a été déposée à la CAI depuis au moins 60 jours <b>et</b> que l’ÉFVP est terminée. Le développement en mode test n’est pas bloqué.</p>
+        <div class="row">
+          <div><label for="dLaunch">Date cible de lancement</label><input type="date" id="dLaunch"></div>
+          <div><label for="dCai">Date de dépôt à la CAI</label><input type="date" id="dCai"></div>
+        </div>
+        <div class="out" id="calcOut" aria-live="polite"></div>
+      </section>
+    </div>
+
+    <section aria-labelledby="h-bots">
+      <h2 id="h-bots" class="sr">Vos assistants</h2>
+      <div class="bots" id="bots"></div>
+    </section>
+
+    <div class="layout">
+      <nav class="toc" aria-label="Phases"><h2>Phases</h2><ol id="toc"></ol></nav>
+      <div>
+        <p class="printhdr" id="printhdr"></p>
+        <div id="phases"></div>
+        <div class="empty" id="empty" role="status">Aucune étape ne correspond à votre recherche ou à ce filtre.</div>
+      </div>
+    </div>
+  </div>
+</main>
+<footer><div class="wrap">Sources : cahier des charges Volis (parties A, B et C), charte graphique et dev-assets (README_DEV.md). Les liens pointent vers la documentation officielle. Guide autonome : il fonctionne hors ligne. Les données restent dans ce navigateur (localStorage); exportez-les pour les sauvegarder ou les transférer.</div></footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<dialog id="dlgReset" aria-labelledby="dr-t" aria-describedby="dr-d">
+  <h2 id="dr-t">Réinitialiser la progression ?</h2>
+  <p id="dr-d">Toutes les cases cochées, notes et dates seront effacées de ce navigateur. Exportez d’abord votre progression si vous voulez la garder.</p>
+  <div class="act">
+    <button class="btn" type="button" id="drExport">Exporter d’abord</button>
+    <button class="btn ghost" type="button" id="drNo">Annuler</button>
+    <button class="btn danger" type="button" id="drYes">Tout effacer</button>
+  </div>
+</dialog>
+
+<script id="guide-data" type="application/json">{"phases": [{"id": "p0", "title": "Préparation et décisions", "intro": "Fixer ce qui conditionne tout le reste : les montants, le nom, la forme juridique et le calendrier. Les montants des maquettes ne sont que des exemples.", "steps": [{"nolegal": false, "id": "p0-1", "title": "Lire le cahier des charges et la charte", "objective": "Avoir une vue d’ensemble avant de lancer les chantiers.", "sub": ["Lire l’introduction et les conventions (« à confirmer », « à décider », « à faire valider »).", "Parcourir les 50 écrans (volis-ecrans-concept1.pdf) et les planches par parcours.", "Noter vos questions et vos désaccords, partie par partie."], "deliverable": "Liste de questions classées par partie (A, B, C).", "bot": "Vous (Faycal)", "prompt": "Voici mes questions après avoir lu le cahier des charges Volis (/workspace/volis/cahier-des-charges-volis.md). Pour chacune, dis-moi quelle partie et quel bot doit y répondre, puis propose une réponse courte quand tu peux : [collez vos questions]", "links": [], "duration": "2 à 3 h", "deps": [], "critical": false, "warn": "", "ref": "Introduction"}, {"nolegal": false, "id": "p0-2", "title": "Décider les montants et les délais", "objective": "Remplacer les valeurs illustratives par vos vrais choix d’affaires.", "sub": ["Commission Volis (taux) : à décider.", "Frais de versement instantané et éventuelle marge Volis : à décider (à divulguer).", "Plafond de la protection de base (sans assurance) et valeur déclarée maximale : à décider.", "Délai de contestation, délai de libération des fonds, délai d’expiration d’une demande : à décider.", "Délai de grâce avant suppression définitive d’un compte : à décider.", "Faire relire ces choix par Legal Team (prix tout inclus, divulgation)."], "deliverable": "Tableau des montants et délais validés (une page).", "bot": "Legal Team", "prompt": "Je fixe les montants de Volis : commission [x %], frais de versement instantané [x], plafond de protection de base [x $], valeur déclarée maximale [x $], délai de contestation [x jours], délai de libération [x jours]. Vérifie, d’après la partie C du cahier des charges (prix tout inclus, divulgation des frais, assurance, remboursements), ce qui doit être affiché ou divulgué pour chaque montant et signale ce qui pose un problème. Ce n’est pas un avis juridique : dis-moi ce que je dois faire valider par l’avocat.", "links": [], "duration": "1 à 2 jours", "deps": [], "critical": true, "warn": "", "ref": "Partie A §9 · Partie B §4 · Partie C §1–5"}, {"nolegal": false, "id": "p0-3", "title": "Valider le nom « Volis »", "objective": "« Volis » est un nom de travail : vérifier qu’il est utilisable avant d’investir dans la marque.", "sub": ["Chercher la marque dans la base de l’OPIC et dans les stores.", "Vérifier la disponibilité du nom de domaine et des comptes de réseaux sociaux.", "Demander à l’avocat s’il faut déposer la marque."], "deliverable": "Nom confirmé (ou nouveau nom) et domaine réservé.", "bot": "Legal Team", "prompt": "Je veux utiliser « Volis » pour une application de mise en relation entre expéditeurs de colis et voyageurs (Québec, puis international). Prépare une liste de vérifications à faire (base de marques de l’OPIC, stores, domaine) et les questions à poser à un avocat sur le dépôt de marque. Ne conclus pas à ma place sur la disponibilité.", "links": [["OPIC — Recherche de marques de commerce", "https://ised-isde.canada.ca/cipo/trademark-search/srch"]], "duration": "1 à 3 jours", "deps": [], "critical": false, "warn": "", "ref": ""}, {"nolegal": false, "id": "p0-4", "title": "Choisir la forme juridique et obtenir le NEQ", "objective": "Avoir une entité légale pour signer avec Stripe, Apple, Google et l’assureur.", "sub": ["Choisir la forme (entreprise individuelle ou société) avec l’avocat ou le comptable.", "S’immatriculer au Registraire des entreprises du Québec et obtenir le NEQ.", "Ouvrir un compte bancaire d’entreprise."], "deliverable": "NEQ et compte bancaire d’entreprise.", "bot": "Legal Team", "prompt": "Aide-moi à préparer ma rencontre avec un avocat ou un comptable pour choisir la forme juridique de Volis (entreprise individuelle ou société par actions) et m’immatriculer au Registraire des entreprises du Québec. Liste les questions à poser en tenant compte de la partie C du cahier des charges (commission, TPS/TVQ, Stripe Connect, responsabilité). Ne tranche pas à ma place.", "links": [["Registraire des entreprises du Québec", "https://www.registreentreprises.gouv.qc.ca/"], ["Québec.ca — Démarrer une entreprise", "https://www.quebec.ca/entreprises-et-travailleurs-autonomes/demarrer-entreprise"]], "duration": "1 à 3 semaines", "deps": [], "critical": true, "warn": "Les comptes organisation Apple et Google, Stripe en production et le D-U-N-S dépendent de l’entité légale.", "ref": ""}, {"nolegal": false, "id": "p0-5", "title": "Fixer la date cible de lancement et le calendrier", "objective": "Planifier à rebours depuis les préalables légaux, qui sont le chemin critique.", "sub": ["Fixer une date cible de lancement (J1 — MVP Canada).", "Calculer la date limite de dépôt de la déclaration biométrique à la CAI (au moins 60 jours avant la mise en service de Stripe Identity en production). Utilisez le calculateur en haut de la page.", "Placer l’ÉFVP, l’avis de l’avocat, le pentest et la revue des stores avant J1."], "deliverable": "Calendrier J0 → J1 avec le chemin critique en évidence.", "bot": "App Dev & Security", "prompt": "D’après la section 6.2 du volet technique (jalons J0 à J4) et le délai de 60 jours de la déclaration biométrique à la CAI, construis un calendrier à rebours pour un lancement le [date]. Indique le chemin critique, les tâches en parallèle et les marges. Les dates de l’ÉFVP et de l’avis juridique sont à confirmer avec Legal Team.", "links": [], "duration": "½ journée", "deps": [], "critical": true, "warn": "", "ref": "Partie B §6.2"}, {"nolegal": false, "id": "p0-6", "title": "Choisir le mode d’assurance (option A ou B)", "objective": "Décider si l’assurance arrive au lancement ou en version 1.1, et sous quelle forme.", "sub": ["Option A : recommandation vers l’assureur (le plus simple).", "Option B : distribution sans représentant (à valider avec l’avocat et l’assureur).", "Identifier un assureur partenaire potentiel."], "deliverable": "Décision écrite : option A, option B ou report à la version 1.1.", "bot": "Legal Team", "prompt": "Compare pour moi les options A (recommandation) et B (distribution sans représentant) de l’assurance optionnelle décrites dans la partie C §4 du cahier des charges : impacts sur l’interface (écrans 11 et 40), sur le paiement et sur mes obligations. Liste ce que je dois faire valider par l’avocat et par l’assureur.", "links": [], "duration": "1 semaine", "deps": [], "critical": false, "warn": "", "ref": "Partie C §4 · Partie B §4.4"}]}, {"id": "p1", "title": "Légal et conformité", "intro": "À démarrer dès J0, en parallèle du développement. Ce guide ne remplace pas un avocat membre du Barreau du Québec.", "steps": [{"nolegal": false, "id": "p1-1", "title": "Consultation initiale avec un avocat", "objective": "Obtenir un avis initial sur le modèle et le calendrier des démarches.", "sub": ["Choisir un avocat membre du Barreau du Québec (droit des affaires, protection du consommateur, vie privée).", "Lui transmettre la partie C et la liste « À faire valider » (§9).", "Obtenir le calendrier de la déclaration à la CAI et de l’ÉFVP."], "deliverable": "Avis initial écrit et liste des démarches avec responsables.", "bot": "Legal Team", "prompt": "Prépare un dossier d’une page pour ma première rencontre avec un avocat au sujet de Volis : description du service, flux d’argent (Stripe Connect, separate charges and transfers), données traitées (dont la biométrie via Stripe Identity), et la liste « À faire valider » de la partie C §9. Ajoute les questions prioritaires.", "links": [["Barreau du Québec", "https://www.barreau.qc.ca/"]], "duration": "1 à 3 semaines", "deps": ["p0-4"], "critical": true, "warn": "", "ref": "Partie C §9"}, {"nolegal": false, "id": "p1-2", "title": "Désigner la personne responsable de la protection des renseignements personnels", "objective": "Répondre à la Loi 25 dès le départ.", "sub": ["Désigner la personne responsable (vous, par défaut, si vous dirigez l’entreprise : à confirmer avec l’avocat).", "Préparer ses coordonnées pour la politique de confidentialité et le site web.", "Mettre en place le registre des incidents de confidentialité (conservé 5 ans)."], "deliverable": "Nom et coordonnées publiés; registre des incidents ouvert.", "bot": "Legal Team", "prompt": "Explique-moi, à partir de la partie C §7 et du tableau 3.1 de la partie B, ce que la personne responsable de la protection des renseignements personnels de Volis doit faire en pratique (registre des incidents, demandes d’accès, ÉFVP). Indique ce qui doit être validé par l’avocat.", "links": [["Commission d’accès à l’information (CAI)", "https://www.cai.gouv.qc.ca/"]], "duration": "½ journée", "deps": ["p0-4"], "critical": false, "warn": "", "ref": "Partie B §3.1, SEC-20"}, {"nolegal": false, "id": "p1-3", "title": "Inventaire des données et des sous-traitants", "objective": "Savoir exactement quelles données circulent, où et chez qui.", "sub": ["Lister les données par entité (users, parcels, messages, photos, paiements…).", "Lister les sous-traitants : Stripe, Sentry, service push d’Expo, analytics éventuel, assureur. Supabase est en Canada (Central).", "Ajouter le fournisseur de SMS du code de vérification (ex. Twilio via Supabase), le fournisseur de cartes, ainsi qu’Apple et Google (livraison des notifications derrière Expo).", "Indiquer ce qui sort du Québec."], "deliverable": "Tableau données × finalité × sous-traitant × lieu de traitement.", "bot": "App Dev & Security", "prompt": "À partir du modèle de données (partie B §2.4) et des sous-traitants (partie C §7), produis l’inventaire des données personnelles de Volis : donnée, finalité, base de consentement, sous-traitant, lieu de traitement, durée de conservation (tableau 3.1). Signale les champs à minimiser.", "links": [], "duration": "1 à 2 jours", "deps": [], "critical": false, "warn": "", "ref": "Partie B §2.4 · Partie C §7"}, {"nolegal": false, "id": "p1-4", "title": "Évaluation des facteurs relatifs à la vie privée (ÉFVP)", "objective": "Évaluer les risques avant le lancement, y compris les transferts hors Québec (Loi 25, art. 17).", "sub": ["Remplir l’ÉFVP avec l’inventaire (étape précédente).", "Évaluer chaque transfert hors Québec (Stripe, Sentry, Expo, analytics, assureur, fournisseur de SMS du code de vérification — ex. Twilio via Supabase —, fournisseur de cartes, Apple et Google pour la livraison des notifications derrière Expo).", "Signer un contrat de traitement des données avec chaque sous-traitant.", "Faire valider par l’avocat."], "deliverable": "ÉFVP terminée et validée.", "bot": "Legal Team", "prompt": "Aide-moi à structurer l’ÉFVP de Volis à partir de l’inventaire des données ci-joint et de la partie C §7 : sections, risques par sous-traitant, mesures (SEC-10, SEC-13, SEC-17, purge SEC-25). Indique ce qui doit être confirmé par l’avocat. [collez l’inventaire]", "links": [["Commission d’accès à l’information (CAI)", "https://www.cai.gouv.qc.ca/"]], "duration": "2 à 4 semaines", "deps": ["p1-3", "p1-1"], "critical": true, "warn": "Bloque la mise en production de Stripe Identity et le lancement.", "ref": "Partie C §7 · Partie B J1"}, {"nolegal": false, "id": "p1-5", "title": "Déclarer la banque biométrique à la CAI", "objective": "Respecter le préalable légal : déclaration au moins 60 jours avant la mise en service.", "sub": ["Préparer la déclaration avec l’avocat (Stripe Identity : pièce d’identité + égoportrait).", "Déposer la déclaration auprès de la CAI et conserver la preuve de dépôt avec la date.", "Inscrire la date de dépôt dans le calculateur en haut de la page."], "deliverable": "Preuve de dépôt datée.", "bot": "Legal Team", "prompt": "Je dois déclarer à la CAI la banque de caractéristiques biométriques liée à Stripe Identity (vérification d’identité de Volis), au moins 60 jours avant sa mise en service. À partir de l’écran 18 (consentement) et de SEC-10, liste les informations à préparer et les questions à valider avec l’avocat. Ne donne pas d’avis juridique.", "links": [["CAI — Biométrie", "https://www.cai.gouv.qc.ca/protection-renseignements-personnels/sujets-et-domaines-dinteret/biometrie"], ["Commission d’accès à l’information (CAI)", "https://www.cai.gouv.qc.ca/"]], "duration": "Dépôt : 1 jour · délai : 60 jours minimum", "deps": ["p1-1"], "critical": true, "warn": "CHEMIN CRITIQUE : déposer au moins 60 jours avant la mise en production de Stripe Identity.", "ref": "Partie B §6.2, §6.3"}, {"nolegal": false, "id": "p1-6", "title": "Valider les durées de conservation", "objective": "Faire confirmer le tableau 3.1 avant de coder la purge.", "sub": ["Paiements : 6 ans après l’année fiscale; preuves de litige : 3 ans; incidents : 5 ans; consentements : durée du compte + 3 ans.", "Faire valider le traitement d’un échec définitif de Stripe Identity."], "deliverable": "Tableau 3.1 validé par l’avocat.", "bot": "Legal Team", "prompt": "Relis le tableau 3.1 de la partie B (durées de conservation) et prépare la liste des points à faire confirmer par l’avocat, notamment le traitement des sessions Stripe Identity après un échec définitif.", "links": [], "duration": "1 semaine", "deps": ["p1-1"], "critical": false, "warn": "", "ref": "Partie B §3.1"}, {"nolegal": false, "id": "p1-7", "title": "Conditions d’utilisation, politiques et contrat en français", "objective": "Avoir des documents conformes à la LPC et en français.", "sub": ["Conditions d’utilisation : les 10 clauses de la partie C §8.", "Politique de remboursement et de litiges (partie C §6).", "Politique de confidentialité (sous-traitants, responsable, droits).", "Modèle de contrat et de reçu en français (contrat à distance : copie dans les 15 jours).", "Validation par l’avocat."], "deliverable": "Documents finaux en français, validés et publiés.", "bot": "Legal Team", "prompt": "Rédige un premier jet en français des conditions d’utilisation de Volis en suivant les 10 clauses de la partie C §8, avec mes montants : [collez le tableau des montants]. Marque chaque passage à faire valider par l’avocat. Ne présente pas ce texte comme définitif.", "links": [], "duration": "3 à 6 semaines", "deps": ["p0-2", "p1-4"], "critical": true, "warn": "", "ref": "Partie C §2, §6, §8"}, {"nolegal": false, "id": "p1-8", "title": "TPS/TVQ et déclaration des revenus des voyageurs", "objective": "Clarifier les obligations fiscales avec un comptable.", "sub": ["Inscription TPS/TVQ (seuil ou inscription volontaire) : à confirmer avec le comptable.", "Règles des plateformes numériques et déclaration à l’ARC : à confirmer.", "Prévoir la collecte des renseignements requis, avec consentement."], "deliverable": "Avis du comptable et décisions écrites.", "bot": "Legal Team", "prompt": "Prépare les questions pour mon comptable à partir de la partie C §3 : inscription TPS/TVQ, perception par Volis comme plateforme, déclaration à l’ARC des revenus des voyageurs, et les données à recueillir pour le faire.", "links": [["Revenu Québec", "https://www.revenuquebec.ca/"]], "duration": "2 à 4 semaines", "deps": ["p0-4"], "critical": false, "warn": "", "ref": "Partie C §3"}, {"nolegal": false, "id": "p1-9", "title": "Statut paiements de détail et statut des voyageurs", "objective": "Sécuriser le modèle Stripe Connect et le statut de travailleur autonome.", "sub": ["Faire confirmer par l’avocat le statut de Volis selon la loi sur les activités associées aux paiements de détail.", "Faire confirmer le statut de travailleur autonome des voyageurs (pas d’horaires, quotas ni prix imposés).", "Ne pas modifier le flux d’argent sans cet avis."], "deliverable": "Avis juridique écrit.", "bot": "Legal Team", "prompt": "Résume pour l’avocat le flux d’argent de Volis (partie B §4.6 et partie C §6 : separate charges and transfers, solde Stripe de la plateforme) et le rôle des voyageurs (partie C §3), puis liste les questions à lui poser.", "links": [], "duration": "2 à 4 semaines", "deps": ["p1-1"], "critical": true, "warn": "Bloque Stripe en production.", "ref": "Partie C §3, §6"}, {"nolegal": false, "id": "p1-10", "title": "Consentements marketing et analytics", "objective": "Respecter la LCAP et la Loi 25 pour les communications et le traçage.", "sub": ["Consentement exprès pour les courriels promotionnels, lien de désabonnement.", "Analytics et publicité ciblée désactivées par défaut, consentement distinct.", "Fiches vie privée des stores cohérentes."], "deliverable": "Textes de consentement et paramètres par défaut validés.", "bot": "Legal Team", "prompt": "À partir de la partie C §7 et de la liste d’événements analytiques (partie A §8), rédige les textes de consentement (marketing, analytics) en français et précise les réglages par défaut.", "links": [], "duration": "2 à 3 jours", "deps": [], "critical": false, "warn": "", "ref": "Partie C §7 · Partie A §8"}]}, {"id": "p2", "title": "Comptes et services", "intro": "Créer les comptes au nom de l’entreprise. Les secrets sont distincts par environnement (dev, staging, prod).", "steps": [{"nolegal": false, "id": "p2-1", "title": "Domaine et courriel professionnel", "objective": "Avoir une adresse web et un courriel pour les stores, Stripe et le soutien.", "sub": ["Réserver le domaine (selon le nom confirmé).", "Créer support@, confidentialite@ et un courriel administratif.", "Prévoir les liens universels (Universal Links / App Links) sur le domaine."], "deliverable": "Domaine actif et courriels fonctionnels.", "bot": "App Dev & Security", "prompt": "Liste les enregistrements et fichiers à prévoir sur le domaine de Volis : courriel (SPF, DKIM, DMARC), Universal Links (apple-app-site-association), App Links (assetlinks.json), page de suivi destinataire, pages légales.", "links": [], "duration": "½ journée", "deps": ["p0-3"], "critical": false, "warn": "", "ref": ""}, {"nolegal": false, "id": "p2-2", "title": "Numéro D-U-N-S", "objective": "Nécessaire pour les comptes développeur au nom d’une organisation.", "sub": ["Demander ou retrouver le D-U-N-S de l’entreprise.", "Vérifier que le nom et l’adresse correspondent au Registraire."], "deliverable": "Numéro D-U-N-S.", "bot": "Vous (Faycal)", "prompt": "Quelles informations dois-je préparer pour obtenir un numéro D-U-N-S pour mon entreprise québécoise et l’utiliser pour Apple Developer et Google Play Console ?", "links": [["D-U-N-S (Dun & Bradstreet)", "https://www.dnb.com/duns.html"], ["Play Console — Informations requises pour créer un compte", "https://support.google.com/googleplay/android-developer/answer/13628312"]], "duration": "1 à 2 semaines", "deps": ["p0-4"], "critical": false, "warn": "", "ref": ""}, {"nolegal": false, "id": "p2-3", "title": "Apple Developer Program (organisation)", "objective": "Publier sur l’App Store et utiliser TestFlight.", "sub": ["S’inscrire au nom de l’entreprise avec le D-U-N-S.", "Activer l’authentification à deux facteurs.", "Inviter les membres de l’équipe au besoin."], "deliverable": "Compte Apple Developer actif.", "bot": "Vous (Faycal)", "prompt": "Explique-moi les étapes d’inscription au Apple Developer Program pour une organisation, et ce qu’EAS Build et EAS Submit ont besoin ensuite (identifiants, clé App Store Connect).", "links": [["Apple Developer Program — Inscription", "https://developer.apple.com/programs/enroll/"]], "duration": "1 à 2 semaines", "deps": ["p2-2"], "critical": false, "warn": "", "ref": ""}, {"nolegal": false, "id": "p2-4", "title": "Google Play Console (organisation)", "objective": "Publier sur Google Play et faire des tests fermés.", "sub": ["Créer le compte de développeur au nom de l’organisation (D-U-N-S requis).", "Vérifier l’identité et les coordonnées.", "Lire les exigences de test pour un nouveau compte."], "deliverable": "Compte Play Console actif.", "bot": "Vous (Faycal)", "prompt": "Explique-moi la création d’un compte Google Play Console pour une organisation (informations requises, vérification), et les exigences de test avant la publication en production.", "links": [["Google Play Console", "https://play.google.com/console"], ["Play Console — Informations requises pour créer un compte", "https://support.google.com/googleplay/android-developer/answer/13628312"], ["Play Console — Tests internes, fermés et ouverts", "https://support.google.com/googleplay/android-developer/answer/9845334"]], "duration": "1 à 2 semaines", "deps": ["p2-2"], "critical": false, "warn": "", "ref": ""}, {"nolegal": false, "id": "p2-5", "title": "Stripe : compte plateforme et Connect (mode test)", "objective": "Commencer le développement des paiements sans attendre la production.", "sub": ["Créer le compte Stripe et activer Connect.", "Configurer « separate charges and transfers ».", "Installer Stripe CLI pour les webhooks en local.", "Garder les clés secrètes hors de l’app (SEC-06)."], "deliverable": "Compte Stripe en mode test, Connect activé, clés en secrets CI/EAS.", "bot": "App Dev & Security", "prompt": "Guide-moi pour configurer Stripe Connect en mode test pour Volis selon la partie B §1.1 et §4 : type de comptes connectés, separate charges and transfers, webhooks plateforme et Connect (§2.6), Stripe CLI. Indique les points « à confirmer avec Stripe ».", "links": [["Stripe Connect", "https://docs.stripe.com/connect"], ["Stripe — Separate charges and transfers", "https://docs.stripe.com/connect/separate-charges-and-transfers"], ["Stripe CLI", "https://docs.stripe.com/stripe-cli"], ["Stripe — Webhooks", "https://docs.stripe.com/webhooks"]], "duration": "1 à 2 jours", "deps": [], "critical": false, "warn": "", "ref": "Partie B §2.6, §4"}, {"nolegal": true, "id": "p2-6", "title": "Stripe Identity – développement (mode test)", "objective": "Intégrer et tester la vérification d’identité en mode test. Aucun blocage légal pour le développement.", "sub": ["Activer Stripe Identity en mode test.", "Créer les sessions côté serveur, gérer les webhooks identity.verification_session.*.", "Programmer l’effacement (redact) dès la vérification (SEC-10).", "Utiliser uniquement des données de test, jamais de vraies pièces d’identité.", "La mise en production est une étape distincte (P8-2), bloquée par la déclaration CAI (60 jours) et l’ÉFVP."], "deliverable": "Flux de vérification fonctionnel en mode test.", "bot": "App Dev & Security", "prompt": "Implémente le flux Stripe Identity de Volis en mode test : création de VerificationSession côté serveur (Edge Function), présentation hébergée, webhooks verified / requires_input / processing / canceled / redacted, appel redact après la vérification (SEC-10). Écrans de référence : 17 à 22.", "links": [["Stripe Identity", "https://docs.stripe.com/identity"], ["Stripe Identity — Sessions et effacement", "https://docs.stripe.com/identity/verification-sessions"]], "duration": "3 à 5 jours", "deps": ["p2-5"], "critical": false, "warn": "", "ref": "Partie B SEC-10 · Partie A US-10"}, {"nolegal": false, "id": "p2-7", "title": "Supabase : projets dev, staging, prod en ca-central-1", "objective": "Héberger la base, l’auth et le stockage au Canada.", "sub": ["Créer les projets en choisissant la région précise Canada (Central), ca-central-1 (pas « Americas »).", "Installer la CLI pour le développement local.", "Configurer les Edge Functions en invocation régionale."], "deliverable": "Trois projets Supabase, accès restreint en prod.", "bot": "App Dev & Security", "prompt": "Donne-moi la checklist de création des projets Supabase dev / staging / prod de Volis en ca-central-1, selon la partie B §1.2 et §6.1 : réglages Auth, stockage privé, accès, sauvegardes, secrets.", "links": [["Supabase — Régions", "https://supabase.com/docs/guides/platform/regions"], ["Supabase — Développement local (CLI)", "https://supabase.com/docs/guides/local-development"]], "duration": "½ journée", "deps": [], "critical": false, "warn": "", "ref": "Partie B §1.2, §6.1"}, {"nolegal": false, "id": "p2-8", "title": "Expo et EAS", "objective": "Préparer les builds signés et l’envoi aux stores.", "sub": ["Créer le compte Expo de l’organisation.", "Configurer les profils EAS development / preview / production.", "Stocker les secrets par environnement dans EAS."], "deliverable": "Projet EAS lié, profils configurés.", "bot": "App Dev & Security", "prompt": "Prépare eas.json pour Volis avec les profils development, preview (staging, TestFlight et test interne Play) et production, et liste les variables d’environnement par profil (partie B §6.1).", "links": [["EAS Build", "https://docs.expo.dev/build/introduction/"], ["EAS Build — Configuration", "https://docs.expo.dev/build/setup/"]], "duration": "½ journée", "deps": [], "critical": false, "warn": "", "ref": ""}, {"nolegal": false, "id": "p2-9", "title": "Sentry", "objective": "Suivre les plantages et la performance sans données personnelles.", "sub": ["Créer le projet Sentry.", "Activer le masquage (scrubbing) : aucun courriel, jeton ni contenu de message (SEC-13).", "Ajouter Sentry à l’ÉFVP."], "deliverable": "Sentry configuré avec masquage.", "bot": "App Dev & Security", "prompt": "Configure Sentry dans l’app Expo de Volis avec un beforeSend qui retire toute donnée personnelle (SEC-13) et donne-moi un test qui le vérifie.", "links": [["Expo — Utiliser Sentry", "https://docs.expo.dev/guides/using-sentry/"], ["Sentry pour React Native", "https://docs.sentry.io/platforms/react-native/"]], "duration": "½ journée", "deps": [], "critical": false, "warn": "", "ref": ""}, {"nolegal": false, "id": "p2-10", "title": "Dépôt de code et CI", "objective": "Avoir un pipeline reproductible dès le premier jour.", "sub": ["Créer le dépôt privé et protéger la branche principale (revue obligatoire).", "GitHub Actions : lint, tests, analyses (SEC-22), scan de secrets (SEC-06).", "Secrets CI distincts par environnement."], "deliverable": "CI verte sur le squelette.", "bot": "App Dev & Security", "prompt": "Écris les workflows GitHub Actions de Volis : lint + tests TypeScript, tests RLS Supabase, CodeQL ou Semgrep, OSV-Scanner, gitleaks, et déclenchement EAS Build. Base-toi sur SEC-04, SEC-06 et SEC-22.", "links": [["GitHub Actions", "https://docs.github.com/actions"]], "duration": "1 jour", "deps": [], "critical": false, "warn": "", "ref": ""}]}, {"id": "p3", "title": "Transfert du design", "intro": "Tout est dans /workspace/volis-design/ : charte, maquettes, dev-assets (tokens, thème, icônes, illustrations, logos, polices).", "steps": [{"nolegal": false, "id": "p3-1", "title": "Prendre connaissance de la charte et des maquettes", "objective": "Partager la même référence visuelle.", "sub": ["Lire volis-charte-graphique.pdf (17 pages).", "Parcourir les planches par parcours A à G et l’inventaire-ecrans.csv.", "Lire README_DEV.md."], "deliverable": "Questions de design notées.", "bot": "Ui Designer", "prompt": "Je commence l’intégration de Volis. Résume-moi en 10 règles les points de la charte graphique (concept 1 « Carnet de voyage ») qu’un développeur ne doit jamais enfreindre, avec la page de la charte correspondante.", "links": [], "duration": "2 h", "deps": [], "critical": false, "warn": "", "ref": ""}, {"nolegal": false, "id": "p3-2", "title": "Intégrer les design tokens", "objective": "Utiliser une source unique pour les couleurs, la typo et les espacements.", "sub": ["Copier tokens/theme.ts dans src/theme/ et utiliser useTheme().", "Web : tokens.css et tailwind.config.js.", "Vérifier le mode sombre (darkColors)."], "deliverable": "Thème branché, aucune couleur codée en dur.", "bot": "App Dev & Security", "prompt": "Intègre dev-assets/tokens/theme.ts dans l’app Expo de Volis (useTheme, mode clair et sombre) et ajoute une règle de lint qui interdit les couleurs hexadécimales codées en dur dans les composants.", "links": [], "duration": "½ journée", "deps": ["p4-1"], "critical": false, "warn": "", "ref": ""}, {"nolegal": false, "id": "p3-3", "title": "Intégrer les ressources (icônes, illustrations, polices, icônes d’app, splash)", "objective": "Brancher tous les fichiers de marque.", "sub": ["Copier expo/, fonts/, illustrations/ dans assets/.", "Fusionner app.json.snippet.json (icônes iOS clair/sombre/teinté, icône adaptative Android, splash).", "Charger les polices (option A : @expo-google-fonts).", "Ajouter le composant Icon (react-native-svg)."], "deliverable": "Build de développement avec icône, splash et polices corrects.", "bot": "App Dev & Security", "prompt": "Intègre les dev-assets de Volis dans le projet Expo en suivant README_DEV.md : app.json (icônes, splash clair/sombre), polices via @expo-google-fonts, composant Icon. Vérifie le rendu sur iOS et Android.", "links": [["Expo — Splash et icône", "https://docs.expo.dev/develop/user-interface/splash-screen-and-app-icon/"], ["Expo — Polices", "https://docs.expo.dev/develop/user-interface/fonts/"]], "duration": "½ journée", "deps": ["p4-1"], "critical": false, "warn": "", "ref": ""}, {"nolegal": false, "id": "p3-4", "title": "Concevoir les écrans de la phase 2", "objective": "Compléter les écrans non maquettés.", "sub": ["Édition du profil, modifier / annuler un voyage, ajout d’une carte, reçu détaillé.", "Page web de suivi destinataire, mise à jour forcée (SEC-21).", "Outil interne de modération (simple)."], "deliverable": "Maquettes complémentaires dans le même style.", "bot": "Ui Designer", "prompt": "Conçois les écrans de la phase 2 de Volis listés dans la partie A §4 (édition du profil, modifier/annuler un voyage, ajout d’une carte, reçu détaillé, page web de suivi destinataire, mise à jour forcée, outil de modération), concept 1, mêmes règles (393×852 @2x, FR-CA, AA, 44 pt).", "links": [], "duration": "1 à 2 semaines", "deps": [], "critical": false, "warn": "", "ref": "Partie A §4"}, {"nolegal": false, "id": "p3-5", "title": "Revue de design des écrans développés", "objective": "Vérifier que l’app ressemble aux maquettes.", "sub": ["Faire des captures de chaque écran développé.", "Les comparer aux maquettes (numéros 01 à 50).", "Corriger les écarts (espacements, contrastes, états)."], "deliverable": "Liste d’écarts corrigée, à répéter à chaque parcours.", "bot": "Ui Designer", "prompt": "Voici des captures de l’app Volis développée (écrans [numéros]). Compare-les aux maquettes correspondantes et liste les écarts par gravité (accessibilité, marque, détail).", "links": [], "duration": "Continu", "deps": [], "critical": false, "warn": "", "ref": ""}]}, {"id": "p4", "title": "Socle technique", "intro": "Le squelette sur lequel toutes les fonctionnalités reposent. La logique sensible reste côté serveur.", "steps": [{"nolegal": false, "id": "p4-1", "title": "Projet Expo TypeScript + Expo Router", "objective": "Démarrer l’app iOS, Android et web avec une seule base de code.", "sub": ["Créer le projet (TypeScript strict).", "Structure de dossiers de la partie B §2.3; couche domaine en TypeScript pur.", "Build de développement sur appareil."], "deliverable": "App vide qui démarre sur iOS, Android et web.", "bot": "App Dev & Security", "prompt": "Crée le squelette de l’app Volis : Expo + Expo Router + TypeScript strict, structure de dossiers de la partie B §2.3, onglets Accueil / Envois / Voyages / Messages / Profil, build de développement.", "links": [["Expo — Créer un projet", "https://docs.expo.dev/get-started/create-a-project/"], ["Expo Router", "https://docs.expo.dev/router/introduction/"], ["Expo — Development builds", "https://docs.expo.dev/develop/development-builds/introduction/"]], "duration": "1 jour", "deps": ["p2-8"], "critical": false, "warn": "", "ref": "Partie B §2.2–2.3"}, {"nolegal": false, "id": "p4-2", "title": "Thème, i18n et accessibilité de base", "objective": "Préparer FR-CA par défaut, l’anglais et le RTL futur.", "sub": ["expo-localization + bibliothèque i18n (à confirmer); aucune chaîne en dur.", "Formats fr-CA (Intl) pour les montants et les dates.", "Texte dynamique activé; start/end plutôt que left/right."], "deliverable": "Changement de langue fonctionnel.", "bot": "App Dev & Security", "prompt": "Mets en place l’internationalisation de Volis (fr-CA par défaut, en-CA) selon la partie A §7 : fichiers de traduction, pluriels ICU, formats Intl, préparation RTL.", "links": [], "duration": "1 à 2 jours", "deps": ["p4-1"], "critical": false, "warn": "", "ref": "Partie A §7"}, {"nolegal": false, "id": "p4-3", "title": "Bibliothèque de composants", "objective": "Avoir les composants de la charte avec tous leurs états.", "sub": ["Button, Field, Chip, Card, Badge, Toggle, Segmented, BottomSheet, Toast, TabBar, Timeline.", "Rôles, libellés et états d’accessibilité; cibles de 44 pt."], "deliverable": "Composants documentés (page de démonstration interne).", "bot": "App Dev & Security", "prompt": "Code les composants React Native de Volis décrits dans les pages 11 à 13 de la charte (boutons, champs, puces, cartes, badges, feuilles, toasts, barre d’onglets, frise) avec tous leurs états et l’accessibilité (rôles, libellés, états).", "links": [], "duration": "1 semaine", "deps": ["p3-2"], "critical": false, "warn": "", "ref": ""}, {"nolegal": false, "id": "p4-4", "title": "Schéma de base de données, migrations et RLS", "objective": "Protéger chaque ligne côté serveur.", "sub": ["Créer les tables de la partie B §2.4 en migrations versionnées.", "RLS sur toutes les tables, politiques par rôle (SEC-04).", "Tests RLS automatisés en CI."], "deliverable": "Migrations + tests RLS verts.", "bot": "App Dev & Security", "prompt": "Écris les migrations SQL Supabase du modèle de données de Volis (partie B §2.4) avec RLS sur chaque table et des tests automatisés qui prouvent que l’utilisateur A ne lit ni ne modifie les données de B (SEC-04). Aucune écriture directe de l’app sur payments, transfers et statuts.", "links": [["Supabase — Row Level Security", "https://supabase.com/docs/guides/database/postgres/row-level-security"]], "duration": "1 à 2 semaines", "deps": ["p2-7"], "critical": true, "warn": "", "ref": "Partie B §2.4, SEC-04"}, {"nolegal": false, "id": "p4-5", "title": "Authentification", "objective": "Connexion sûre et conforme aux stores.", "sub": ["Supabase Auth avec PKCE via le navigateur système (SEC-01).", "Apple, Google, courriel; clé d’accès (à confirmer).", "Jetons dans SecureStore, rotation, révocation (SEC-03, SEC-05).", "Ré-authentification avant les actions sensibles (SEC-02)."], "deliverable": "Inscription, connexion, déconnexion, mot de passe oublié.", "bot": "App Dev & Security", "prompt": "Implémente l’authentification de Volis : Supabase Auth PKCE, Apple et Google, courriel, jetons dans expo-secure-store, ré-authentification avant les actions sensibles (SEC-01, 02, 03, 05). Écrans 05, 06, 23, 24.", "links": [["Supabase Auth", "https://supabase.com/docs/guides/auth"], ["Expo SecureStore", "https://docs.expo.dev/versions/latest/sdk/securestore/"]], "duration": "1 semaine", "deps": ["p4-4"], "critical": false, "warn": "", "ref": "SEC-01 à SEC-05"}, {"nolegal": false, "id": "p4-6", "title": "Machine d’états des livraisons (serveur)", "objective": "Rendre impossibles les transitions non prévues.", "sub": ["Fonctions serveur pour chaque transition de la partie B §2.5.", "Vérification de l’état, du rôle et de la version (verrou optimiste).", "Tests unitaires de chaque transition."], "deliverable": "Transitions testées, refus des transitions interdites.", "bot": "App Dev & Security", "prompt": "Code la machine d’états des livraisons de Volis (partie B §2.5) dans des fonctions serveur Supabase, avec verrou optimiste, et des tests qui couvrent chaque transition permise et refusée.", "links": [["Supabase Edge Functions", "https://supabase.com/docs/guides/functions"]], "duration": "1 semaine", "deps": ["p4-4"], "critical": true, "warn": "", "ref": "Partie B §2.5"}, {"nolegal": false, "id": "p4-7", "title": "Webhooks Stripe", "objective": "Traiter les événements Stripe de façon sûre et idempotente.", "sub": ["Deux points de terminaison (plateforme, Connect).", "Vérification de signature sur le corps brut; idempotence par event.id (SEC-08).", "Événements de la partie B §2.6."], "deliverable": "Webhooks testés avec Stripe CLI.", "bot": "App Dev & Security", "prompt": "Écris les Edge Functions de webhooks Stripe de Volis (plateforme et Connect) avec vérification de signature et idempotence (table stripe_events), pour les événements de la partie B §2.6. Ajoute les tests SEC-08.", "links": [["Stripe — Webhooks", "https://docs.stripe.com/webhooks"], ["Stripe CLI", "https://docs.stripe.com/stripe-cli"]], "duration": "3 à 5 jours", "deps": ["p2-5", "p4-6"], "critical": false, "warn": "", "ref": "Partie B §2.6, SEC-08"}, {"nolegal": false, "id": "p4-8", "title": "Modèle de menaces (STRIDE)", "objective": "Fixer le niveau de sécurité visé (MAS-L1 au minimum).", "sub": ["Atelier STRIDE sur l’architecture §2.1.", "Décider du niveau MASVS final et du pinning."], "deliverable": "Modèle de menaces écrit.", "bot": "App Dev & Security", "prompt": "Fais un modèle de menaces STRIDE de l’architecture Volis (partie B §2.1) et propose le profil MASVS final, avec les décisions à prendre (pinning, attestation d’app).", "links": [["OWASP MASVS", "https://mas.owasp.org/MASVS/"]], "duration": "1 jour", "deps": [], "critical": false, "warn": "", "ref": "Partie B §3"}]}, {"id": "p5", "title": "Fonctionnalités du MVP", "intro": "Par parcours, dans l’ordre conseillé. Chaque étape renvoie aux histoires utilisateur (US) et aux écrans.", "steps": [{"nolegal": false, "id": "p5-1", "title": "Inscription et vérification du téléphone", "objective": "Créer un compte et valider le numéro.", "sub": ["Écrans 05, 06, 25.", "Code à 6 chiffres, renvoi minuté, limitation de débit (SEC-14)."], "deliverable": "US-02 et US-03 acceptées.", "bot": "App Dev & Security", "prompt": "Implémente US-02 et US-03 de la partie A (inscription, connexion, code SMS) avec leurs critères d’acceptation et la limitation de débit SEC-14.", "links": [], "duration": "1 semaine", "deps": ["p4-5"], "critical": false, "warn": "", "ref": ""}, {"nolegal": false, "id": "p5-2", "title": "Vérification d’identité (interface)", "objective": "Parcours complet de vérification, en mode test.", "sub": ["Écrans 17 à 22 : intro, consentement exprès, page Stripe, résultats.", "Consentement horodaté (table consents)."], "deliverable": "US-10 accepté en mode test.", "bot": "App Dev & Security", "prompt": "Implémente US-10 (écrans 17 à 22) avec Stripe Identity en mode test : consentement exprès et horodaté, page hébergée, trois résultats, voie manuelle.", "links": [["Stripe Identity", "https://docs.stripe.com/identity"]], "duration": "1 semaine", "deps": ["p2-6", "p4-5"], "critical": false, "warn": "", "ref": "US-10"}, {"nolegal": false, "id": "p5-3", "title": "Publier un voyage et mes voyages", "objective": "Côté voyageur.", "sub": ["Écrans 15 et 31.", "Billet jamais visible des expéditeurs."], "deliverable": "US-40 et US-41 acceptées.", "bot": "App Dev & Security", "prompt": "Implémente US-40 et US-41 (écrans 15 et 31) : publication de voyage, capacité, catégories, prix suggéré, liste de mes voyages.", "links": [], "duration": "1 semaine", "deps": ["p4-6"], "critical": false, "warn": "", "ref": ""}, {"nolegal": false, "id": "p5-4", "title": "Recherche, filtres, carte et alertes", "objective": "Trouver un voyageur.", "sub": ["Écrans 07, 08, 38, 39, 36, 09.", "Prix tout inclus pour le poids saisi (frais inclus)."], "deliverable": "US-20 et US-21 acceptées.", "bot": "App Dev & Security", "prompt": "Implémente US-20 et US-21 : recherche, résultats avec prix tout inclus calculé par le serveur, filtres en feuille, carte des points de remise, état vide avec alerte, profil voyageur.", "links": [], "duration": "2 semaines", "deps": ["p5-3"], "critical": false, "warn": "", "ref": ""}, {"nolegal": false, "id": "p5-5", "title": "Créer un envoi", "objective": "Décrire le colis.", "sub": ["Écran 10 : photos, poids, dimensions, valeur déclarée et plafond.", "Objets interdits vérifiés à la saisie et côté serveur; attestation horodatée."], "deliverable": "US-22 accepté.", "bot": "App Dev & Security", "prompt": "Implémente US-22 (écran 10) : formulaire en 4 étapes, photos sans EXIF (SEC-17), valeur déclarée avec plafond, contrôle des objets interdits côté serveur, attestation horodatée.", "links": [["Supabase Storage", "https://supabase.com/docs/guides/storage"]], "duration": "1 semaine", "deps": ["p4-6"], "critical": false, "warn": "", "ref": ""}, {"nolegal": false, "id": "p5-6", "title": "Demandes : envoi, acceptation, refus", "objective": "Mettre en relation.", "sub": ["Écrans 26 à 30.", "Expiration visible; capacité vérifiée par le serveur."], "deliverable": "US-30, US-31 et US-37 acceptées.", "bot": "App Dev & Security", "prompt": "Implémente US-30, US-31 et US-37 (écrans 26 à 30) : demande, expiration, acceptation/refus avec motif, liste de mes envois, contrôle de capacité côté serveur.", "links": [], "duration": "1 semaine", "deps": ["p5-4", "p5-5"], "critical": false, "warn": "", "ref": ""}, {"nolegal": false, "id": "p5-7", "title": "Paiement en séquestre", "objective": "Payer en sécurité, fonds retenus jusqu’à la livraison.", "sub": ["Écran 11 : détail figé par le serveur.", "PaymentSheet (aucun champ de carte maison, SEC-11).", "Statut « Payé / retenu » seulement par webhook.", "Assurance selon la décision p0-6 (non cochée par défaut)."], "deliverable": "US-23 accepté en mode test.", "bot": "App Dev & Security", "prompt": "Implémente US-23 (écran 11) : PaymentIntent pour le total exact figé par le serveur, PaymentSheet, statut par webhook payment_intent.succeeded, gestion des échecs, idempotence (SEC-09).", "links": [["Stripe — Separate charges and transfers", "https://docs.stripe.com/connect/separate-charges-and-transfers"], ["Stripe React Native SDK", "https://github.com/stripe/stripe-react-native"], ["Stripe — Accepter un paiement", "https://docs.stripe.com/payments/accept-a-payment"]], "duration": "1 à 2 semaines", "deps": ["p4-7", "p5-6"], "critical": true, "warn": "", "ref": "US-23 · Partie B §4.1"}, {"nolegal": false, "id": "p5-8", "title": "Messagerie", "objective": "Discuter sans quitter l’app.", "sub": ["Écran 14 : bannière de sécurité, numéros masqués.", "Signalement et modération (SEC-16)."], "deliverable": "US-33 accepté.", "bot": "App Dev & Security", "prompt": "Implémente US-33 (écran 14) avec Supabase Realtime et RLS : messages par réservation, masquage des numéros et courriels, signalement qui masque le message (SEC-16).", "links": [["Supabase Realtime", "https://supabase.com/docs/guides/realtime"]], "duration": "1 semaine", "deps": ["p5-6"], "critical": false, "warn": "", "ref": ""}, {"nolegal": false, "id": "p5-9", "title": "Destinataire, suivi et notifications", "objective": "Suivre le colis jusqu’à l’arrivée.", "sub": ["Écrans 43, 12, 32, 50.", "Lien de suivi web sans données du voyageur.", "Notifications push (Expo Notifications); Live Activity iOS en option."], "deliverable": "US-32, US-35 et US-61 acceptées.", "bot": "App Dev & Security", "prompt": "Implémente US-32, US-35 et US-61 : destinataire et lien de suivi web, frise de suivi, notifications push avec préférences. Évalue la faisabilité de la Live Activity iOS (écran 50).", "links": [["Expo Notifications", "https://docs.expo.dev/versions/latest/sdk/notifications/"]], "duration": "1 à 2 semaines", "deps": ["p5-7"], "critical": false, "warn": "", "ref": ""}, {"nolegal": false, "id": "p5-10", "title": "Remise du colis (QR, code, hors ligne, attestation douane)", "objective": "Prouver la remise.", "sub": ["Écrans 49, 13, 37.", "Confirmation des deux parties; code signé utilisable hors ligne."], "deliverable": "US-34 accepté.", "bot": "App Dev & Security", "prompt": "Implémente US-34 : attestation douane du voyageur (écran 49), QR + code à 4 chiffres (13), photo scellée, mode hors ligne avec code signé et synchronisation (37). Aucune transition de paiement hors ligne.", "links": [], "duration": "1 à 2 semaines", "deps": ["p5-7"], "critical": true, "warn": "", "ref": ""}, {"nolegal": false, "id": "p5-11", "title": "Livraison, avis et libération des fonds", "objective": "Clore la transaction.", "sub": ["Écran 33 : avis en double aveugle.", "Transfert au voyageur après le délai de contestation (à décider), avec source_transaction."], "deliverable": "US-36 accepté; transfert testé.", "bot": "App Dev & Security", "prompt": "Implémente US-36 (écran 33) : confirmation de livraison, avis en double aveugle, puis libération des fonds par le serveur (Transfer avec source_transaction) après le délai à décider. Ajoute les tests contre le double transfert.", "links": [["Stripe — Separate charges and transfers", "https://docs.stripe.com/connect/separate-charges-and-transfers"]], "duration": "1 semaine", "deps": ["p5-10"], "critical": true, "warn": "", "ref": ""}, {"nolegal": false, "id": "p5-12", "title": "Imprévus et litiges", "objective": "Gérer vol annulé, litige et rétrofacturation.", "sub": ["Écrans 34, 35, 44, 45.", "Gel légal automatique (legal_holds); preuves assemblées."], "deliverable": "US-50, US-51 et US-52 acceptées.", "bot": "App Dev & Security", "prompt": "Implémente US-50 à US-52 : vol annulé (réattribuer, garder, rembourser), ouverture de litige avec preuves automatiques et gel des fonds, centre d’aide et objets interdits. Gère charge.dispute.created.", "links": [], "duration": "2 semaines", "deps": ["p5-11"], "critical": false, "warn": "", "ref": ""}, {"nolegal": false, "id": "p5-13", "title": "Versements aux voyageurs", "objective": "Payer les voyageurs via Stripe Connect.", "sub": ["Écrans 42 et 41 : onboarding hébergé, standard gratuit toujours offert.", "Instantané avec frais affichés (version 1.1 selon le jalon J2)."], "deliverable": "US-60 accepté.", "bot": "App Dev & Security", "prompt": "Implémente US-60 : onboarding Stripe Connect hébergé (écran 42), écran Versements (41) avec statuts payout.*, virement standard. Le versement instantané est prévu au jalon J2.", "links": [["Stripe Connect — Onboarding hébergé", "https://docs.stripe.com/connect/hosted-onboarding"], ["Stripe Connect — Versements instantanés", "https://docs.stripe.com/connect/instant-payouts"]], "duration": "1 semaine", "deps": ["p5-11"], "critical": false, "warn": "", "ref": ""}, {"nolegal": false, "id": "p5-14", "title": "Réglages, export des données et suppression du compte", "objective": "Respecter Apple 5.1.1(v) et la Loi 25.", "sub": ["Écrans 46 à 48.", "Export JSON, suppression avec ré-authentification (SEC-19)."], "deliverable": "US-62 et US-63 acceptées.", "bot": "App Dev & Security", "prompt": "Implémente US-62 et US-63 (écrans 46 à 48) : réglages, retrait de consentement, export JSON, suppression du compte avec blocages, ré-authentification et anonymisation (SEC-19).", "links": [["Apple — Suppression de compte dans l’app", "https://developer.apple.com/support/offering-account-deletion-in-your-app/"]], "duration": "1 semaine", "deps": ["p4-5"], "critical": false, "warn": "", "ref": ""}, {"nolegal": false, "id": "p5-15", "title": "Purge automatisée et gel légal", "objective": "Appliquer les durées de conservation.", "sub": ["Tâches planifiées idempotentes (SEC-25).", "Gel légal posé et levé automatiquement."], "deliverable": "Tests de purge en CI.", "bot": "App Dev & Security", "prompt": "Implémente SEC-25 : tâches de purge planifiées selon le tableau 3.1 validé, gel légal, journal des purges sans données personnelles, tests automatisés en CI.", "links": [], "duration": "3 à 5 jours", "deps": ["p1-6", "p4-4"], "critical": false, "warn": "", "ref": "SEC-25"}]}, {"id": "p6", "title": "Sécurité et tests", "intro": "Les exigences SEC-01 à SEC-25 sont testables : chaque critère doit être prouvé avant le lancement.", "steps": [{"nolegal": false, "id": "p6-1", "title": "Revue des exigences SEC-01 à SEC-25", "objective": "Vérifier chaque critère de la partie B §3.", "sub": ["Une preuve (test, capture de config) par exigence.", "Marquer les écarts et les corriger."], "deliverable": "Matrice SEC avec preuves.", "bot": "App Dev & Security", "prompt": "Produis la matrice de conformité SEC-01 à SEC-25 de Volis : pour chaque exigence, le test ou la preuve attendue, l’état actuel et ce qui manque.", "links": [["OWASP MASVS", "https://mas.owasp.org/MASVS/"]], "duration": "2 à 3 jours", "deps": ["p5-15"], "critical": false, "warn": "", "ref": ""}, {"nolegal": false, "id": "p6-2", "title": "Tests de bout en bout des parcours critiques", "objective": "Protéger l’argent et les preuves.", "sub": ["Inscription, vérification, réservation, paiement, remise, litige.", "Mode avion (hors ligne partiel)."], "deliverable": "Tests E2E verts en CI.", "bot": "App Dev & Security", "prompt": "Écris les tests E2E des parcours critiques de Volis (inscription, vérification, réservation, paiement, remise, litige) et un scénario en mode avion, selon la partie B §5.", "links": [], "duration": "1 semaine", "deps": ["p5-12"], "critical": false, "warn": "", "ref": ""}, {"nolegal": false, "id": "p6-3", "title": "Audit d’accessibilité", "objective": "Atteindre WCAG 2.2 AA.", "sub": ["VoiceOver et TalkBack sur chaque parcours.", "Texte à 200 %, contrastes, cibles de 44 pt."], "deliverable": "Rapport d’audit et corrections.", "bot": "Ui Designer", "prompt": "Prépare la grille d’audit d’accessibilité de Volis selon la partie A §6 et la page 15 de la charte (VoiceOver, TalkBack, texte 200 %, contrastes, focus), écran par écran.", "links": [["WCAG 2.2", "https://www.w3.org/TR/WCAG22/"]], "duration": "3 à 5 jours", "deps": ["p5-12"], "critical": false, "warn": "", "ref": ""}, {"nolegal": false, "id": "p6-4", "title": "Analyse MobSF et test d’intrusion", "objective": "Obtenir un regard externe avant J1.", "sub": ["MobSF sur les builds de release.", "Test d’intrusion par un tiers (MASVS/MASTG + API).", "Corriger les constats critiques."], "deliverable": "Rapport de pentest avec constats corrigés.", "bot": "App Dev & Security", "prompt": "Rédige le cahier de test d’intrusion de Volis à remettre à un tiers : périmètre (app, API, Supabase, webhooks), référentiels MASVS/MASTG et OWASP API Top 10, scénarios prioritaires (RLS, libération des fonds, photos).", "links": [["MobSF", "https://github.com/MobSF/Mobile-Security-Framework-MobSF"], ["OWASP MASVS", "https://mas.owasp.org/MASVS/"]], "duration": "2 à 3 semaines", "deps": ["p6-1"], "critical": true, "warn": "", "ref": "SEC-22"}, {"nolegal": false, "id": "p6-5", "title": "Plan d’incident et sauvegardes", "objective": "Être prêt à réagir.", "sub": ["Exercice sur table du plan de réponse (SEC-20).", "Restauration de sauvegarde testée (SEC-18)."], "deliverable": "Comptes rendus d’exercice.", "bot": "App Dev & Security", "prompt": "Prépare un exercice sur table d’incident de confidentialité pour Volis (SEC-20 : détection, confinement, évaluation, avis à la CAI, registre) et la procédure de test de restauration (SEC-18).", "links": [], "duration": "1 jour", "deps": ["p1-2"], "critical": false, "warn": "", "ref": ""}]}, {"id": "p7", "title": "Bêta", "intro": "Tester avec de vrais utilisateurs en environnement staging, sans données réelles d’identité ni d’argent.", "steps": [{"nolegal": false, "id": "p7-1", "title": "Builds EAS preview (staging)", "objective": "Distribuer une version de test.", "sub": ["Profil EAS « preview » relié au staging.", "Numéro de version et notes de version."], "deliverable": "Builds iOS et Android installables.", "bot": "App Dev & Security", "prompt": "Lance les builds EAS « preview » de Volis reliées au staging et prépare les notes de version de la bêta.", "links": [["EAS Build", "https://docs.expo.dev/build/introduction/"]], "duration": "½ journée", "deps": ["p6-2"], "critical": false, "warn": "", "ref": ""}, {"nolegal": false, "id": "p7-2", "title": "TestFlight", "objective": "Bêta iOS.", "sub": ["Envoyer la build avec EAS Submit.", "Groupes de testeurs internes puis externes."], "deliverable": "Bêta iOS ouverte aux testeurs.", "bot": "App Dev & Security", "prompt": "Guide-moi pour distribuer la bêta iOS de Volis sur TestFlight avec EAS Submit, et rédige la description de test en français.", "links": [["Apple TestFlight", "https://developer.apple.com/testflight/"], ["EAS Submit", "https://docs.expo.dev/submit/introduction/"]], "duration": "1 à 3 jours", "deps": ["p7-1", "p2-3"], "critical": false, "warn": "", "ref": ""}, {"nolegal": false, "id": "p7-3", "title": "Google Play : test interne puis fermé", "objective": "Bêta Android.", "sub": ["Piste de test interne, puis fermée.", "Vérifier les exigences de test du compte."], "deliverable": "Bêta Android ouverte.", "bot": "App Dev & Security", "prompt": "Guide-moi pour publier la bêta Android de Volis sur la piste de test interne puis fermée de Google Play avec EAS Submit.", "links": [["Play Console — Tests internes, fermés et ouverts", "https://support.google.com/googleplay/android-developer/answer/9845334"], ["EAS Submit", "https://docs.expo.dev/submit/introduction/"]], "duration": "1 à 3 jours", "deps": ["p7-1", "p2-4"], "critical": false, "warn": "", "ref": ""}, {"nolegal": false, "id": "p7-4", "title": "Recruter les bêta-testeurs et recueillir les retours", "objective": "Valider le service sur un corridor réel.", "sub": ["Expéditeurs et voyageurs volontaires (consentement).", "Formulaire de retour et suivi des bogues."], "deliverable": "Rapport de bêta.", "bot": "Ui Designer", "prompt": "Prépare le plan de bêta de Volis : profils de testeurs, scénarios à tester par parcours, questionnaire en français (5 minutes), et grille de priorisation des retours.", "links": [], "duration": "2 à 4 semaines", "deps": ["p7-2", "p7-3", "p1-4", "p1-7"], "critical": false, "warn": "Même avec des paiements de test, de vrais testeurs fournissent des renseignements personnels : politique de confidentialité et consentement requis (P1-7), ÉFVP faite (P1-4).", "ref": ""}, {"nolegal": false, "id": "p7-5", "title": "Corriger et stabiliser", "objective": "Arriver au lancement sans bogue bloquant.", "sub": ["Trier par gravité.", "Nouvelle build et nouveau tour de test."], "deliverable": "Zéro bogue bloquant.", "bot": "App Dev & Security", "prompt": "Voici les retours de la bêta de Volis : [collez]. Classe-les (bloquant, majeur, mineur, amélioration) et propose un plan de correction.", "links": [], "duration": "1 à 3 semaines", "deps": ["p7-4"], "critical": false, "warn": "", "ref": ""}]}, {"id": "p8", "title": "Lancement", "intro": "Passer en production seulement quand tous les préalables légaux sont faits.", "steps": [{"nolegal": false, "id": "p8-1", "title": "Stripe en production", "objective": "Activer les paiements réels.", "sub": ["Compléter l’activation du compte Stripe (entreprise, compte bancaire).", "Clés et secrets live distincts.", "Webhooks live configurés."], "deliverable": "Stripe live opérationnel.", "bot": "App Dev & Security", "prompt": "Donne-moi la checklist de passage en production de Stripe pour Volis (activation, clés live, webhooks, Radar, rapprochement), selon la partie B §6.1.", "links": [["Stripe Connect", "https://docs.stripe.com/connect"]], "duration": "1 à 3 jours", "deps": ["p1-9", "p1-8", "p1-7", "p0-4", "p4-7"], "critical": true, "warn": "Pas de production tant que les webhooks n’ont pas été testés en mode test, idempotence et rejeu compris. Pas d’argent réel avant l’avis sur les paiements de détail (P1-9) et l’avis fiscal (P1-8).", "ref": ""}, {"nolegal": false, "id": "p8-2", "title": "Stripe Identity – mise en production", "objective": "Activer la vérification d’identité réelle.", "sub": ["Vérifier que la déclaration CAI a été déposée depuis au moins 60 jours.", "Vérifier que l’ÉFVP est terminée.", "Activer Identity en mode live; tester avec une vraie vérification interne."], "deliverable": "Identity live, redact vérifié.", "bot": "App Dev & Security", "prompt": "Vérifie avec moi les préalables à la mise en production de Stripe Identity pour Volis (déclaration CAI déposée depuis au moins 60 jours, ÉFVP terminée), puis donne-moi la checklist technique de passage en live (clés, webhooks, redact).", "links": [["Stripe Identity", "https://docs.stripe.com/identity"], ["CAI — Biométrie", "https://www.cai.gouv.qc.ca/protection-renseignements-personnels/sujets-et-domaines-dinteret/biometrie"]], "duration": "1 jour", "deps": ["p1-5", "p1-4", "p8-1"], "critical": true, "warn": "BLOQUÉ tant que (a) la déclaration biométrique à la CAI n’est pas déposée depuis au moins 60 jours et (b) l’ÉFVP n’est pas terminée.", "ref": ""}, {"nolegal": false, "id": "p8-3", "title": "Fiches des stores, captures et confidentialité", "objective": "Présenter l’app et déclarer les données correctement.", "sub": ["Textes FR et EN, captures tirées des maquettes ou de l’app.", "Apple : détails de confidentialité et privacy manifest; Google : Sécurité des données.", "Exigences 2026 : API 36 sur Google Play, Xcode 26 / SDK iOS 26."], "deliverable": "Fiches complètes dans les deux consoles.", "bot": "Ui Designer", "prompt": "Rédige les fiches App Store et Google Play de Volis en français et en anglais (titre, sous-titre, description, mots-clés) et propose 6 captures à partir des écrans 07, 08, 11, 12, 13 et 33.", "links": [["Apple — Détails de confidentialité", "https://developer.apple.com/app-store/app-privacy-details/"], ["Play Console — Section Sécurité des données", "https://support.google.com/googleplay/android-developer/answer/10787469"], ["Google Play — Niveau d’API cible", "https://support.google.com/googleplay/android-developer/answer/11926878"], ["Apple — Exigences à venir", "https://developer.apple.com/news/upcoming-requirements/"]], "duration": "2 à 3 jours", "deps": ["p1-10", "p8-4"], "critical": false, "warn": "L’URL de la politique de confidentialité doit être en ligne (P8-4) : les deux stores l’exigent dans la fiche.", "ref": ""}, {"nolegal": false, "id": "p8-4", "title": "Publier les pages légales", "objective": "Rendre les politiques accessibles avant le lancement.", "sub": ["Conditions, politique de remboursement et de litiges, politique de confidentialité, responsable de la protection.", "Liens dans l’app et dans les fiches des stores."], "deliverable": "Pages en ligne en français.", "bot": "App Dev & Security", "prompt": "Crée les pages web légales de Volis (en français, version anglaise ensuite) à partir des textes validés, avec les liens à mettre dans l’app (Réglages) et dans les stores.", "links": [], "duration": "1 jour", "deps": ["p1-7", "p2-1"], "critical": false, "warn": "", "ref": ""}, {"nolegal": false, "id": "p8-5", "title": "Builds de production et soumission", "objective": "Envoyer l’app en revue.", "sub": ["EAS Build « production » puis EAS Submit.", "Vérifier la suppression de compte dans l’app, la connexion Apple (règle 4.8) et les informations de démonstration pour la revue."], "deliverable": "App approuvée sur les deux stores.", "bot": "App Dev & Security", "prompt": "Prépare la soumission de Volis : builds EAS production, EAS Submit, notes pour la revue Apple (compte de démonstration, suppression de compte, Sign in with Apple, Stripe Identity), points sensibles de la revue Google.", "links": [["EAS Submit", "https://docs.expo.dev/submit/introduction/"], ["App Review Guidelines (Apple)", "https://developer.apple.com/app-store/review/guidelines/"], ["Apple — Suppression de compte dans l’app", "https://developer.apple.com/support/offering-account-deletion-in-your-app/"]], "duration": "1 à 2 semaines", "deps": ["p8-3", "p7-5", "p6-4", "p8-2"], "critical": true, "warn": "Apple doit pouvoir tester une vraie vérification d’identité : Stripe Identity doit être en production (P8-2) avant la soumission.", "ref": ""}, {"nolegal": false, "id": "p8-6", "title": "Déploiement web", "objective": "Mettre en ligne la version web et la page de suivi destinataire.", "sub": ["Export web d’Expo et hébergement.", "Universal Links / App Links vérifiés."], "deliverable": "Web en production.", "bot": "App Dev & Security", "prompt": "Déploie la version web de Volis et la page de suivi destinataire, avec les fichiers de liens universels, selon la doc Expo de déploiement web.", "links": [["Expo — Déployer le web", "https://docs.expo.dev/deploy/web/"]], "duration": "1 à 2 jours", "deps": ["p2-1", "p7-5"], "critical": false, "warn": "", "ref": ""}, {"nolegal": false, "id": "p8-7", "title": "Go / no-go", "objective": "Décider du lancement avec tous les préalables cochés.", "sub": ["ÉFVP terminée, politiques publiées, Stripe live, Identity live, pentest fait, déclaration CAI dans les délais.", "Plan de soutien prêt."], "deliverable": "Décision écrite de lancement.", "bot": "Vous (Faycal)", "prompt": "Fais la revue go/no-go du lancement de Volis : vérifie chaque préalable du jalon J1 (partie B §6.2) et dis-moi ce qui manque.", "links": [], "duration": "½ journée", "deps": ["p8-2", "p8-4", "p8-5", "p8-6"], "critical": true, "warn": "", "ref": ""}]}, {"id": "p9", "title": "Après le lancement", "intro": "Mesurer, soutenir, améliorer, puis ouvrir de nouveaux pays un à la fois.", "steps": [{"nolegal": false, "id": "p9-1", "title": "Surveillance et rapprochement", "objective": "Voir les problèmes avant les utilisateurs.", "sub": ["Alertes Sentry, disponibilité, webhooks en échec.", "Rapprochement quotidien Stripe ↔ base (payments, transfers)."], "deliverable": "Tableau de bord et alertes actifs.", "bot": "App Dev & Security", "prompt": "Définis les alertes de production de Volis (Sentry, webhooks en échec, transferts en attente, rétrofacturations) et un script de rapprochement Stripe ↔ base.", "links": [["Sentry pour React Native", "https://docs.sentry.io/platforms/react-native/"]], "duration": "2 jours", "deps": [], "critical": false, "warn": "", "ref": ""}, {"nolegal": false, "id": "p9-2", "title": "Soutien, modération et litiges", "objective": "Tenir les délais promis aux utilisateurs.", "sub": ["Délais de réponse affichés dans l’app (à décider).", "File de modération et traitement des litiges."], "deliverable": "Procédures écrites.", "bot": "Legal Team", "prompt": "Rédige les procédures de traitement des litiges et des signalements de Volis à partir de la partie C §6 et des écrans 34, 35 et 44, avec des réponses types en français.", "links": [], "duration": "2 à 3 jours", "deps": [], "critical": false, "warn": "", "ref": ""}, {"nolegal": false, "id": "p9-3", "title": "Versions 1.1 et 1.2", "objective": "Ajouter les fonctions prévues aux jalons J2 et J3.", "sub": ["J2 : versement instantané, assurance, modération automatique.", "J3 : arabe (RTL), devises locales, Stripe Billing si retenu."], "deliverable": "Feuille de route à jour.", "bot": "App Dev & Security", "prompt": "Planifie les versions 1.1 et 1.2 de Volis (jalons J2 et J3 de la partie B §6.2) avec leurs préalables juridiques et les écrans à concevoir.", "links": [], "duration": "Continu", "deps": [], "critical": false, "warn": "", "ref": ""}, {"nolegal": false, "id": "p9-4", "title": "Veille des exigences des stores et des SDK", "objective": "Éviter les rejets de mise à jour.", "sub": ["Vérifier chaque année le niveau d’API Google Play et les exigences Apple.", "Mettre à jour le SDK Expo."], "deliverable": "Mises à jour planifiées.", "bot": "App Dev & Security", "prompt": "Vérifie les exigences actuelles Google Play (API cible) et Apple (Xcode, SDK) pour Volis et la compatibilité du SDK Expo utilisé.", "links": [["Google Play — Niveau d’API cible", "https://support.google.com/googleplay/android-developer/answer/11926878"], ["Apple — Exigences à venir", "https://developer.apple.com/news/upcoming-requirements/"]], "duration": "Annuel", "deps": [], "critical": false, "warn": "", "ref": ""}, {"nolegal": false, "id": "p9-5", "title": "Expansion pays par pays", "objective": "Ouvrir un nouveau corridor de façon contrôlée.", "sub": ["Vérifier la disponibilité de Stripe Connect et Stripe Identity.", "Avocat local; exigences locales (par ex. RGPD, DSA, DAC7 en Europe); pays sous sanctions exclus."], "deliverable": "Fiche d’ouverture validée par pays.", "bot": "Legal Team", "prompt": "Prépare la fiche d’ouverture de Volis pour [pays] : disponibilité Stripe Connect et Identity (à confirmer avec Stripe), exigences locales à faire valider par un avocat local, adaptations de l’app.", "links": [], "duration": "Par pays", "deps": [], "critical": false, "warn": "", "ref": ""}, {"nolegal": false, "id": "p9-6", "title": "Revue annuelle de conformité", "objective": "Garder l’ÉFVP et les registres à jour.", "sub": ["Mettre à jour l’ÉFVP à chaque nouveau sous-traitant ou fonction.", "Vérifier les purges et le registre des incidents."], "deliverable": "Compte rendu annuel.", "bot": "Legal Team", "prompt": "Prépare la checklist de revue annuelle de conformité de Volis : ÉFVP, sous-traitants, consentements, purges (SEC-25), registre des incidents, politiques.", "links": [], "duration": "1 jour par an", "deps": [], "critical": false, "warn": "", "ref": ""}]}], "bots": {"Ui Designer": {"k": "ui", "d": "Design : écrans, charte, accessibilité, fiches des stores."}, "App Dev & Security": {"k": "dev", "d": "Code, architecture, sécurité, CI, builds et soumissions."}, "Legal Team": {"k": "leg", "d": "Questions juridiques, conformité, documents (pas un avis juridique)."}, "Vous (Faycal)": {"k": "you", "d": "Décisions et démarches que vous faites vous-même."}}}</script>
+<script>
+(function(){
+'use strict';
+var DATA = JSON.parse(document.getElementById('guide-data').textContent);
+var KEY = 'volis-guide-v1';
+var ALL = [], BYID = {}, PH = {};
+DATA.phases.forEach(function(p, pi){ p.n = pi; p.steps.forEach(function(s){ s.phase = p.id; ALL.push(s); BYID[s.id] = s; }); PH[p.id] = p; });
+
+/* --- état --- */
+function blank(){ return {version:1, done:{}, notes:{}, open:{}, dates:{launch:'', cai:''}, updated:null}; }
+var st = blank();
+var storageOK = true;
+try { var raw = localStorage.getItem(KEY); if (raw) st = sanitize(JSON.parse(raw)) || blank(); } catch(e){ storageOK = false; }
+function sanitize(o){
+  if (!o || typeof o !== 'object') return null;
+  var r = blank();
+  ['done','open'].forEach(function(k){ if (o[k] && typeof o[k]==='object') Object.keys(o[k]).forEach(function(id){ if (BYID[id] && o[k][id]===true) r[k][id]=true; }); });
+  if (o.notes && typeof o.notes==='object') Object.keys(o.notes).forEach(function(id){ if (BYID[id] && typeof o.notes[id]==='string') r.notes[id]=o.notes[id].slice(0,20000); });
+  var re=/^\d{4}-\d{2}-\d{2}$/;
+  if (o.dates){ if (re.test(o.dates.launch||'')) r.dates.launch=o.dates.launch; if (re.test(o.dates.cai||'')) r.dates.cai=o.dates.cai; }
+  r.updated = typeof o.updated==='string' ? o.updated : null;
+  return r;
+}
+var saveT;
+function save(){ st.updated = new Date().toISOString(); try { localStorage.setItem(KEY, JSON.stringify(st)); storageOK = true; } catch(e){ if (storageOK){ toast('Impossible d’enregistrer dans ce navigateur : exportez votre progression.'); } storageOK = false; } }
+
+/* --- utilitaires DOM --- */
+function el(tag, attrs, kids){
+  var e = document.createElement(tag);
+  if (attrs) Object.keys(attrs).forEach(function(k){
+    var v = attrs[k]; if (v===null||v===undefined||v===false) return;
+    if (k==='class') e.className=v; else if (k==='text') e.textContent=v; else if (k==='html') e.innerHTML=v;
+    else if (k.slice(0,2)==='on') e.addEventListener(k.slice(2), v); else e.setAttribute(k, v===true?'':v);
+  });
+  (kids||[]).forEach(function(c){ if (c===null||c===undefined) return; e.appendChild(typeof c==='string'?document.createTextNode(c):c); });
+  return e;
+}
+var ICO = {
+  check:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  chev:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="m6 9 6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  clock:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2" stroke-linecap="round"/></svg>',
+  flag:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 21V4m0 0h11l-2 4 2 4H5" stroke-linejoin="round"/></svg>',
+  lock:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>',
+  warn:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3 2 20h20L12 3z" stroke-linejoin="round"/><path d="M12 10v4M12 17h.01" stroke-linecap="round"/></svg>',
+  ext:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v6H4V6h6" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  copy:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V5a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h3"/></svg>',
+  note:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16v4z" stroke-linejoin="round"/></svg>'
+};
+function svg(name){ var s = document.createElement('span'); s.innerHTML = ICO[name]; return s.firstChild; }
+function initials(b){ return {ui:'UI', dev:'DS', leg:'LT', you:'FC'}[b] || '?'; }
+function plural(n, one, many){ return n + ' ' + (n>1?many:one); }
+
+/* --- assistants --- */
+var botsEl = document.getElementById('bots');
+Object.keys(DATA.bots).forEach(function(name){
+  var b = DATA.bots[name];
+  botsEl.appendChild(el('div',{class:'bot'},[el('span',{class:'av '+b.k,'aria-hidden':'true',text:initials(b.k)}), el('div',null,[el('b',{text:name}), b.d])]));
+});
+
+/* --- rendu des phases --- */
+var phasesEl = document.getElementById('phases'), tocEl = document.getElementById('toc'), gridEl = document.getElementById('phgrid');
+var NODES = {};
+DATA.phases.forEach(function(p){
+  var sec = el('section',{class:'phase',id:'phase-'+p.id,'aria-labelledby':'h-'+p.id});
+  var pc = el('span',{class:'pc'});
+  sec.appendChild(el('div',{class:'phhead'},[el('div',null,[el('div',{class:'n',text:'PHASE '+p.n}), el('h2',{id:'h-'+p.id,text:p.title})]), pc]));
+  sec.appendChild(el('p',{class:'phintro',text:p.intro}));
+  var bar = el('div',{class:'bar sm',role:'progressbar','aria-label':'Progression de la phase '+p.n,'aria-valuemin':'0','aria-valuemax':'100','aria-valuenow':'0'},[el('i')]);
+  sec.appendChild(bar);
+  var ul = el('ol',{class:'steps'});
+  p.steps.forEach(function(s){ ul.appendChild(stepNode(s)); });
+  sec.appendChild(ul);
+  phasesEl.appendChild(sec);
+  var ta = el('a',{href:'#phase-'+p.id},[el('span',{text:p.n+'. '+p.title}), el('span',{class:'p',text:'0 %'})]);
+  tocEl.appendChild(el('li',null,[ta]));
+  var ga = el('a',{href:'#phase-'+p.id,'aria-label':'Phase '+p.n+' : '+p.title},[el('b',{text:'Phase '+p.n}), el('span',{class:'gp',text:'0 %'}), el('div',{class:'bar sm','aria-hidden':'true'},[el('i')])]);
+  gridEl.appendChild(ga);
+  PH[p.id].dom = {sec:sec, pc:pc, bar:bar, toc:ta, grid:ga};
+});
+
+function stepNode(s){
+  var bot = DATA.bots[s.bot];
+  var li = el('li',{class:'step'+(s.critical?' crit':''),id:'step-'+s.id});
+  var cbid = 'cb-'+s.id, bodyid = 'body-'+s.id, tid = 't-'+s.id;
+  var cb = el('input',{type:'checkbox',id:cbid,'aria-describedby':'bd-'+s.id});
+  cb.addEventListener('change', function(){ setDone(s.id, cb.checked); });
+  var badges = el('div',{class:'badges',id:'bd-'+s.id});
+  var title = el('label',{class:'st-title',for:cbid,id:tid},[el('span',{class:'st-id',text:s.id.toUpperCase()}), el('span',{class:'tt',text:s.title})]);
+  var exp = el('button',{class:'exp',type:'button','aria-expanded':'false','aria-controls':bodyid,'aria-label':'Détails : '+s.title});
+  exp.appendChild(svg('chev'));
+  exp.addEventListener('click', function(){ toggle(s.id); });
+  var head = el('div',{class:'st-h'},[el('span',{class:'ck'},[cb, el('span',{class:'box','aria-hidden':'true',html:ICO.check})]), el('div',{class:'st-main'},[title, badges]), exp]);
+  var body = el('div',{class:'st-b',id:bodyid,role:'region','aria-labelledby':tid});
+  body.appendChild(el('h3',{text:'Objectif'})); body.appendChild(el('p',{class:'obj',text:s.objective}));
+  if (s.warn){ var a = el('div',{class:'alert crit'},[svg('warn'), el('div',{text:s.warn})]); body.appendChild(a); }
+  var blockBox = el('div',{class:'alert block',hidden:true},[svg('lock'), el('div',{class:'bt'})]);
+  body.appendChild(blockBox);
+  body.appendChild(el('h3',{text:'Sous-étapes'}));
+  body.appendChild(el('ol',{class:'sub'}, s.sub.map(function(x){ return el('li',{text:x}); })));
+  body.appendChild(el('h3',{text:'Livrable'})); body.appendChild(el('p',{class:'deliv',text:s.deliverable}));
+  var depsUl = null;
+  if (s.deps.length){
+    body.appendChild(el('h3',{text:'Dépend de'}));
+    depsUl = el('ul',{class:'deps'});
+    body.appendChild(depsUl);
+  }
+  body.appendChild(el('h3',{text:'Qui solliciter'}));
+  var pre = el('pre',{id:'pr-'+s.id,tabindex:'0','aria-label':'Requête à copier pour '+s.bot,text:s.prompt});
+  var cpy = el('button',{class:'btn pri',type:'button','aria-describedby':'pr-'+s.id},[svg('copy'), el('span',{text:'Copier la requête'})]);
+  cpy.addEventListener('click', function(){ copyText(s.prompt, s.bot); });
+  body.appendChild(el('div',{class:'ask'},[el('div',{class:'who'},[el('span',{class:'av '+bot.k,'aria-hidden':'true',text:initials(bot.k)}), el('b',{text:s.bot}), cpy]), pre]));
+  if (s.links.length){
+    body.appendChild(el('h3',{text:'Documentation officielle'}));
+    body.appendChild(el('ul',{class:'links'}, s.links.map(function(l){ return el('li',null,[el('a',{href:l[1],target:'_blank',rel:'noopener noreferrer'},[l[0], svg('ext'), el('span',{class:'sr',text:' (nouvel onglet)'})])]); })));
+  }
+  var meta = [];
+  if (s.duration) meta.push('Durée estimée : '+s.duration);
+  if (s.ref) meta.push('Référence : '+s.ref);
+  if (meta.length){ body.appendChild(el('h3',{text:'Repères'})); body.appendChild(el('p',{class:'meta',text:meta.join(' · ')})); }
+  var nid = 'nt-'+s.id, saved = el('span',{class:'saved','aria-hidden':'true',text:'Enregistré'});
+  var nh3 = el('h3',{class:'nh'},[el('label',{for:nid,text:'Mes notes'}), saved]); body.appendChild(nh3);
+  var ta = el('textarea',{class:'notes',id:nid,placeholder:'Décisions, liens, contacts, dates…'});
+  ta.value = st.notes[s.id] || '';
+  var nt;
+  ta.addEventListener('input', function(){
+    if (ta.value) st.notes[s.id] = ta.value; else delete st.notes[s.id];
+    clearTimeout(nt); nt = setTimeout(function(){ save(); saved.classList.add('on'); setTimeout(function(){ saved.classList.remove('on'); }, 1200); refreshBadges(s.id); }, 400);
+  });
+  body.appendChild(ta);
+  li.appendChild(head); li.appendChild(body);
+  NODES[s.id] = {li:li, cb:cb, exp:exp, badges:badges, block:blockBox, deps:depsUl, notes:ta,
+    hay: norm([s.id, s.title, s.objective, s.sub.join(' '), s.deliverable, s.bot, s.prompt, s.ref, s.warn, s.links.map(function(l){return l[0];}).join(' ')].join(' '))};
+  return li;
+}
+function norm(t){ return (t||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[’']/g,"'"); }
+
+function unmet(s){ return s.deps.filter(function(d){ return !st.done[d]; }); }
+function refreshBadges(id){
+  var s = BYID[id], n = NODES[id], b = n.badges, bot = DATA.bots[s.bot];
+  b.textContent = '';
+  if (st.done[id]) b.appendChild(el('span',{class:'bdg ok'},[svg('check'),'Faite']));
+  if (s.critical) b.appendChild(el('span',{class:'bdg crit'},[svg('flag'),'Chemin critique']));
+  if (s.nolegal) b.appendChild(el('span',{class:'bdg ok'},[svg('check'),'Aucun blocage légal']));
+  var u = unmet(s);
+  if (u.length && !st.done[id]) b.appendChild(el('span',{class:'bdg block'},[svg('lock'),'Prérequis : '+u.map(function(x){return x.toUpperCase();}).join(', ')]));
+  if (s.duration) b.appendChild(el('span',{class:'bdg'},[svg('clock'), s.duration]));
+  b.appendChild(el('span',{class:'bdg bot-'+bot.k,text:s.bot}));
+  if (st.notes[id]) b.appendChild(el('span',{class:'bdg note'},[svg('note'),'Note']));
+  /* bloc d'alerte de dépendances */
+  if (u.length && !st.done[id]){
+    n.block.hidden = false;
+    n.block.querySelector('.bt').textContent = 'Prérequis à terminer d’abord : ' + u.map(function(x){ return x.toUpperCase()+' — '+BYID[x].title; }).join(' · ');
+  } else n.block.hidden = true;
+  if (n.deps){
+    n.deps.textContent = '';
+    s.deps.forEach(function(d){
+      var ok = !!st.done[d];
+      var a = el('a',{href:'#step-'+d,class:ok?'d-ok':'d-no'},[svg(ok?'check':'lock'), d.toUpperCase()+' · '+BYID[d].title, el('span',{class:'sr',text:ok?' (faite)':' (à faire)'})]);
+      a.addEventListener('click', function(ev){ ev.preventDefault(); focusStep(d); });
+      n.deps.appendChild(el('li',null,[a]));
+    });
+  }
+}
+function focusStep(id){
+  var s = BYID[id];
+  var f = document.querySelector('input[name=f][value=all]'); if (f && !f.checked){ f.checked = true; }
+  q.value=''; qclr.classList.remove('on'); applyFilter();
+  setOpen(id, true);
+  var li = NODES[id].li; li.scrollIntoView({block:'start'}); NODES[id].exp.focus({preventScroll:true});
+}
+function setOpen(id, open){
+  var n = NODES[id]; n.li.classList.toggle('open', open); n.exp.setAttribute('aria-expanded', open?'true':'false');
+  if (open) st.open[id] = true; else delete st.open[id];
+}
+function toggle(id){ setOpen(id, !NODES[id].li.classList.contains('open')); save(); }
+function setDone(id, v){
+  if (v) st.done[id] = true; else delete st.done[id];
+  NODES[id].li.classList.toggle('isdone', v);
+  save();
+  ALL.forEach(function(s){ if (s.id===id || s.deps.indexOf(id)>=0) refreshBadges(s.id); });
+  progress(); calc(); applyFilter();
+  toast(v ? 'Étape '+id.toUpperCase()+' marquée comme faite.' : 'Étape '+id.toUpperCase()+' remise à faire.');
+}
+
+/* --- progression --- */
+function pct(a,b){ return b ? Math.round(a*100/b) : 0; }
+function progress(){
+  var d = ALL.filter(function(s){ return st.done[s.id]; }).length, P = pct(d, ALL.length);
+  document.getElementById('gPct').textContent = P + ' %';
+  document.getElementById('gOf').textContent = plural(d,'étape faite','étapes faites') + ' sur ' + ALL.length;
+  var gb = document.getElementById('gBar'); gb.setAttribute('aria-valuenow', P); gb.setAttribute('aria-valuetext', P+' %, '+d+' sur '+ALL.length); gb.firstChild.style.width = P+'%';
+  var crit = ALL.filter(function(s){ return s.critical; }), cd = crit.filter(function(s){ return st.done[s.id]; }).length;
+  var blocked = ALL.filter(function(s){ return !st.done[s.id] && unmet(s).length; }).length;
+  var ready = ALL.filter(function(s){ return !st.done[s.id] && !unmet(s).length; }).length;
+  var gs = document.getElementById('gStats'); gs.textContent='';
+  [['Chemin critique', cd+' / '+crit.length], ['Prêtes à commencer', ready], ['En attente de prérequis', blocked], ['Notes', Object.keys(st.notes).length]].forEach(function(x){ gs.appendChild(el('span',null,[x[0]+' : ', el('b',{text:String(x[1])})])); });
+  DATA.phases.forEach(function(p){
+    var n = p.steps.length, k = p.steps.filter(function(s){ return st.done[s.id]; }).length, v = pct(k,n), D = p.dom;
+    D.pc.textContent = k+' / '+n+' · '+v+' %';
+    D.bar.setAttribute('aria-valuenow', v); D.bar.setAttribute('aria-valuetext', v+' %, '+k+' sur '+n); D.bar.firstChild.style.width = v+'%';
+    D.toc.querySelector('.p').textContent = v+' %'; D.toc.classList.toggle('done', v===100);
+    D.grid.querySelector('.gp').textContent = v+' % · '+k+'/'+n; D.grid.querySelector('i').style.width = v+'%'; D.grid.classList.toggle('done', v===100);
+  });
+  document.getElementById('printhdr').textContent = 'Progression au '+new Date().toLocaleDateString('fr-CA',{year:'numeric',month:'long',day:'numeric'})+' : '+P+' % ('+d+' / '+ALL.length+' étapes).';
+}
+
+/* --- filtres et recherche --- */
+var q = document.getElementById('q'), qclr = document.getElementById('qclr'), emptyEl = document.getElementById('empty');
+function curFilter(){ var r = document.querySelector('input[name=f]:checked'); return r ? r.value : 'all'; }
+function hl(node, terms){
+  var t = node.getAttribute('data-raw'); if (t===null){ t = node.textContent; node.setAttribute('data-raw', t); }
+  node.textContent = '';
+  if (!terms.length){ node.textContent = t; return; }
+  var nt = norm(t), i = 0, out = [];
+  while (i < t.length){
+    var best = -1, bl = 0;
+    terms.forEach(function(w){ var j = nt.indexOf(w, i); if (j>=0 && (best<0 || j<best)){ best=j; bl=w.length; } });
+    if (best<0){ out.push(document.createTextNode(t.slice(i))); break; }
+    if (best>i) out.push(document.createTextNode(t.slice(i,best)));
+    out.push(el('mark',{text:t.slice(best,best+bl)})); i = best+bl;
+  }
+  out.forEach(function(x){ node.appendChild(x); });
+}
+var lastTerms = '';
+function esc(w){ return w.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'); }
+function wordHit(h, w){ return new RegExp('(^|[^a-z0-9])'+esc(w)).test(h); }
+function applyFilter(){
+  var f = curFilter(), terms = norm(q.value.trim()).split(/\s+/).filter(Boolean), shown = 0;
+  ALL.forEach(function(s){
+    var n = NODES[s.id], ok = true;
+    if (f==='todo' && st.done[s.id]) ok = false;
+    if (f==='done' && !st.done[s.id]) ok = false;
+    if (f==='crit' && !s.critical) ok = false;
+    if (ok && terms.length){ var nh = ' '+n.hay+' '+norm(st.notes[s.id]||''); ok = terms.every(function(w){ return wordHit(nh, w); }); }
+    n.li.hidden = !ok; if (ok) shown++;
+    hl(n.li.querySelector('.tt'), terms);
+  });
+  DATA.phases.forEach(function(p){ p.dom.sec.hidden = p.steps.every(function(s){ return NODES[s.id].li.hidden; }); });
+  emptyEl.style.display = shown ? 'none' : 'block';
+  var key = f+'|'+terms.join(' ');
+  if (key !== lastTerms && (terms.length || f!=='all')) announce(shown===0 ? 'Aucune étape trouvée.' : plural(shown,'étape affichée','étapes affichées')+'.');
+  lastTerms = key;
+}
+var qt;
+q.addEventListener('input', function(){ qclr.classList.toggle('on', !!q.value); clearTimeout(qt); qt = setTimeout(applyFilter, 150); });
+q.addEventListener('keydown', function(e){ if (e.key==='Escape'){ q.value=''; qclr.classList.remove('on'); applyFilter(); } });
+qclr.addEventListener('click', function(){ q.value=''; qclr.classList.remove('on'); applyFilter(); q.focus(); });
+document.querySelectorAll('input[name=f]').forEach(function(r){ r.addEventListener('change', applyFilter); });
+document.addEventListener('keydown', function(e){ if (e.key==='/' && document.activeElement.tagName!=='INPUT' && document.activeElement.tagName!=='TEXTAREA'){ e.preventDefault(); q.focus(); } });
+
+/* --- tout déplier / replier --- */
+document.getElementById('bExpand').addEventListener('click', function(){ ALL.forEach(function(s){ if (!NODES[s.id].li.hidden) setOpen(s.id, true); }); save(); announce('Étapes dépliées.'); });
+document.getElementById('bCollapse').addEventListener('click', function(){ ALL.forEach(function(s){ setOpen(s.id, false); }); save(); announce('Étapes repliées.'); });
+
+/* --- copie --- */
+function copyText(t, who){
+  function ok(){ toast('Requête copiée : collez-la dans « '+who+' ».'); }
+  function fallback(){
+    var ta = el('textarea',{style:'position:fixed;top:-1000px;opacity:0','aria-hidden':'true'}); ta.value = t; document.body.appendChild(ta); ta.select();
+    var r = false; try { r = document.execCommand('copy'); } catch(e){}
+    document.body.removeChild(ta); r ? ok() : toast('Copie impossible : sélectionnez le texte et faites Ctrl+C.');
+  }
+  if (navigator.clipboard && window.isSecureContext){ navigator.clipboard.writeText(t).then(ok, fallback); } else fallback();
+}
+
+/* --- calculateur CAI --- */
+var dL = document.getElementById('dLaunch'), dC = document.getElementById('dCai'), out = document.getElementById('calcOut');
+dL.value = st.dates.launch; dC.value = st.dates.cai;
+function pd(v){ if (!v) return null; var p = v.split('-'); return new Date(+p[0], +p[1]-1, +p[2]); }
+function add(d, n){ var r = new Date(d.getTime()); r.setDate(r.getDate()+n); return r; }
+function fmt(d){ return d.toLocaleDateString('fr-CA',{weekday:'long',year:'numeric',month:'long',day:'numeric'}); }
+function line(cls, txt){ return el('div',{class:'pill '+cls},[el('span',{class:'dot','aria-hidden':'true'}), el('div',{text:txt})]); }
+function calc(){
+  out.textContent = '';
+  var L = pd(dL.value), C = pd(dC.value), today = new Date(); today.setHours(0,0,0,0);
+  var efvp = !!st.done['p1-4'];
+  if (L){
+    var lim = add(L, -60), left = Math.round((lim - today)/864e5);
+    if (!C) out.appendChild(line(left<0?'bad':'', 'Déposer la déclaration à la CAI au plus tard le '+fmt(lim)+(left>=0 ? ' (dans '+plural(left,'jour','jours')+').' : ' : cette date est dépassée, le lancement avec Identity doit être reporté.')));
+  }
+  if (C){
+    var go = add(C, 60);
+    var ready = go <= today;
+    out.appendChild(line(ready?'good':'', 'Délai de 60 jours écoulé le '+fmt(go)+(ready?' : condition (a) remplie.':'.')));
+    if (L) out.appendChild(line(go<=L?'good':'bad', go<=L ? 'La date de lancement respecte le délai de 60 jours.' : 'Le lancement est prévu avant la fin du délai de 60 jours : reportez-le au '+fmt(go)+' ou plus tard.'));
+  }
+  out.appendChild(line(efvp?'good':'bad', efvp ? 'ÉFVP terminée (étape P1-4 cochée) : condition (b) remplie.' : 'ÉFVP non terminée (étape P1-4) : condition (b) non remplie.'));
+  if (!L && !C) out.insertBefore(line('', 'Saisissez une date de lancement pour obtenir la date limite de dépôt.'), out.firstChild);
+}
+function onDate(){ st.dates.launch = dL.value || ''; st.dates.cai = dC.value || ''; save(); calc(); }
+dL.addEventListener('change', onDate); dC.addEventListener('change', onDate);
+
+/* --- export / import --- */
+function exportJSON(){
+  var payload = {app:'volis-guide', version:1, exported:new Date().toISOString(), done:st.done, notes:st.notes, open:st.open, dates:st.dates};
+  var blob = new Blob([JSON.stringify(payload, null, 2)], {type:'application/json'});
+  var a = el('a',{href:URL.createObjectURL(blob), download:'volis-guide-progression-'+new Date().toISOString().slice(0,10)+'.json'});
+  document.body.appendChild(a); a.click(); setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); }, 500);
+  toast('Progression exportée.');
+}
+document.getElementById('bExport').addEventListener('click', exportJSON);
+var fi = document.getElementById('fImport');
+document.getElementById('bImport').addEventListener('click', function(){ fi.value=''; fi.click(); });
+fi.addEventListener('change', function(){
+  var f = fi.files && fi.files[0]; if (!f) return;
+  if (f.size > 2e6){ toast('Fichier trop volumineux.'); return; }
+  var r = new FileReader();
+  r.onload = function(){
+    var o; try { o = JSON.parse(r.result); } catch(e){ toast('Fichier invalide : JSON illisible.'); return; }
+    if (!o || o.app !== 'volis-guide'){ toast('Ce fichier n’est pas une progression du guide Volis.'); return; }
+    var s = sanitize(o); if (!s){ toast('Fichier invalide.'); return; }
+    st = s; save(); syncAll();
+    toast('Progression importée : '+plural(Object.keys(st.done).length,'étape faite','étapes faites')+'.');
+  };
+  r.readAsText(f);
+});
+
+/* --- impression --- */
+document.getElementById('bPrint').addEventListener('click', function(){ window.print(); });
+window.addEventListener('beforeprint', function(){ ALL.forEach(function(s){ var e=!NODES[s.id].notes.value; NODES[s.id].notes.classList.toggle('emptyn', e); NODES[s.id].li.querySelector('.nh').classList.toggle('emptyn', e); }); });
+
+/* --- réinitialiser --- */
+var dlg = document.getElementById('dlgReset'), lastFocus;
+document.getElementById('bReset').addEventListener('click', function(){
+  lastFocus = document.activeElement;
+  if (dlg.showModal) { dlg.showModal(); document.getElementById('drNo').focus(); }
+  else if (window.confirm('Réinitialiser la progression ? Toutes les cases, notes et dates seront effacées.')) doReset();
+});
+function closeDlg(){ dlg.close(); if (lastFocus) lastFocus.focus(); }
+document.getElementById('drNo').addEventListener('click', closeDlg);
+document.getElementById('drExport').addEventListener('click', exportJSON);
+document.getElementById('drYes').addEventListener('click', function(){ doReset(); closeDlg(); });
+function doReset(){ st = blank(); try { localStorage.removeItem(KEY); } catch(e){} syncAll(); toast('Progression réinitialisée.'); }
+
+/* --- divers --- */
+var tEl = document.getElementById('toast'), tT;
+function toast(m){ tEl.textContent = m; tEl.classList.add('on'); clearTimeout(tT); tT = setTimeout(function(){ tEl.classList.remove('on'); }, 2600); }
+function announce(m){ toast(m); }
+function syncAll(){
+  ALL.forEach(function(s){ var n = NODES[s.id]; n.cb.checked = !!st.done[s.id]; n.li.classList.toggle('isdone', !!st.done[s.id]); n.notes.value = st.notes[s.id]||''; setOpen(s.id, !!st.open[s.id]); refreshBadges(s.id); });
+  dL.value = st.dates.launch; dC.value = st.dates.cai; progress(); calc(); applyFilter();
+}
+/* phase courante dans la table des matières */
+if ('IntersectionObserver' in window){
+  var io = new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting){ var id = e.target.id.replace('phase-',''); DATA.phases.forEach(function(p){ var c = p.id===id; p.dom.toc.classList.toggle('cur', c); if (c) p.dom.toc.setAttribute('aria-current','true'); else p.dom.toc.removeAttribute('aria-current'); }); } }); }, {rootMargin:'-90px 0px -65% 0px'});
+  DATA.phases.forEach(function(p){ io.observe(p.dom.sec); });
+}
+syncAll();
+if (location.hash && location.hash.indexOf('#step-')===0){ var id = location.hash.slice(6); if (BYID[id]) setTimeout(function(){ focusStep(id); }, 50); }
+if (!storageOK) toast('Le stockage local est indisponible : exportez votre progression avant de fermer.');
+})();
+</script>
+</body>
+</html>

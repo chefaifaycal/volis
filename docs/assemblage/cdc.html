@@ -1,0 +1,1531 @@
+<!doctype html><html lang="fr-CA"><head><meta charset="utf-8"><title>Volis — Cahier des charges</title><style>
+@page { size: letter; margin: 20mm 19mm 20mm 19mm;
+  @bottom-left { content: "Volis — Cahier des charges · v1.0 · 11 octobre 2026"; font: 500 8pt Inter; color: #6F6A60; }
+  @bottom-right { content: counter(page) " / " counter(pages); font: 600 8pt Inter; color: #6F6A60; }
+}
+@page cover { margin: 0; @bottom-left { content: none } @bottom-right { content: none } }
+html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+body { font: 400 9.6pt/1.5 Inter, sans-serif; color: #1E2A3A; margin: 0; }
+.cover { page: cover; width: 215.9mm; height: 279.4mm; position: relative; overflow: hidden; background: #F5F1E8; page-break-after: always; }
+h1, h2, h3, h4 { font-family: 'Plus Jakarta Sans', sans-serif; color: #1E2A3A; break-after: avoid; page-break-after: avoid; }
+h1 { font-size: 20pt; line-height: 1.2; margin: 0 0 10pt; padding-bottom: 6pt; border-bottom: 2.5pt solid #0F766E; break-before: page; page-break-before: always; }
+h1.part { string-set: part content(text); }
+h2 { font-size: 13.5pt; margin: 16pt 0 6pt; color: #1E2A3A; }
+h3 { font-size: 11pt; margin: 12pt 0 4pt; color: #0F766E; }
+h4 { font-size: 10pt; margin: 10pt 0 4pt; color: #0F766E; }
+p { margin: 0 0 6pt; orphans: 3; widows: 3; }
+a { color: #0F766E; text-decoration: none; word-break: break-word; }
+ul, ol { margin: 0 0 6pt; padding-left: 16pt; } li { margin: 0 0 2.5pt; }
+blockquote { margin: 6pt 0 10pt; padding: 8pt 12pt; background: #EEF6F4; border-left: 3.5pt solid #0F766E; border-radius: 0 6pt 6pt 0; }
+blockquote p:last-child { margin-bottom: 0; }
+code { font: 500 8.4pt 'JetBrains Mono', monospace; background: #EFE8DA; padding: 0 2.5pt; border-radius: 3pt; word-break: break-word; }
+pre { background: #F7F3EA; border: 1pt solid #E4DACA; border-radius: 6pt; padding: 8pt 10pt; font-size: 7.8pt; line-height: 1.4; white-space: pre-wrap; break-inside: avoid; }
+pre code { background: none; padding: 0; font-size: 7.8pt; }
+table { width: 100%; border-collapse: collapse; margin: 6pt 0 10pt; font-size: 8.2pt; line-height: 1.4; }
+thead { display: table-header-group; }
+th { background: #0F766E; color: #fff; text-align: left; font-weight: 700; padding: 4pt 6pt; }
+td { padding: 4pt 6pt; border-bottom: 0.75pt solid #DCD3C2; vertical-align: top; }
+tr { break-inside: avoid; }
+tbody tr:nth-child(even) td { background: #FBF8F2; }
+figure { margin: 8pt 0 12pt; text-align: center; break-inside: avoid; }
+figure img { max-width: 100%; max-height: 190mm; }
+figcaption { font: 500 8pt Inter; color: #4E5A69; margin-top: 4pt; }
+input[type=checkbox] { margin-right: 4pt; }
+ul.task-list, ul:has(> li > input) { list-style: none; padding-left: 4pt; }
+.mk { position: absolute; font-size: 1px; color: transparent; }
+.toc h1 { break-before: page; }
+.toc ol { list-style: none; padding: 0; margin: 0; }
+.toc li { display: flex; align-items: baseline; gap: 6pt; margin: 0; padding: 2.4pt 0; }
+.toc li.l1 { font: 700 10.5pt 'Plus Jakarta Sans'; margin-top: 8pt; color: #1E2A3A; }
+.toc li.l2 { font: 400 9pt Inter; padding-left: 14pt; color: #33404F; }
+.toc li .t { flex: none; max-width: 82%; }
+.toc li .d { flex: 1; border-bottom: 1pt dotted #B9B09E; transform: translateY(-3pt); }
+.toc li .n { flex: none; font-variant-numeric: tabular-nums; min-width: 16pt; text-align: right; }
+.partcover { break-before: page; page-break-before: always; }
+.meta td:first-child { font-weight: 700; width: 32%; }
+</style></head><body><section class="cover"><div style="position:absolute;right:-60mm;top:-40mm;width:190mm;height:190mm;border-radius:46% 54% 50% 50%;background:#BFE3DB;opacity:.65"></div><div style="position:absolute;right:-30mm;top:120mm;width:120mm;height:110mm;border-radius:52% 48% 44% 56%;background:#FFC4B2;opacity:.6"></div><img src="file:///workspace/volis-design/dev-assets/illustrations/voyageur-valise-colis@2x.png" style="position:absolute;right:22mm;top:52mm;height:150mm"/><div style="position:absolute;left:22mm;top:30mm;width:62mm"><svg style='width:100%;height:auto' xmlns="http://www.w3.org/2000/svg" viewBox="-12.0 -140.0 286.4 156.0"><path d="M26.668 0.0 1.298 -64.428H20.413999999999998L37.995999999999995 -15.693999999999999H30.68L48.262 -64.428H67.378L42.007999999999996 0.0Z" fill="#1E2A3A"/><mask id="k1" maskUnits="userSpaceOnUse" x="-1000" y="-1000" width="3000" height="3000"><rect x="-1000" y="-1000" width="3000" height="3000" fill="#fff"/><path d="M99.68 -49.50 L113.10 -41.75 L113.10 -26.25 L99.68 -18.50 L86.25 -26.25 L86.25 -41.75Z" fill="#000" stroke="#000" stroke-width="2.5" stroke-linejoin="round"/></mask><circle cx="99.68" cy="-34.00" r="34" fill="#1E2A3A" mask="url(#k1)"/><path d="M86.25 -41.75 L99.68 -34.00 L113.10 -41.75 M99.68 -34.00 L99.68 -18.50" fill="none" stroke="#FF7A59" stroke-width="3.6" stroke-linecap="butt" stroke-linejoin="miter" /><path d="M144.166 0.0V-89.326H161.86599999999999V0.0ZM174.728 0.0V-64.428H192.428V0.0Z" fill="#1E2A3A"/><path d="M231.36199999999997 1.416Q220.74199999999996 1.416 212.89499999999998 -3.5989999999999993Q205.04799999999997 -8.613999999999999 202.21599999999998 -17.11L215.19599999999997 -23.246Q217.67399999999998 -18.054 221.92199999999997 -15.104Q226.16999999999996 -12.154 231.36199999999997 -12.154Q235.13799999999998 -12.154 237.14399999999998 -13.687999999999999Q239.14999999999998 -15.222 239.14999999999998 -17.936Q239.14999999999998 -19.352 238.44199999999998 -20.355Q237.73399999999998 -21.358 236.31799999999998 -22.183999999999997Q234.902 -23.009999999999998 232.77799999999996 -23.599999999999998L221.80399999999997 -26.668Q213.89799999999997 -28.91 209.64999999999998 -33.925Q205.402 -38.94 205.402 -45.784Q205.402 -51.802 208.46999999999997 -56.286Q211.53799999999998 -60.769999999999996 217.08399999999997 -63.306999999999995Q222.62999999999997 -65.844 229.82799999999997 -65.844Q239.26799999999997 -65.844 246.40699999999998 -61.419Q253.54599999999996 -56.994 256.496 -48.97L243.39799999999997 -42.833999999999996Q241.98199999999997 -46.846 238.265 -49.265Q234.54799999999997 -51.684 229.82799999999997 -51.684Q226.40599999999998 -51.684 224.45899999999997 -50.268Q222.51199999999997 -48.852 222.51199999999997 -46.373999999999995Q222.51199999999997 -45.076 223.21999999999997 -44.013999999999996Q223.92799999999997 -42.952 225.52099999999996 -42.126Q227.11399999999998 -41.3 229.474 -40.592L239.73999999999998 -37.524Q247.76399999999998 -35.164 252.012 -30.384999999999998Q256.26 -25.605999999999998 256.26 -18.644Q256.26 -12.626 253.13299999999998 -8.142Q250.00599999999997 -3.658 244.45999999999998 -1.121Q238.914 1.416 231.36199999999997 1.416Z" fill="#1E2A3A"/><mask id="k2" maskUnits="userSpaceOnUse" x="-1000" y="-1000" width="3000" height="3000"><rect x="-1000" y="-1000" width="3000" height="3000" fill="#fff"/><path d="M195.07 -100.82 L172.17 -96.70 L181.79 -92.52Z" fill="#000" stroke="#000" stroke-width="1.6" stroke-linejoin="round"/><path d="M194.80 -99.41 L182.67 -90.90 L181.91 -84.62Z" fill="#000" stroke="#000" stroke-width="1.6" stroke-linejoin="round"/></mask><circle cx="183.6" cy="-95.1" r="17" fill="#FF7A59" mask="url(#k2)"/></svg></div><div style="position:absolute;left:22mm;top:92mm;width:105mm"><div style="font:700 10pt JetBrains Mono;letter-spacing:2pt;color:#0F766E">CAHIER DES CHARGES</div><div style="font:800 34pt/1.08 'Plus Jakarta Sans';margin-top:6pt;letter-spacing:-.5pt">Application Volis</div><div style="font:400 12.5pt/1.45 Inter;color:#4E5A69;margin-top:10pt">Mise en relation d’expéditeurs de colis et de voyageurs vérifiés, avec paiement retenu jusqu’à la livraison. iOS, Android et web.</div></div><div style="position:absolute;left:22mm;bottom:28mm;right:22mm;border-top:2pt solid #1E2A3A;padding-top:8pt;display:flex;justify-content:space-between;font:500 9.5pt/1.5 Inter"><div style="flex:1.3"><b>Préparé pour</b><br>Faycal Chefai<br>Trois-Rivières (Québec)</div><div style="flex:1"><b>Version</b><br>1.0<br>11 octobre 2026</div><div style="flex:1.4"><b>Contenu</b><br>A. Fonctionnel et UX · B. Technique<br>et sécurité · C. Volet légal</div></div><div style="position:absolute;left:22mm;bottom:14mm;font:500 8pt Inter;color:#6F6A60">Document de travail · ne constitue pas un avis juridique · noms et montants des exemples fictifs</div></section><section><h2 style="margin-top:0">Avertissement</h2><p><strong>Avertissement.</strong> Ce cahier des charges est un document de travail préparé pour Faycal Chefai. Les passages juridiques, fiscaux et financiers sont une <strong>synthèse informative</strong> : ils ne constituent ni un avis juridique, ni un avis fiscal, ni un avis financier. Ils doivent être validés par un avocat membre du Barreau du Québec, et par un comptable pour la fiscalité, avant le lancement. Les informations sur des services tiers (Stripe, Supabase, Expo, Apple, Google) reflètent leur documentation à la date du document et peuvent changer. Les montants, taux et délais cités en exemple ne sont pas des engagements.</p>
+<h2>Informations sur le document</h2><table class="meta"><tbody><tr><td>Titre</td><td>Cahier des charges — Application Volis</td></tr><tr><td>Version</td><td>1.0 (11 octobre 2026)</td></tr><tr><td>Préparé pour</td><td>Faycal Chefai, porteur du projet</td></tr><tr><td>Langue</td><td>Français (Canada)</td></tr><tr><td>Statut</td><td>Document de travail, à valider (juridique, fiscal, fournisseurs)</td></tr></tbody></table><h2>Sections assemblées</h2><table><thead><tr><th>Partie</th><th>Préparée par</th><th>Fichier source</th></tr></thead><tbody><tr><td>Partie A — Spécifications fonctionnelles et UX</td><td>Équipe UI/UX</td><td><code>specs-fonctionnelles-ux.md</code><br><span style="color:#6F6A60">version du 2026-10-11 16:21 · empreinte 13794bdc</span></td></tr><tr><td>Partie B — Volet technique et sécurité</td><td>Équipe technique</td><td><code>cdc-technique-securite.md</code><br><span style="color:#6F6A60">version du 2026-10-11 15:59 · empreinte 036f38a4</span></td></tr><tr><td>Partie C — Volet légal de la monétisation</td><td>Équipe juridique</td><td><code>cahier-legal-monetisation.md</code><br><span style="color:#6F6A60">version du 2026-10-11 16:00 · empreinte b940ad64</span></td></tr></tbody></table><p style="color:#4E5A69;font-size:8.5pt">Les trois sections sont reprises intégralement. Seuls les renvois entre sections ont été harmonisés lors de l’assemblage.</p></section><section class="toc"><h1 style="break-before:page">Table des matières</h1><ol><li class="l1"><span class="t">Introduction</span><span class="d"></span><span class="n">4</span></li><li class="l2"><span class="t">Objet du document</span><span class="d"></span><span class="n">4</span></li><li class="l2"><span class="t">Contexte</span><span class="d"></span><span class="n">4</span></li><li class="l2"><span class="t">Structure du document</span><span class="d"></span><span class="n">4</span></li><li class="l2"><span class="t">Conventions de lecture</span><span class="d"></span><span class="n">4</span></li><li class="l2"><span class="t">Documents associés</span><span class="d"></span><span class="n">5</span></li><li class="l1"><span class="t">Partie A — Spécifications fonctionnelles et UX</span><span class="d"></span><span class="n">6</span></li><li class="l2"><span class="t">1. Rôles et principes</span><span class="d"></span><span class="n">6</span></li><li class="l2"><span class="t">2. Navigation et architecture de l’information</span><span class="d"></span><span class="n">7</span></li><li class="l2"><span class="t">3. Parcours et histoires utilisateur</span><span class="d"></span><span class="n">7</span></li><li class="l2"><span class="t">4. Inventaire des écrans</span><span class="d"></span><span class="n">10</span></li><li class="l2"><span class="t">5. États et cas limites</span><span class="d"></span><span class="n">11</span></li><li class="l2"><span class="t">6. Accessibilité</span><span class="d"></span><span class="n">12</span></li><li class="l2"><span class="t">7. Localisation</span><span class="d"></span><span class="n">13</span></li><li class="l2"><span class="t">8. Événements analytiques suggérés</span><span class="d"></span><span class="n">13</span></li><li class="l2"><span class="t">9. Monétisation : exigences UX</span><span class="d"></span><span class="n">14</span></li><li class="l1"><span class="t">Partie B — Volet technique et sécurité</span><span class="d"></span><span class="n">15</span></li><li class="l2"><span class="t">1. Stack technique justifiée</span><span class="d"></span><span class="n">15</span></li><li class="l2"><span class="t">2. Architecture</span><span class="d"></span><span class="n">17</span></li><li class="l2"><span class="t">3. Sécurité — exigences testables</span><span class="d"></span><span class="n">22</span></li><li class="l2"><span class="t">4. Monétisation — partie technique</span><span class="d"></span><span class="n">25</span></li><li class="l2"><span class="t">5. Exigences non fonctionnelles</span><span class="d"></span><span class="n">27</span></li><li class="l2"><span class="t">6. Environnements, jalons et risques</span><span class="d"></span><span class="n">28</span></li><li class="l2"><span class="t">Annexe — Références officielles</span><span class="d"></span><span class="n">30</span></li><li class="l1"><span class="t">Partie C — Volet légal de la monétisation</span><span class="d"></span><span class="n">31</span></li><li class="l2"><span class="t">1. Sources de revenus prévues</span><span class="d"></span><span class="n">31</span></li><li class="l2"><span class="t">2. Prix et transparence (Loi sur la protection du consommateur et Loi sur la concurrence)</span><span class="d"></span><span class="n">31</span></li><li class="l2"><span class="t">3. Commission de la plateforme</span><span class="d"></span><span class="n">32</span></li><li class="l2"><span class="t">4. Assurance optionnelle</span><span class="d"></span><span class="n">32</span></li><li class="l2"><span class="t">5. Frais de versement instantané</span><span class="d"></span><span class="n">32</span></li><li class="l2"><span class="t">6. Paiement retenu, remboursements et litiges</span><span class="d"></span><span class="n">33</span></li><li class="l2"><span class="t">7. Marketing et données</span><span class="d"></span><span class="n">33</span></li><li class="l2"><span class="t">8. Clauses à prévoir dans les conditions d'utilisation</span><span class="d"></span><span class="n">33</span></li><li class="l2"><span class="t">9. À faire valider par l'avocat et le comptable</span><span class="d"></span><span class="n">34</span></li></ol></section><h1 id="introduction">Introduction</h1>
+<h2 id="objet-du-document">Objet du document</h2>
+<p>Ce cahier des charges décrit l’application <strong>Volis</strong> (nom de travail) : une plateforme de mise en relation entre des <strong>expéditeurs</strong> qui veulent faire livrer un colis à l’étranger et des <strong>voyageurs</strong> vérifiés qui ont de la place dans leurs bagages sur un vol. Le paiement est retenu (séquestre) jusqu’à la remise au destinataire. Le document sert de référence commune pour la conception, le développement, l’estimation et la validation juridique de la première version de l’application (iOS, Android et web).</p>
+<h2 id="contexte">Contexte</h2>
+<ul>
+<li><strong>Porteur du projet :</strong> Faycal Chefai (Trois-Rivières, Québec).</li>
+<li><strong>Marché de départ :</strong> diaspora installée au Québec qui envoie des colis vers sa famille (premiers corridors illustrés : Montréal YUL → Alger ALG, Tlemcen, Oran, Casablanca). Le service s’adresse aux particuliers (consommateurs au sens de la LPC).</li>
+<li><strong>Promesse :</strong> un envoi plus rapide et moins cher que les transporteurs, avec trois garanties visibles : identité vérifiée (Stripe Identity), paiement retenu jusqu’à la livraison (Stripe Connect) et preuves de remise horodatées.</li>
+<li><strong>Plateformes :</strong> application mobile Expo / React Native (iOS, Android) et web; backend Supabase hébergé au Canada (région Canada (Central), <code>ca-central-1</code>), selon la partie B.</li>
+<li><strong>Direction visuelle retenue :</strong> concept 1 « Carnet de voyage », avec le logo « Colis caché » et l’icône d’appli « Signature » (charte graphique fournie à part).</li>
+</ul>
+<h2 id="structure-du-document">Structure du document</h2>
+<table>
+
+<thead>
+<tr>
+<th>Partie</th>
+<th>Contenu</th>
+<th>Préparée par</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>A. Spécifications fonctionnelles et UX</strong></td>
+<td>Rôles, navigation, parcours et histoires utilisateur avec critères d’acceptation, inventaire des 50 écrans, états et cas limites, accessibilité, localisation, événements analytiques, exigences UX de monétisation.</td>
+<td>Équipe UI/UX</td>
+</tr>
+<tr>
+<td><strong>B. Volet technique et sécurité</strong></td>
+<td>Stack, architecture, modèle de données, machine d’états, webhooks Stripe, exigences de sécurité testables (SEC-01 à SEC-25), durées de conservation, monétisation technique, exigences non fonctionnelles, jalons et risques.</td>
+<td>Équipe technique</td>
+</tr>
+<tr>
+<td><strong>C. Volet légal de la monétisation</strong></td>
+<td>Sources de revenus, prix et transparence (LPC, Loi sur la concurrence), commission, assurance, versements, séquestre et litiges, marketing et données, clauses des conditions d’utilisation, points à faire valider.</td>
+<td>Équipe juridique</td>
+</tr>
+</tbody>
+</table>
+<p>Chaque partie garde sa propre numérotation. Les renvois prennent la forme « partie B, 4.1 » ou, dans le texte des équipes, « volet technique 4.1 » et « volet légal 2 ».</p>
+<h2 id="conventions-de-lecture">Conventions de lecture</h2>
+<ul>
+<li><strong>« À confirmer »</strong> : point qui n’a pas été vérifié dans une source officielle ou qui dépend d’un fournisseur (Stripe, Supabase, assureur).</li>
+<li><strong>« À décider (par Faycal) »</strong> : choix d’affaires ouvert : montants, taux, délais, plafonds. Les valeurs visibles dans les maquettes sont <strong>illustratives</strong>.</li>
+<li><strong>« À faire valider par l’avocat / le comptable »</strong> : point juridique ou fiscal qui doit être validé avant le lancement.</li>
+<li>Les noms de personnes, numéros de vol, codes et montants des exemples sont <strong>fictifs</strong>.</li>
+<li>Les identifiants <strong>US-xx</strong> (histoires utilisateur, partie A) et <strong>SEC-xx</strong> (exigences de sécurité, partie B) servent à la traçabilité dans les tickets et les tests.</li>
+</ul>
+<h2 id="documents-associés">Documents associés</h2>
+<ul>
+<li>Maquettes : <code>volis-ecrans-concept1.pdf</code> (50 écrans) et planches par parcours.</li>
+<li>Charte graphique : <code>volis-charte-graphique.pdf</code> (17 pages).</li>
+<li>Ressources développeurs : <code>volis-dev-assets-partie1…3.zip</code> (tokens, thème React Native, icônes, illustrations, logos, icônes d’appli, polices, inventaire des écrans).</li>
+</ul>
+<h1 id="partie-a-spécifications-fonctionnelles-et-ux" class="part">Partie A — Spécifications fonctionnelles et UX</h1>
+<p><em>Préparé par l’équipe UI/UX — 11 octobre 2026</em></p>
+<blockquote>
+<p><strong>Portée de cette section.</strong> Elle décrit ce que l’application doit faire du point de vue de l’utilisateur : rôles, parcours, histoires utilisateur, critères d’acceptation, états et cas limites, accessibilité, localisation et événements analytiques. Elle s’appuie sur les 50 maquettes du concept 1 « Carnet de voyage » (<code>volis-design/ecrans/</code>, numérotées 01 à 50) et sur la charte graphique (<code>volis-charte-graphique.pdf</code>). La technique (machine d’états, Stripe, sécurité) relève du volet technique; le cadre légal, du volet légal. Les renvois sont indiqués entre parenthèses.</p>
+<p><strong>Convention.</strong> Les montants, taux, délais et plafonds visibles dans les maquettes (commission de 15 %, 1,5 % pour le versement instantané, protection de base de 100 $, valeur déclarée maximale de 1 000 $, délai de signalement de 72 h, etc.) sont <strong>illustratifs</strong>. Ils restent <strong>à décider par Faycal</strong>, puis à faire valider par l’équipe juridique quand c’est nécessaire. Tous les noms et numéros sont fictifs.</p>
+</blockquote>
+<h2 id="rôles-et-principes">1. Rôles et principes</h2>
+<h3 id="rôles">1.1 Rôles</h3>
+<table>
+
+<thead>
+<tr>
+<th>Rôle</th>
+<th>Description</th>
+<th>Compte requis</th>
+<th>Vérification</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Visiteur</strong></td>
+<td>Parcourt les trajets et les prix sans compte (« Explorer sans compte », écran 05).</td>
+<td>Non</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>Expéditeur</strong></td>
+<td>Crée un envoi, choisit un voyageur, paie en séquestre, remet le colis, suit la livraison, laisse un avis.</td>
+<td>Oui</td>
+<td>Courriel + téléphone; identité (Stripe Identity) avant le 1er paiement (SEC-15).</td>
+</tr>
+<tr>
+<td><strong>Voyageur</strong></td>
+<td>Publie un voyage, accepte ou refuse les demandes, inspecte et transporte le colis, reçoit ses gains via Stripe Connect.</td>
+<td>Oui</td>
+<td>Courriel + téléphone + identité; vol confirmé (billet vérifié) pour le badge « Vol confirmé »; compte Stripe Connect avant le 1er versement.</td>
+</tr>
+<tr>
+<td><strong>Destinataire</strong></td>
+<td>Reçoit le colis à l’arrivée. Suit l’envoi par un lien web et donne le code de réception.</td>
+<td>Non (lien de suivi)</td>
+<td>Téléphone (reçoit le texto)</td>
+</tr>
+<tr>
+<td><strong>Agent soutien / modération</strong> (interne)</td>
+<td>Traite les litiges, signalements, vérifications manuelles.</td>
+<td>Outil interne</td>
+<td>MFA obligatoire</td>
+</tr>
+</tbody>
+</table>
+<p>Un même compte peut être expéditeur et voyageur. Le rôle n’est pas un réglage : il découle de l’action (« J’envoie un colis » / « Je voyage », écran 07). Le choix de rôle à l’inscription (écran 06) sert seulement à personnaliser l’accueil.</p>
+<h3 id="principes-ux-rappel-de-la-charte">1.2 Principes UX (rappel de la charte)</h3>
+<ol type="1">
+<li><strong>Confiance visible au bon moment</strong> : identité vérifiée, séquestre et preuves de remise sont rappelés à chaque décision (paiement, remise, acceptation).</li>
+<li><strong>Une action principale par écran</strong>, en bas, pleine largeur, libellée par un verbe précis (« Payer 32,06 $ »).</li>
+<li><strong>Prix tout inclus, détail avant paiement</strong> (volet légal 2; volet technique 4.1) : le prix affiché dans les listes inclut tous les frais obligatoires; seules les taxes s’ajoutent.</li>
+<li><strong>Jamais de données bancaires ni biométriques dans nos écrans</strong> : Stripe Identity et Stripe Connect sont hébergés (SEC-10, SEC-11).</li>
+<li><strong>Accessible par défaut</strong> : WCAG 2.2 AA, cibles 44 pt, texte dynamique (section 6).</li>
+</ol>
+<h2 id="navigation-et-architecture-de-linformation">2. Navigation et architecture de l’information</h2>
+<ul>
+<li><strong>Barre d’onglets</strong> (5 onglets fixes) : Accueil · Envois · Voyages · Messages · Profil. L’onglet actif est indiqué par une pilule sarcelle claire, un libellé gras et <code>accessibilityState.selected</code>. Une pastille corail signale du non lu (Messages, Notifications).</li>
+<li><strong>Piles de navigation</strong> par onglet; les flux transactionnels (créer un envoi, paiement, remise, vérification) s’ouvrent en plein écran sans barre d’onglets, avec retour et un indicateur d’étape.</li>
+<li><strong>Feuilles modales</strong> (bottom sheets) pour les choix secondaires : filtres (38), assurance (40), tri. Fermeture par glissement, bouton « Fermer » et geste retour Android.</li>
+<li><strong>Liens profonds</strong> (SEC-23) : <code>volis://envoi/{id}</code>, <code>volis://voyage/{id}</code>, <code>volis://remise/{id}</code>, retour Stripe Identity et Stripe Connect par Universal Links / App Links. Le lien de suivi destinataire est une page web (<code>volis.app/s/{code}</code>).</li>
+</ul>
+<h2 id="parcours-et-histoires-utilisateur">3. Parcours et histoires utilisateur</h2>
+<p>Format : <strong>US-xx</strong> « En tant que…, je veux…, afin de… » puis critères d’acceptation (CA) vérifiables. Les écrans sont cités par leur numéro.</p>
+<h3 id="parcours-a-accueil-inscription-et-connexion-écrans-0106-2325">3.1 Parcours A — Accueil, inscription et connexion (écrans 01–06, 23–25)</h3>
+<p><strong>US-01 — Découvrir le service.</strong> En tant que visiteur, je veux comprendre en trois écrans comment fonctionne Volis afin de décider si je m’inscris. - CA1 : le splash (01) dure au plus le temps de chargement (masqué dès que les polices et la session sont prêtes, max. 2 s). - CA2 : 3 écrans d’onboarding (02–04), pagination annoncée (« 1 sur 3 »), lien « Passer » sur chacun, glissement et boutons. - CA3 : l’onboarding ne s’affiche qu’au premier lancement.</p>
+<p><strong>US-02 — Créer un compte.</strong> En tant que nouvel utilisateur, je veux m’inscrire avec Apple, Google ou mon courriel afin de commencer rapidement. - CA1 : « Continuer avec Apple » est proposé sur iOS à côté de Google : la règle Apple 4.8 exige une option de connexion équivalente qui protège la vie privée dès qu’une connexion tierce est offerte. - CA2 : champs prénom, nom, courriel, téléphone (+1 par défaut, indicatif modifiable), mot de passe avec règles visibles, case des conditions non cochée par défaut (06). - CA3 : le téléphone est validé par un code SMS à 6 chiffres (25) : remplissage automatique (<code>oneTimeCode</code>), renvoi après 30 s, option d’appel vocal, 5 essais puis blocage temporaire (SEC-14). - CA4 : la vérification d’identité n’est pas exigée à l’inscription; elle est demandée avant la 1re transaction (US-10).</p>
+<p><strong>US-03 — Se connecter.</strong> CA1 : connexion Apple, Google, clé d’accès (passkey) ou courriel + mot de passe (05). CA2 : flux PKCE via le navigateur système, aucune WebView (SEC-01). CA3 : message d’erreur générique (« Courriel ou mot de passe incorrect ») sans révéler l’existence du compte.</p>
+<p><strong>US-04 — Récupérer mon mot de passe.</strong> CA1 : saisie du courriel (23) puis écran de confirmation neutre (24) : « Si un compte existe, un lien vous a été envoyé ». CA2 : bouton « Ouvrir Courriel », renvoi possible après 60 s. CA3 : le lien expire (durée à décider) et ne contient aucun jeton réutilisable (SEC-23).</p>
+<h3 id="parcours-b-vérification-didentité-écrans-1722">3.2 Parcours B — Vérification d’identité (écrans 17–22)</h3>
+<p><strong>US-10 — Vérifier mon identité.</strong> En tant qu’utilisateur, je veux faire vérifier mon identité afin d’envoyer ou de transporter un colis. - CA1 : l’intro (17) explique les 3 étapes et la durée (~2 min) avant tout traitement. - CA2 : <strong>consentement exprès et distinct</strong> à la biométrie (18) : quoi, pourquoi, qui (Stripe), où (hors Québec, le cas échéant), durée (gabarit supprimé après la vérification), droits; case non cochée par défaut; bouton désactivé tant qu’elle ne l’est pas; alternative « vérification manuelle sans biométrie » toujours offerte (Loi 25; SEC-10). Le consentement est horodaté avec la version du texte (table <code>consents</code>). - CA3 : la capture se fait sur la page hébergée Stripe Identity (19), présentée comme une page externe (barre d’adresse visible). - CA4 : trois résultats : <strong>Vérifiée</strong> (20), <strong>En cours d’examen</strong> (21, notification à la fin), <strong>Échec</strong> (22, raison lisible issue de <code>last_error.reason</code>, conseils, nombre d’essais restants, voie manuelle). - CA5 : Volis ne stocke que <code>identity_status</code> et l’ID de session; la session est effacée (redact) dès la vérification (SEC-10, tableau 3.1).</p>
+<h3 id="parcours-c-recherche-et-réservation-écrans-0711-36-3840">3.3 Parcours C — Recherche et réservation (écrans 07–11, 36, 38–40)</h3>
+<p><strong>US-20 — Chercher un voyageur.</strong> En tant qu’expéditeur, je veux trouver un voyageur pour mon trajet afin d’envoyer mon colis. - CA1 : recherche De / À (aéroport ou ville), date (exacte ou flexible), poids (07). - CA2 : résultats (08) en cartes : nom abrégé (prénom + initiale), note et nombre d’avis, badges de vérification, date, kg disponibles, <strong>prix total pour le poids saisi, frais inclus</strong> (taxes en sus). - CA3 : tri (recommandés, prix, date, note) et filtres en feuille (38) : dates ± 3/7 j, prix max, « ID vérifiée seulement », « Vol confirmé », note minimale; le bouton affiche le nombre de résultats (« Afficher 8 voyageurs »). - CA4 : vue carte (39) : épingles par point de remise proposé (jamais l’adresse du voyageur), carte du voyageur sélectionné. - CA5 : <strong>aucun résultat</strong> (36) : explication, « Créer une alerte » (dates flexibles, destinations proches), suggestion d’élargir.</p>
+<p><strong>US-21 — Évaluer un voyageur.</strong> CA1 : profil (09) : vérifications par niveau (courriel, téléphone, identité, vol), statistiques (livraisons, ponctualité, délai de réponse), avis récents. CA2 : numéro de vol et heure précise <strong>masqués</strong> jusqu’à l’acceptation. CA3 : boutons « Signaler » et « Bloquer » accessibles depuis le menu.</p>
+<p><strong>US-22 — Décrire mon colis.</strong> En tant qu’expéditeur, je veux déclarer le contenu, le poids et la valeur de mon colis afin d’obtenir un prix et d’être couvert. - CA1 : formulaire en 4 étapes (Trajet, Colis, Voyageur, Paiement) avec indicateur (10). - CA2 : 1 à 4 photos (ouvert puis fermé), poids, dimensions, catégorie de contenu, <strong>valeur déclarée</strong> avec plafond affiché près du champ (« sert de plafond d’indemnisation », volet légal 4). - CA3 : rappel des objets interdits avec lien vers la liste complète (45); contrôle à la saisie <strong>et</strong> côté serveur. - CA4 : attestation du contenu obligatoire, horodatée (table <code>parcels</code>).</p>
+<p><strong>US-23 — Payer en séquestre.</strong> En tant qu’expéditeur, je veux payer en sachant que l’argent est retenu jusqu’à la livraison afin de ne pas prendre de risque. - CA1 : écran de paiement (11) avec résumé, <strong>détail figé par le serveur</strong> : transport, frais de service Volis, assurance (si choisie), taxes, total (volet technique 4.1). - CA2 : l’assurance est une <strong>option distincte, non cochée par défaut</strong>, avec prix à part, couverture, plafond, exclusions et divulgation de la rémunération reçue de l’assureur (40; volet légal 4). Si l’option A (« recommandation ») est retenue, la feuille 40 devient une redirection vers l’assureur et l’assurance disparaît du total Volis. - CA3 : Apple Pay / Google Pay / carte via PaymentSheet (aucun champ de carte maison, SEC-11). - CA4 : le statut « Payé / retenu » n’apparaît qu’à la réception du webhook (<code>payment_intent.succeeded</code>); entre-temps : « Paiement en cours de confirmation ». - CA5 : échec de paiement : message de la banque traduit, CTA « Réessayer » ou « Changer de moyen de paiement »; la réservation reste « Réservée ».</p>
+<h3 id="parcours-d-demande-remise-et-suivi-écrans-1214-2630-33-37-43-50">3.4 Parcours D — Demande, remise et suivi (écrans 12–14, 26–30, 33, 37, 43, 50)</h3>
+<p><strong>US-30 — Envoyer une demande.</strong> CA1 : la demande expire si le voyageur ne répond pas (délai visible, ex. 24 h) (27). CA2 : rien n’est débité tant que la demande n’est pas acceptée (pré-autorisation affichée). CA3 : en cas de refus (29), le motif est affiché s’il est fourni, sans frais, avec d’autres voyageurs pour le même trajet.</p>
+<p><strong>US-31 — Répondre à une demande (voyageur).</strong> CA1 : détail (26) : expéditeur vérifié, contenu et photos, poids, gain net, capacité restante, délai pour répondre. CA2 : « Refuser » demande un motif facultatif (liste). CA3 : « Accepter » est désactivé si la capacité est dépassée.</p>
+<p><strong>US-32 — Ajouter le destinataire.</strong> CA1 : nom, téléphone international, ville (43). CA2 : lien de suivi généré et partageable; texto envoyé au destinataire avec son accord. CA3 : la page de suivi ne montre ni le nom complet ni le téléphone du voyageur.</p>
+<p><strong>US-33 — Discuter en sécurité.</strong> CA1 : messagerie par réservation (14), bannière « Ne payez jamais en dehors de l’appli ». CA2 : numéros de téléphone et courriels détectés et masqués; liens externes signalés. CA3 : signaler un message → masqué en attente de modération (SEC-16). CA4 : carte « Remise proposée » (lieu public, date, heure) acceptable en un geste.</p>
+<p><strong>US-34 — Remettre le colis au voyageur.</strong> En tant qu’expéditeur et voyageur, nous voulons une preuve de remise afin d’éviter tout litige. - CA1 : le voyageur doit d’abord remplir l’<strong>attestation douane renforcée</strong> (49) : contenu vu ouvert, conforme, sans objet interdit; il peut refuser sans pénalité. - CA2 : l’expéditeur affiche un QR et un code à 4 chiffres (13); le voyageur scanne ou saisit le code; photo du colis scellé; les deux confirment. - CA3 : <strong>mode hors ligne</strong> (37) : le code signé est stocké sur l’appareil, la remise est horodatée localement puis synchronisée. - CA4 : transition « Payée / retenue » → « Remise au voyageur » seulement après confirmation des deux parties (volet technique 2.5).</p>
+<p><strong>US-35 — Suivre mon colis.</strong> CA1 : frise (12) : Accepté → Paiement sécurisé → Remis au voyageur → Embarqué → Atterri → Remis au destinataire → Fonds libérés; étape en cours mise en avant. CA2 : statut du vol (à l’heure, retardé, annulé). CA3 : <strong>Live Activity iOS / notification persistante Android</strong> (50) pendant le vol : trajet, progression, heure d’arrivée; désactivable.</p>
+<p><strong>US-36 — Confirmer la livraison et noter.</strong> CA1 : le destinataire donne son code ou le voyageur prend une photo; l’expéditeur est notifié (33). CA2 : avis <strong>en double aveugle</strong> : chacun voit l’avis de l’autre seulement après avoir publié le sien ou après 14 jours. CA3 : note obligatoire, commentaire facultatif, qualités en puces. CA4 : « Signaler un problème » reste accessible pendant le délai de contestation.</p>
+<p><strong>US-37 — Voir mes envois.</strong> CA1 : liste (30) avec onglets « En cours » / « Terminés », statut en badge texte + couleur, progression. CA2 : brouillons reprenables.</p>
+<h3 id="parcours-e-côté-voyageur-écrans-15-26-31-49">3.5 Parcours E — Côté voyageur (écrans 15, 26, 31, 49)</h3>
+<p><strong>US-40 — Publier un voyage.</strong> CA1 : trajet, date, vol (numéro facultatif, billet joint en privé pour le badge « Vol confirmé »), capacité en kg, catégories acceptées, prix par kg avec suggestion (15). CA2 : le billet n’est jamais visible par les expéditeurs. CA3 : publication modifiable tant qu’aucune demande n’est acceptée.</p>
+<p><strong>US-41 — Gérer mes voyages.</strong> CA1 : liste (31) : capacité acceptée / en attente / libre, demandes à traiter, gain prévu. CA2 : annuler un voyage avec demandes acceptées déclenche le parcours de réattribution pour chaque expéditeur (US-50).</p>
+<h3 id="parcours-f-imprévus-litiges-et-aide-écrans-34-35-44-45">3.6 Parcours F — Imprévus, litiges et aide (écrans 34, 35, 44, 45)</h3>
+<p><strong>US-50 — Vol retardé ou annulé.</strong> En tant qu’expéditeur, je veux savoir quoi faire si le vol est annulé afin de ne pas perdre mon argent. - CA1 : notification immédiate; écran (34) avec le vol annulé, rappel « Votre argent est protégé ». - CA2 : trois choix : réattribuer à un autre voyageur (prix égal ou inférieur), garder le voyageur sur son nouveau vol, remboursement total. - CA3 : un simple retard ne demande aucune action; on avertit à chaque changement. - CA4 : sans choix de l’expéditeur dans un délai (à décider), remboursement automatique.</p>
+<p><strong>US-51 — Ouvrir un litige.</strong> CA1 : motif (endommagé, manquant, non livré, autre), description, photos de l’utilisateur + <strong>preuves automatiques</strong> (photos de remise horodatées) (35). CA2 : indemnisation possible affichée : protection de base (sans assurance) ou couverture de l’assurance, plafonnée à la valeur déclarée. CA3 : délai de signalement et délai de réponse affichés; transfert au voyageur gelé pendant l’examen (<code>legal_holds</code>, SEC-25). CA4 : la décision est notifiée avec explication et recours.</p>
+<p><strong>US-52 — Trouver de l’aide.</strong> CA1 : centre d’aide (44) avec recherche, catégories, FAQ, contact soutien (délai moyen affiché) et <strong>urgence sécurité</strong> distincte. CA2 : liste des objets interdits et sous conditions (45), aussi accessible depuis la création d’envoi et l’attestation douane.</p>
+<h3 id="parcours-g-profil-argent-et-réglages-écrans-16-32-41-42-4648">3.7 Parcours G — Profil, argent et réglages (écrans 16, 32, 41, 42, 46–48)</h3>
+<p><strong>US-60 — Recevoir mes gains.</strong> En tant que voyageur, je veux retirer mon argent afin d’être payé pour mes trajets. - CA1 : première fois : configuration via <strong>Stripe Connect hébergé</strong> (42); Volis ne voit jamais les coordonnées bancaires. - CA2 : écran Versements (41) : solde disponible, montants en séquestre, choix <strong>Standard (gratuit, toujours offert)</strong> ou <strong>Instantané</strong> avec frais affichés avant la confirmation (volet technique 4.3; volet légal 5). Si une marge Volis existe, elle est libellée « frais Volis ». - CA3 : historique avec statuts « En séquestre », « En cours », « Déposé », « Échoué » (webhooks <code>payout.*</code>).</p>
+<p><strong>US-61 — Gérer mes notifications.</strong> CA1 : centre (32) groupé par jour; non lu signalé par un point + texte masqué pour lecteur d’écran (« non lu »). CA2 : préférences par canal (push, texto, courriel) et par type; les notifications transactionnelles critiques (paiement, remise, litige) ne peuvent pas être toutes désactivées.</p>
+<p><strong>US-62 — Réglages et confidentialité.</strong> CA1 : langue (fr-CA, en-CA; arabe à évaluer), devise, notifications, moyens de paiement, versements, clé d’accès, consentements (retrait possible), visibilité du profil, <strong>télécharger mes données</strong> (JSON, SEC-19) (46).</p>
+<p><strong>US-63 — Supprimer mon compte.</strong> En tant qu’utilisateur, je veux supprimer mon compte depuis l’appli (règle Apple 5.1.1(v)). - CA1 : écran d’explication (47) : ce qui est supprimé, ce qui est conservé et combien de temps (paiements 6 ans après l’année fiscale, preuves de litige 3 ans, consentements 3 ans après la fermeture : tableau 3.1 du volet technique). - CA2 : blocages explicites : envoi en cours, litige ouvert, solde non viré, avec action pour chacun. - CA3 : ré-authentification (SEC-02) puis confirmation forte (48 : saisir « SUPPRIMER »). Délai de grâce (ex. 30 jours) <strong>à décider</strong>; courriel de confirmation. - CA4 : après suppression : session révoquée, profil anonymisé, avis conservés sous « Membre supprimé ».</p>
+<h2 id="inventaire-des-écrans">4. Inventaire des écrans</h2>
+<p>Inventaire complet (id, fichier, parcours, objectif, composants clés, onglet) : <code>dev-assets/screens/inventaire-ecrans.csv</code>. Résumé :</p>
+<table>
+
+<thead>
+<tr>
+<th>Parcours</th>
+<th>Écrans</th>
+<th>Histoires</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A · Accueil, connexion et compte</td>
+<td>01 Splash · 02–04 Onboarding · 05 Connexion · 06 Inscription · 23 Mot de passe oublié · 24 Lien envoyé · 25 Code SMS</td>
+<td>US-01 à US-04</td>
+</tr>
+<tr>
+<td>B · Vérification d’identité</td>
+<td>17 Intro · 18 Consentement biométrique · 19 Stripe Identity · 20 Vérifiée · 21 En attente · 22 Échec</td>
+<td style="white-space:nowrap">US-10</td>
+</tr>
+<tr>
+<td>C · Recherche et réservation</td>
+<td>07 Accueil · 08 Résultats · 38 Filtres · 39 Carte · 36 Aucun résultat · 09 Profil voyageur · 10 Créer un envoi · 11 Paiement · 40 Assurance</td>
+<td>US-20 à US-23</td>
+</tr>
+<tr>
+<td>D · Envoi, remise et suivi</td>
+<td>30 Mes envois · 27/28/29 Détail (en attente / accepté / refusé) · 43 Destinataire · 14 Messages · 13 Remise · 37 Remise hors ligne · 12 Suivi · 50 Live Activity · 33 Livraison et avis</td>
+<td>US-30 à US-37</td>
+</tr>
+<tr>
+<td>E · Côté voyageur</td>
+<td>15 Publier · 31 Mes voyages · 26 Demande reçue · 49 Attestation douane</td>
+<td>US-31, US-34, US-40, US-41</td>
+</tr>
+<tr>
+<td>F · Imprévus, litiges et aide</td>
+<td>34 Vol annulé · 35 Litige · 44 Centre d’aide · 45 Objets interdits</td>
+<td>US-50 à US-52</td>
+</tr>
+<tr>
+<td>G · Profil, argent et réglages</td>
+<td>16 Profil / Portefeuille · 41 Versements · 42 Stripe Connect · 32 Notifications · 46 Réglages · 47–48 Suppression</td>
+<td>US-60 à US-63</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Écrans à concevoir en phase 2</strong> (non maquettés) : édition du profil, modifier / annuler un voyage, ajout d’une carte (feuille Stripe), reçu détaillé, page web de suivi destinataire, mise à jour forcée (SEC-21), outil interne de modération.</p>
+<h2 id="états-et-cas-limites">5. États et cas limites</h2>
+<h3 id="états-transverses-tous-les-écrans-de-données">5.1 États transverses (tous les écrans de données)</h3>
+<table>
+
+<thead>
+<tr>
+<th>État</th>
+<th>Traitement</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Chargement</td>
+<td>Squelettes aux dimensions du contenu (pas de spinner plein écran au-delà de 300 ms); boutons en état « chargement » pendant une action.</td>
+</tr>
+<tr>
+<td>Vide</td>
+<td>Illustration + explication + action utile (36). Jamais un écran blanc.</td>
+</tr>
+<tr>
+<td>Erreur réseau</td>
+<td>Toast « Hors ligne · on réessaie automatiquement »; données en cache affichées avec la date de dernière synchro; actions d’argent bloquées hors ligne (sauf code de remise, 37).</td>
+</tr>
+<tr>
+<td>Erreur serveur</td>
+<td>Message humain + « Réessayer »; identifiant de corrélation dans « Détails » pour le soutien.</td>
+</tr>
+<tr>
+<td>Permission refusée</td>
+<td>Expliquer l’utilité, proposer « Ouvrir les réglages »; ne pas redemander en boucle (SEC-24).</td>
+</tr>
+<tr>
+<td>Session expirée</td>
+<td>Ré-authentification en feuille, retour à l’écran en cours sans perte de saisie.</td>
+</tr>
+<tr>
+<td>Version obsolète</td>
+<td>Écran de mise à jour bloquant (SEC-21).</td>
+</tr>
+</tbody>
+</table>
+<h3 id="cas-limites-métier">5.2 Cas limites métier</h3>
+<table>
+
+<thead>
+<tr>
+<th>Cas</th>
+<th>Comportement attendu</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Deux expéditeurs dépassent ensemble la capacité du voyageur</td>
+<td>La 2e acceptation est refusée par le serveur (verrou de version); message « capacité atteinte ».</td>
+</tr>
+<tr>
+<td>Paiement confirmé par l’app mais webhook absent</td>
+<td>Statut « Paiement en cours de confirmation »; relance serveur; jamais « Payé » sans webhook.</td>
+</tr>
+<tr>
+<td>Le voyageur ne se présente pas à la remise</td>
+<td>Bouton « Il n’est pas venu » après l’heure + 30 min → réattribution ou remboursement (comme 34).</td>
+</tr>
+<tr>
+<td>Colis non conforme à la déclaration</td>
+<td>Le voyageur refuse à l’attestation (49) : aucune pénalité pour lui; l’expéditeur est remboursé selon la politique (frais non remboursables à décider, volet légal 6).</td>
+</tr>
+<tr>
+<td>Saisie ou refus par la douane</td>
+<td>Litige spécial; non couvert par l’assurance (40); le voyageur fournit la preuve de la douane.</td>
+</tr>
+<tr>
+<td>Destinataire injoignable à l’arrivée</td>
+<td>Le voyageur garde le colis 48 h (à décider), messagerie à trois, puis procédure de retour.</td>
+</tr>
+<tr>
+<td>Rétrofacturation bancaire</td>
+<td>Réservation → « Litige » quel que soit l’état; transfert gelé; preuves assemblées automatiquement (volet technique 4.6).</td>
+</tr>
+<tr>
+<td>Vérification d’identité en échec définitif</td>
+<td>Voie manuelle; impossible de payer ou de transporter tant qu’elle n’est pas réglée.</td>
+</tr>
+<tr>
+<td>Suppression demandée avec envoi en cours</td>
+<td>Bloquée avec explication (47).</td>
+</tr>
+<tr>
+<td>Changement de fuseau horaire</td>
+<td>Heures affichées dans le fuseau du lieu de l’événement, avec mention (« 21 h 40, heure d’Alger »).</td>
+</tr>
+</tbody>
+</table>
+<h2 id="accessibilité">6. Accessibilité</h2>
+<p>Objectif : <strong>WCAG 2.2 niveau AA</strong>, lignes directrices Apple et Android. Critères vérifiables :</p>
+<ol type="1">
+<li>Contraste : texte ≥ 4,5:1, grand texte et composants ≥ 3:1 (tableau de la charte, page 6). Texte blanc interdit sur corail.</li>
+<li>Cibles tactiles ≥ 44 × 44 pt, espacées de 8 pt.</li>
+<li>Texte dynamique jusqu’à 200 % sans perte d’information : montants, codes et statuts jamais tronqués; mise en page en colonne à grande taille.</li>
+<li>Lecteurs d’écran : chaque élément interactif a un libellé français, un rôle et un état; les illustrations sont décoratives (<code>accessible={false}</code>); les codes sont lus chiffre par chiffre; les montants sont lus en entier (« trente-deux dollars et six cents »).</li>
+<li>Statuts et erreurs : couleur + icône/pastille + texte; erreurs de formulaire annoncées (<code>accessibilityLiveRegion</code> / <code>announceForAccessibility</code>).</li>
+<li>Ordre de focus logique; focus visible sur web et clavier externe.</li>
+<li>« Réduire les animations » respecté; aucune information transmise seulement par le mouvement.</li>
+<li>Minuteries visibles et prolongeables (code SMS, expiration de demande).</li>
+<li>Formulaires : étiquettes visibles, <code>textContentType</code>/<code>autoComplete</code> corrects, clavier adapté.</li>
+<li>Tests : audit VoiceOver + TalkBack de chaque parcours avant chaque version majeure; vérification automatique (axe sur web, <code>eslint-plugin-react-native-a11y</code>).</li>
+</ol>
+<h2 id="localisation">7. Localisation</h2>
+<ul>
+<li><strong>Langue par défaut : français (Canada)</strong>; anglais (Canada) au lancement; arabe (RTL) à évaluer selon les corridors (Algérie, Maroc). Toutes les chaînes dans des fichiers de traduction (i18next + <code>expo-localization</code>); aucune chaîne en dur.</li>
+<li><strong>Formats fr-CA</strong> : <code>32,06 $</code>, <code>21 h 40</code>, <code>ven. 14 nov.</code>, séparateur de milliers espace insécable (<code>1 000 $</code>). Utiliser <code>Intl.NumberFormat('fr-CA', { style: 'currency', currency: 'CAD' })</code> et <code>Intl.DateTimeFormat</code>.</li>
+<li><strong>Termes</strong> : courriel, texto, égoportrait, clé d’accès, séquestre (guide de ton, charte p. 16). Vouvoiement.</li>
+<li><strong>Pluriels et genres</strong> gérés par ICU MessageFormat (« 1 voyageur », « 8 voyageurs »).</li>
+<li><strong>RTL</strong> : utiliser <code>start</code>/<code>end</code>, icônes directionnelles miroir, codes et montants restent LTR.</li>
+<li><strong>Fuseaux</strong> : stocker en UTC, afficher dans le fuseau pertinent avec la ville.</li>
+<li><strong>Expansion</strong> : prévoir +30 % de longueur (anglais → français); boutons sur deux lignes interdits, préférer un libellé plus court.</li>
+<li>Les reçus et contrats sont en français (volet légal 2).</li>
+</ul>
+<h2 id="événements-analytiques-suggérés">8. Événements analytiques suggérés</h2>
+<p>Respect de la Loi 25 : consentement explicite pour les mesures non essentielles; aucun nom, courriel, téléphone, adresse, contenu de message ou montant exact lié à une personne dans les événements (SEC-13). Identifiant pseudonyme, propriétés catégorielles.</p>
+<table>
+
+<thead>
+<tr>
+<th>Événement</th>
+<th>Déclencheur</th>
+<th>Propriétés</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>onboarding_completed</code> / <code>onboarding_skipped</code></td>
+<td>Fin ou « Passer » (02–04)</td>
+<td><code>step</code></td>
+</tr>
+<tr>
+<td><code>signup_started</code> / <code>signup_completed</code></td>
+<td>06</td>
+<td><code>method</code> (apple, google, email), <code>role_hint</code></td>
+</tr>
+<tr>
+<td><code>phone_verified</code></td>
+<td>25</td>
+<td><code>attempts</code></td>
+</tr>
+<tr>
+<td><code>identity_started</code> / <code>identity_consent_given</code> / <code>identity_result</code></td>
+<td>17, 18, 20–22</td>
+<td><code>result</code> (verified, processing, failed), <code>reason_code</code></td>
+</tr>
+<tr>
+<td><code>search_performed</code></td>
+<td>07</td>
+<td><code>corridor</code> (YUL-ALG), <code>date_flex</code>, <code>weight_bucket</code></td>
+</tr>
+<tr>
+<td><code>search_no_results</code> / <code>alert_created</code></td>
+<td>36</td>
+<td><code>corridor</code></td>
+</tr>
+<tr>
+<td><code>filters_applied</code> / <code>map_opened</code></td>
+<td>38, 39</td>
+<td><code>filters_count</code>, <code>sort</code></td>
+</tr>
+<tr>
+<td><code>traveler_profile_viewed</code></td>
+<td>09</td>
+<td><code>trust_level</code></td>
+</tr>
+<tr>
+<td><code>shipment_draft_step</code></td>
+<td>10</td>
+<td><code>step</code> (1–4)</td>
+</tr>
+<tr>
+<td><code>insurance_viewed</code> / <code>insurance_added</code></td>
+<td>40, 11</td>
+<td><code>value_bucket</code></td>
+</tr>
+<tr>
+<td><code>checkout_started</code> / <code>payment_succeeded</code> / <code>payment_failed</code></td>
+<td>11</td>
+<td><code>method</code>, <code>error_code</code></td>
+</tr>
+<tr>
+<td><code>request_sent</code> / <code>request_accepted</code> / <code>request_declined</code> / <code>request_expired</code></td>
+<td>26–29</td>
+<td><code>decline_reason</code></td>
+</tr>
+<tr>
+<td><code>handover_completed</code></td>
+<td>13, 37</td>
+<td><code>offline</code> (bool)</td>
+</tr>
+<tr>
+<td><code>customs_attestation_refused</code></td>
+<td>49</td>
+<td><code>reason</code></td>
+</tr>
+<tr>
+<td><code>flight_disruption_choice</code></td>
+<td>34</td>
+<td><code>choice</code> (reassign, keep, refund)</td>
+</tr>
+<tr>
+<td><code>dispute_opened</code></td>
+<td>35</td>
+<td><code>reason</code></td>
+</tr>
+<tr>
+<td><code>delivery_confirmed</code> / <code>review_submitted</code></td>
+<td>33</td>
+<td><code>rating</code>, <code>tags_count</code></td>
+</tr>
+<tr>
+<td><code>trip_published</code></td>
+<td>15</td>
+<td><code>corridor</code>, <code>capacity_bucket</code></td>
+</tr>
+<tr>
+<td><code>payout_onboarding_started</code> / <code>payout_requested</code></td>
+<td>42, 41</td>
+<td><code>type</code> (standard, instant)</td>
+</tr>
+<tr>
+<td><code>account_deletion_started</code> / <code>account_deleted</code></td>
+<td>47, 48</td>
+<td><code>reason</code></td>
+</tr>
+</tbody>
+</table>
+<p>Indicateurs clés : conversion recherche → paiement, délai de 1re réponse du voyageur, taux d’acceptation, taux de litige pour 100 livraisons, réussite de la vérification d’identité, part des versements instantanés, NPS après livraison.</p>
+<h2 id="monétisation-exigences-ux">9. Monétisation : exigences UX</h2>
+<p>Le cadre légal est dans le volet légal (sections 1 à 6) et la mise en œuvre dans le volet technique (section 4). Les règles d’interface :</p>
+<ol type="1">
+<li><strong>Prix tout inclus partout</strong> : les cartes de résultats, le profil voyageur et la carte affichent le prix pour le poids saisi, <strong>frais de service inclus</strong>, avec la mention « frais inclus » ; seules les taxes s’ajoutent au paiement. Exemple des maquettes : transport 24,00 $ + frais 3,60 $ = <strong>27,60 $</strong> affiché (08, 09, 39).</li>
+<li><strong>Détail avant paiement</strong> (11) : transport, frais de service Volis (taux affiché), assurance si choisie, taxes (TPS, TVQ, taxe sur la prime), total. Le bouton reprend le total exact (« Payer 32,06 $ »). Sans assurance, le total de l’exemple est de 28,14 $.</li>
+<li><strong>Assurance optionnelle</strong> (40) : jamais présélectionnée, jamais obligatoire; prix séparé; couvert / non couvert; plafond = valeur déclarée; nom de l’assureur partenaire; divulgation de la rémunération reçue par Volis; lien vers le résumé de la police. Les mots « assuré » ou « garanti » ne s’affichent que si l’assurance est choisie (volet légal 2).</li>
+<li><strong>Protection de base</strong> : sans assurance, le plafond d’indemnisation Volis est affiché près de la valeur déclarée (10) et dans le litige (35). Le texte ne doit pas laisser croire à une exclusion de responsabilité (volet légal 4).</li>
+<li><strong>Gain du voyageur</strong> affiché net (26, 31) : ce qu’il recevra, sans ambiguïté sur la commission.</li>
+<li><strong>Versement instantané</strong> (41) : frais visibles avant le choix; standard gratuit toujours offert et présélectionné.</li>
+<li><strong>Remboursements</strong> : montant et délai affichés au moment du choix (34 : « 100 % remboursé en 3 à 5 jours ouvrables »); frais non remboursables indiqués avant le paiement s’il y en a.</li>
+<li><strong>Mises en avant ou abonnement</strong> (phase ultérieure) : étiquette « Commandité » sur toute annonce mise en avant; prix et renouvellement clairs; résiliation en 2 gestes depuis Réglages.</li>
+<li><strong>Reçus</strong> en français, accessibles depuis le détail de l’envoi et le portefeuille.</li>
+</ol>
+<h1 id="partie-b-volet-technique-et-sécurité" class="part">Partie B — Volet technique et sécurité</h1>
+<p><em>Préparé pour Faycal Chefai (Trois-Rivières, QC) — 11 octobre 2026</em></p>
+<blockquote>
+<p><strong>Portée de cette section.</strong> Ce document couvre la partie technique du cahier des charges de Volis (application de mise en relation entre expéditeurs de colis et voyageurs, sur iOS, Android et web). Il est assemblé avec la partie A (spécifications fonctionnelles et UX) et la partie C (volet légal de la monétisation) du présent cahier des charges. Les aspects légaux et fiscaux relèvent de l'équipe juridique et d'un avocat membre du Barreau du Québec. Ils ne sont repris ici que pour en déduire des exigences techniques.</p>
+<p><strong>Sources :</strong> fiche « Projet Volis — Fiche de recherche » (11 octobre 2026), « Guide sécurité et architecture mobile » (déjà fourni), documentation officielle Expo, Stripe et OWASP MASVS v2.1.0. <strong>Convention :</strong> tout ce qui n'a pas été vérifié dans une source officielle est marqué <strong>« à confirmer »</strong>. Aucun montant, taux ni objectif chiffré n'est fixé ici : ils restent <strong>à décider par Faycal</strong>.</p>
+</blockquote>
+<h2 id="stack-technique-justifiée">1. Stack technique justifiée</h2>
+<h3 id="vue-densemble">1.1 Vue d'ensemble</h3>
+<table>
+
+<thead>
+<tr>
+<th>Besoin</th>
+<th>Choix</th>
+<th>Justification</th>
+<th>Statut</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>App iOS, Android, web</td>
+<td><strong>Expo (React Native) + Expo Router + TypeScript</strong></td>
+<td>Un seul code pour les trois plateformes, routage par fichiers commun au mobile et au web, maquettes déjà prêtes pour cette approche, TypeScript pour typer le domaine et les contrats d'API.</td>
+<td>Retenu (fiche de recherche)</td>
+</tr>
+<tr>
+<td>Backend</td>
+<td><strong>Supabase</strong> (recommandé, voir 1.2)</td>
+<td>Auth, PostgreSQL, sécurité par ligne (RLS), stockage, temps réel et fonctions serveur réunis, ce qui convient à une petite équipe.</td>
+<td>Recommandé</td>
+</tr>
+<tr>
+<td>Vérification d'identité</td>
+<td><strong>Stripe Identity</strong> (pièce d'identité + égoportrait)</td>
+<td>Vérification déléguée à Stripe ; Volis ne stocke que le statut et l'ID de session.</td>
+<td>Retenu</td>
+</tr>
+<tr>
+<td>Paiements de la place de marché</td>
+<td><strong>Stripe Connect, « separate charges and transfers »</strong></td>
+<td>Le paiement est encaissé sur le compte de la plateforme puis transféré au voyageur seulement quand le serveur confirme la remise. Une pré-autorisation de carte en ligne expire généralement après 7 jours (doc Stripe), ce qui ne suffit pas pour un trajet. Connect gère le KYC des voyageurs.</td>
+<td>Retenu</td>
+</tr>
+<tr>
+<td>Notifications push</td>
+<td><strong>Expo Notifications</strong> (service push d'Expo vers APNs et FCM)</td>
+<td>Une seule API pour iOS et Android ; jetons d'appareil enregistrés côté serveur.</td>
+<td>Retenu</td>
+</tr>
+<tr>
+<td>Cartes et géolocalisation</td>
+<td><code>expo-location</code> + composant de carte (par ex. <code>react-native-maps</code> sur mobile ; équivalent web à choisir)</td>
+<td>La localisation n'est demandée qu'en contexte, désactivée par défaut (Loi 25, MASVS-PRIVACY-1). Géocodage via le backend pour ne pas exposer de clé facturée.</td>
+<td>Fournisseur de cartes <strong>à confirmer</strong></td>
+</tr>
+<tr>
+<td>Photos de remise et de litige</td>
+<td><strong>Supabase Storage</strong>, compartiments privés, URL signées de courte durée</td>
+<td>Pas d'accès public ; métadonnées EXIF (dont GPS) retirées avant stockage.</td>
+<td>Retenu</td>
+</tr>
+<tr>
+<td>Messagerie entre utilisateurs</td>
+<td>Table <code>messages</code> dans PostgreSQL + <strong>Supabase Realtime</strong></td>
+<td>Messages liés à une réservation, protégés par RLS, modérables.</td>
+<td>Retenu</td>
+</tr>
+<tr>
+<td>Internationalisation</td>
+<td><code>expo-localization</code> + bibliothèque i18n (par ex. i18next) ; <code>I18nManager</code> pour l'arabe (droite à gauche) ; <code>Intl</code> pour les nombres et devises</td>
+<td>Français (par défaut au Québec), anglais, arabe en RTL ; montants en unités mineures entières + code devise ISO 4217.</td>
+<td>Bibliothèque i18n <strong>à confirmer</strong></td>
+</tr>
+<tr>
+<td>Analytics et monitoring</td>
+<td><strong>Sentry</strong> (plantages, performance) ; outil d'analytics produit <strong>à confirmer</strong></td>
+<td>Données personnelles masquées avant envoi ; analytics non essentielles uniquement après consentement.</td>
+<td>Partiellement retenu</td>
+</tr>
+<tr>
+<td>CI/CD</td>
+<td><strong>GitHub Actions</strong> (lint, tests, analyses de sécurité) + <strong>EAS Build / EAS Submit</strong> (builds signés et envoi aux stores) ; EAS Update pour les correctifs JavaScript <strong>à confirmer</strong></td>
+<td>Pipeline reproductible, signature gérée hors du dépôt.</td>
+<td>Retenu</td>
+</tr>
+</tbody>
+</table>
+<h3 id="backend-supabase-ou-nodenestjs-postgresql">1.2 Backend : Supabase ou Node/NestJS + PostgreSQL</h3>
+<table>
+
+<thead>
+<tr>
+<th>Critère</th>
+<th>Supabase</th>
+<th>Node/NestJS + PostgreSQL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mise en route</td>
+<td>Rapide : Auth, base, stockage, temps réel et fonctions fournis</td>
+<td>Plus lente : tout est à assembler (auth, stockage, temps réel, hébergement)</td>
+</tr>
+<tr>
+<td>Autorisation</td>
+<td>RLS dans PostgreSQL, au niveau des lignes, plus des contrôles dans les fonctions serveur</td>
+<td>Gardes et contrôles dans le code de chaque route</td>
+</tr>
+<tr>
+<td>Webhooks Stripe</td>
+<td>Edge Function (Deno) avec vérification de signature</td>
+<td>Route NestJS dédiée ; écosystème Node standard</td>
+</tr>
+<tr>
+<td>Logique métier complexe</td>
+<td>Fonctions SQL et Edge Functions ; demande de la rigueur pour ne pas disperser la logique</td>
+<td>Très flexible, architecture en modules</td>
+</tr>
+<tr>
+<td>Exploitation</td>
+<td>Service géré ; dépendance à un fournisseur</td>
+<td>Plus de contrôle, plus de travail d'exploitation (mises à jour, sauvegardes, montée en charge)</td>
+</tr>
+<tr>
+<td>Hébergement au Canada</td>
+<td>Région <strong>Canada (Central)</strong>, code <code>ca-central-1</code> (vérifié dans la doc Supabase « Available regions »)</td>
+<td>Selon l'hébergeur choisi : <strong>à confirmer</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Recommandation : Supabase</strong> pour le MVP. La plateforme fournit les briques nécessaires à Volis (Auth avec PKCE et MFA, RLS, stockage privé, temps réel pour la messagerie). La logique sensible reste côté serveur :</p>
+<ul>
+<li>La machine d'états des livraisons et la libération des fonds se font uniquement dans des fonctions serveur (Edge Functions ou fonctions PostgreSQL <code>SECURITY DEFINER</code>), jamais depuis l'app.</li>
+<li>L'app n'a aucun droit d'écriture direct sur les tables <code>payments</code>, <code>transfers</code> et <code>deliveries.status</code>.</li>
+<li><strong>Région : Canada (Central), <code>ca-central-1</code></strong> (existence vérifiée dans la doc Supabase, https://supabase.com/docs/guides/platform/regions). Il faut choisir cette <strong>région précise</strong> à la création du projet, et non la région générale « Americas », qui déploie dans une région AWS de la zone (par ex. Virginie du Nord). Ce choix est <strong>recommandé, pas exigé par la loi</strong> : il allège l'évaluation des transferts hors Québec dans l'ÉFVP, puisque la base, le stockage et l'authentification restent au Canada. Selon l'équipe juridique, il ne reste alors que Stripe à justifier. <strong>À faire valider par l'avocat.</strong> Point technique à signaler à l'équipe juridique : d'autres fournisseurs reçoivent aussi des données (Sentry, service push d'Expo, éventuel outil d'analytics, assureur partenaire) et doivent figurer dans l'ÉFVP. Les Edge Functions peuvent être invoquées dans <code>ca-central-1</code> (doc Supabase « Regional Invocations ») : à configurer.</li>
+<li>Pour garder une porte de sortie, les règles métier sont écrites en TypeScript pur (couche domaine partagée) et la base reste du PostgreSQL standard. Une migration vers NestJS + PostgreSQL resterait possible si les besoins dépassent les Edge Functions.</li>
+</ul>
+<blockquote>
+<p><strong>Règle d'or (fiche de recherche) :</strong> c'est le serveur qui décide de libérer un paiement, jamais l'application.</p>
+</blockquote>
+<h2 id="architecture">2. Architecture</h2>
+<h3 id="schéma-du-système">2.1 Schéma du système</h3>
+<figure>
+<img src="/workspace/volis/assemblage/diagramme-B1.png" style="width:16.5cm" alt="Figure B-1 — Schéma du système" />
+<figcaption aria-hidden="true">Figure B-1 — Schéma du système</figcaption>
+</figure>
+<h3 id="couches-côté-application">2.2 Couches côté application</h3>
+<p>Conformément au guide (architecture « Clean Architecture pragmatique ») :</p>
+<table>
+
+<thead>
+<tr>
+<th>Couche</th>
+<th>Contenu dans Volis</th>
+<th>Règles</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>UI (MVVM)</strong></td>
+<td>Écrans Expo Router ; hooks jouant le rôle de ViewModel (<code>useTripSearchViewModel</code>, etc.) qui exposent un état d'écran immuable ; flux unidirectionnel</td>
+<td>L'UI n'appelle jamais le réseau ni le stockage directement. Elle affiche les statuts fournis par le serveur.</td>
+</tr>
+<tr>
+<td><strong>Domaine (optionnel)</strong></td>
+<td>Types métier (<code>Delivery</code>, <code>Booking</code>, <code>Money</code>), règles pures (transitions d'états permises côté affichage, calcul de l'affichage du détail de prix reçu du serveur)</td>
+<td>TypeScript pur, sans dépendance React Native ; testé unitairement.</td>
+</tr>
+<tr>
+<td><strong>Data (repositories)</strong></td>
+<td><code>TripsRepository</code>, <code>BookingsRepository</code>, <code>PaymentsRepository</code>, <code>MessagesRepository</code>… ; client Supabase, client HTTP des Edge Functions, cache (TanStack Query), stockage sécurisé</td>
+<td>Point unique pour les jetons, la validation des réponses, la gestion des erreurs et le cache hors-ligne.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="structure-de-dossiers-type">2.3 Structure de dossiers type</h3>
+<pre class="text"><code>volis/
+  app/                         # routes Expo Router (iOS, Android, web)
+    (auth)/  connexion.tsx, inscription.tsx
+    (tabs)/  trajets/, envois/, messages/, profil/
+    reservation/[id].tsx
+    litige/[id].tsx
+    _layout.tsx                # fournisseurs (i18n, thème, requêtes, session)
+  src/
+    features/                  # une fonctionnalité = écrans + ViewModels + composants
+      trips/  shipments/  bookings/  payments/  identity/
+      messaging/  disputes/  reviews/  account/  payouts/
+    domain/                    # types et règles pures (sans React Native)
+    data/
+      api/                     # client Supabase, client Edge Functions, intercepteurs
+      repositories/
+      secure/                  # wrapper expo-secure-store
+      cache/                   # persistance hors-ligne (non sensible)
+    ui/                        # design system (thème « Carnet de voyage » / « Scrapbook »)
+    i18n/                      # fr, en, ar (RTL)
+    test/                      # fakes, utilitaires
+  supabase/
+    migrations/                # schéma SQL versionné + politiques RLS
+    functions/                 # Edge Functions (stripe-webhook, release-funds, …)
+    tests/                     # tests RLS et tests de fonctions
+  .github/workflows/           # CI
+  eas.json  app.config.ts</code></pre>
+<h3 id="modèle-de-données-principal">2.4 Modèle de données principal</h3>
+<table>
+
+<thead>
+<tr>
+<th>Entité</th>
+<th>Champs principaux (indicatifs)</th>
+<th>Remarques</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>users</code> (profils)</td>
+<td><code>id</code> (= Auth), nom affiché, langue, pays, <code>identity_status</code>, <code>stripe_identity_session_id</code>, <code>stripe_account_id</code> (voyageur), <code>stripe_customer_id</code> (expéditeur), dates de consentement, <code>deleted_at</code></td>
+<td><strong>Aucune image biométrique ni donnée bancaire.</strong></td>
+</tr>
+<tr>
+<td><code>trips</code> (annonces de trajet)</td>
+<td><code>id</code>, <code>traveler_id</code>, origine, destination, dates, capacité déclarée, restrictions, statut</td>
+<td>Publiées par les voyageurs.</td>
+</tr>
+<tr>
+<td><code>shipment_requests</code> (demandes d'envoi)</td>
+<td><code>id</code>, <code>sender_id</code>, origine, destination, fenêtre de dates, statut</td>
+<td>Publiées par les expéditeurs.</td>
+</tr>
+<tr>
+<td><code>parcels</code> (colis)</td>
+<td><code>id</code>, <code>shipment_request_id</code>, description, dimensions/poids déclarés, <code>declared_value</code> + devise, attestation du contenu (horodatée), photos de dépôt</td>
+<td>Liste d'objets interdits vérifiée à la saisie et côté serveur.</td>
+</tr>
+<tr>
+<td><code>bookings</code> (réservations)</td>
+<td><code>id</code>, <code>trip_id</code>, <code>parcel_id</code>, <code>sender_id</code>, <code>traveler_id</code>, prix convenu (détail : transport, commission, assurance, taxes, total), <code>status</code> (machine d'états 2.5), <code>version</code></td>
+<td>Le détail de prix est calculé et figé par le serveur.</td>
+</tr>
+<tr>
+<td><code>payments</code></td>
+<td><code>id</code>, <code>booking_id</code>, <code>stripe_payment_intent_id</code>, <code>stripe_charge_id</code>, montant, devise, statut, <code>transfer_group</code></td>
+<td>Écrit uniquement par le serveur.</td>
+</tr>
+<tr>
+<td><code>transfers</code></td>
+<td><code>id</code>, <code>booking_id</code>, <code>stripe_transfer_id</code>, destination, montant, statut, éventuelle annulation (<code>reversal</code>)</td>
+<td>Créé seulement par la fonction de libération des fonds.</td>
+</tr>
+<tr>
+<td><code>insurance_policies</code></td>
+<td><code>id</code>, <code>booking_id</code>, partenaire, référence de police, statut</td>
+<td>Selon l'intégration avec l'assureur partenaire (<strong>à confirmer</strong>).</td>
+</tr>
+<tr>
+<td><code>disputes</code> (litiges)</td>
+<td><code>id</code>, <code>booking_id</code>, ouvert par, motif, description, statut, décision, <code>stripe_dispute_id</code> éventuel</td>
+<td>Couvre les litiges internes et les rétrofacturations.</td>
+</tr>
+<tr>
+<td><code>dispute_evidence</code></td>
+<td><code>id</code>, <code>dispute_id</code>, chemin de stockage, type, auteur</td>
+<td>Photos dans un compartiment privé.</td>
+</tr>
+<tr>
+<td><code>delivery_proofs</code></td>
+<td><code>id</code>, <code>booking_id</code>, type (remise au voyageur, livraison), photo, code de confirmation, horodatage</td>
+<td>Preuves de remise.</td>
+</tr>
+<tr>
+<td><code>reviews</code> (avis)</td>
+<td><code>id</code>, <code>booking_id</code>, auteur, cible, note, commentaire, statut de modération</td>
+<td>Un avis par partie et par réservation.</td>
+</tr>
+<tr>
+<td><code>conversations</code> / <code>messages</code></td>
+<td><code>id</code>, <code>booking_id</code>, participants ; <code>message.id</code>, auteur, contenu, statut de modération, signalé</td>
+<td>Accessibles seulement aux participants (RLS).</td>
+</tr>
+<tr>
+<td><code>reports</code> (signalements)</td>
+<td><code>id</code>, auteur, cible (utilisateur, message, photo, annonce), motif, statut</td>
+<td>Alimente la modération et l'anti-fraude.</td>
+</tr>
+<tr>
+<td><code>legal_holds</code></td>
+<td>ressource visée, motif (litige, rétrofacturation), ouvert le, levé le</td>
+<td>Suspend la purge (voir 3.1).</td>
+</tr>
+<tr>
+<td><code>consents</code></td>
+<td>utilisateur, finalité, version du texte, accordé le, retiré le</td>
+<td>Preuves de consentement (voir 3.1).</td>
+</tr>
+<tr>
+<td><code>stripe_events</code></td>
+<td><code>event_id</code> (unique), type, reçu le, traité le, résultat</td>
+<td>Idempotence des webhooks.</td>
+</tr>
+<tr>
+<td><code>audit_log</code></td>
+<td>acteur, action, ressource, horodatage, identifiants techniques</td>
+<td><strong>Sans données personnelles en clair.</strong></td>
+</tr>
+<tr>
+<td><code>security_incidents</code></td>
+<td>date, description, données touchées, évaluation du risque, mesures, avis transmis</td>
+<td>Registre des incidents (Loi 25).</td>
+</tr>
+</tbody>
+</table>
+<h3 id="machine-détats-dune-livraison">2.5 Machine d'états d'une livraison</h3>
+<figure>
+<img src="/workspace/volis/assemblage/diagramme-B2.png" style="width:9.5cm" alt="Figure B-2 — Machine d’états d’une livraison" />
+<figcaption aria-hidden="true">Figure B-2 — Machine d’états d’une livraison</figcaption>
+</figure>
+<p>Règles :</p>
+<ul>
+<li>Chaque transition est faite par une fonction serveur qui vérifie l'état courant, le rôle de l'appelant et la version de la ligne (verrou optimiste). Les transitions non prévues sont refusées.</li>
+<li><code>PayeeRetenue</code> n'est atteint que sur réception du webhook Stripe, jamais sur un retour de l'app.</li>
+<li><code>FondsLiberes</code> déclenche un <code>Transfer</code> Stripe avec <code>source_transaction</code> (doc Stripe : le transfert est accepté mais n'est exécuté que lorsque les fonds du paiement sont disponibles).</li>
+<li>Une rétrofacturation (<code>charge.dispute.created</code>) fait passer la réservation en <code>Litige</code>, quel que soit son état. Si le transfert a déjà été fait, une annulation de transfert (reversal) peut être nécessaire selon les conditions (<strong>à confirmer avec l'équipe juridique</strong>, section 6 du volet légal).</li>
+<li>La durée maximale pendant laquelle les fonds peuvent rester sur le solde de la plateforme avant le transfert est <strong>à confirmer avec Stripe</strong>. Les délais de contestation et de libération sont <strong>à décider</strong>.</li>
+</ul>
+<h3 id="webhooks-stripe-à-traiter">2.6 Webhooks Stripe à traiter</h3>
+<p>Deux points de terminaison distincts : un pour les événements du compte plateforme, un pour les événements des comptes connectés (Connect). Les deux vérifient la signature et sont idempotents (voir SEC-08).</p>
+<table>
+
+<thead>
+<tr>
+<th>Événement</th>
+<th>Point de terminaison</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>payment_intent.succeeded</code></td>
+<td>Plateforme</td>
+<td>Réservation → <code>PayeeRetenue</code> ; enregistrer <code>charge_id</code>.</td>
+</tr>
+<tr>
+<td><code>payment_intent.payment_failed</code></td>
+<td>Plateforme</td>
+<td>Informer l'expéditeur ; la réservation reste <code>Reservee</code>.</td>
+</tr>
+<tr>
+<td><code>payment_intent.canceled</code></td>
+<td>Plateforme</td>
+<td>Réservation annulée si applicable.</td>
+</tr>
+<tr>
+<td><code>charge.refunded</code></td>
+<td>Plateforme</td>
+<td>Réservation → <code>Remboursee</code> ; reçu de remboursement.</td>
+</tr>
+<tr>
+<td><code>charge.dispute.created</code> / <code>charge.dispute.updated</code> / <code>charge.dispute.closed</code></td>
+<td>Plateforme</td>
+<td>Ouvrir ou mettre à jour le litige ; préparer les preuves de remise ; suspendre le transfert.</td>
+</tr>
+<tr>
+<td><code>radar.early_fraud_warning.created</code></td>
+<td>Plateforme</td>
+<td>Signal de fraude : suspendre le transfert, révision manuelle.</td>
+</tr>
+<tr>
+<td><code>transfer.created</code> / <code>transfer.reversed</code></td>
+<td>Plateforme</td>
+<td>Mettre à jour <code>transfers</code>. Noms exacts des événements de transfert disponibles dans la version d'API retenue : <strong>à confirmer</strong>.</td>
+</tr>
+<tr>
+<td><code>identity.verification_session.verified</code></td>
+<td>Plateforme</td>
+<td><code>identity_status = verified</code>.</td>
+</tr>
+<tr>
+<td><code>identity.verification_session.requires_input</code></td>
+<td>Plateforme</td>
+<td><code>identity_status = requires_input</code> ; afficher <code>last_error.reason</code>.</td>
+</tr>
+<tr>
+<td><code>identity.verification_session.processing</code> / <code>canceled</code></td>
+<td>Plateforme</td>
+<td>Mettre à jour le statut.</td>
+</tr>
+<tr>
+<td><code>identity.verification_session.redacted</code></td>
+<td>Plateforme (abonnement explicite requis selon la doc Stripe)</td>
+<td>Confirmer l'effacement des données chez Stripe.</td>
+</tr>
+<tr>
+<td><code>account.updated</code></td>
+<td>Connect</td>
+<td>Mettre à jour les capacités du voyageur (<code>charges_enabled</code>, <code>payouts_enabled</code>, exigences en attente).</td>
+</tr>
+<tr>
+<td><code>payout.created</code> / <code>payout.paid</code> / <code>payout.failed</code></td>
+<td>Connect</td>
+<td>Statuts des versements affichés au voyageur (« en cours → déposé ») ; alerte en cas d'échec.</td>
+</tr>
+<tr>
+<td><code>customer.subscription.*</code>, <code>invoice.paid</code>, <code>invoice.payment_failed</code></td>
+<td>Plateforme</td>
+<td>Seulement si un abonnement est lancé (Stripe Billing, voir 4.5).</td>
+</tr>
+</tbody>
+</table>
+<p>Version de l'API Stripe épinglée et mise à jour volontairement (procédure de test en staging).</p>
+<h2 id="sécurité-exigences-testables">3. Sécurité — exigences testables</h2>
+<p>Référentiels : OWASP MASVS v2.1.0, OWASP API Security Top 10 (2023), guide « Guide sécurité et architecture mobile » (sections 2.2 à 2.9). Profil visé : <strong>MAS-L1 au minimum, plus MASVS-NETWORK-2 et MASVS-RESILIENCE à évaluer</strong>, car l'app manipule de l'argent (recommandation du guide). Le niveau final est <strong>à confirmer</strong> après la modélisation des menaces (STRIDE).</p>
+<table>
+
+<thead>
+<tr>
+<th>ID</th>
+<th>Exigence</th>
+<th>Référence</th>
+<th>Critère de vérification</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="white-space:nowrap">SEC-01</td>
+<td>Authentification par <strong>Supabase Auth avec flux PKCE</strong> (ou fournisseur OIDC avec code d'autorisation + PKCE via le navigateur système). Aucune WebView de connexion.</td>
+<td>MASVS-AUTH-1 ; RFC 8252, RFC 7636</td>
+<td>Revue de config ; test : le flux implicite est refusé.</td>
+</tr>
+<tr>
+<td style="white-space:nowrap">SEC-02</td>
+<td><strong>MFA optionnelle</strong> (TOTP ou passkeys, <strong>à confirmer</strong>) proposée aux utilisateurs ; <strong>ré-authentification</strong> avant les opérations sensibles (changement de courriel, export, suppression du compte, ajout de méthode de versement).</td>
+<td>MASVS-AUTH-3</td>
+<td>Test E2E : opération sensible refusée sans ré-authentification récente.</td>
+</tr>
+<tr>
+<td style="white-space:nowrap">SEC-03</td>
+<td><strong>Jetons d'accès courts</strong>, refresh token avec rotation et révocation côté serveur à la déconnexion et au changement de mot de passe. Durées exactes : <strong>à décider</strong>.</td>
+<td>MASVS-AUTH-1 ; RFC 9700</td>
+<td>Test : refresh token réutilisé → session révoquée.</td>
+</tr>
+<tr>
+<td style="white-space:nowrap">SEC-04</td>
+<td><strong>Autorisation côté serveur sur chaque ressource</strong> : RLS activée sur toutes les tables exposées, politiques par rôle (expéditeur, voyageur, admin) ; aucune table sans politique.</td>
+<td>MASVS-AUTH ; API1/API3/API5</td>
+<td>Tests RLS automatisés en CI : l'utilisateur A ne lit ni ne modifie les données de B ; requête qui liste les tables sans RLS = vide.</td>
+</tr>
+<tr>
+<td style="white-space:nowrap">SEC-05</td>
+<td><strong>Stockage sécurisé</strong> : jetons uniquement dans <code>expo-secure-store</code> (Keychain iOS / Keystore Android) ; rien de sensible dans AsyncStorage ni dans le cache persistant ; purge à la déconnexion. Sur le web : cookies <code>HttpOnly</code>/<code>Secure</code> ou stratégie équivalente (<strong>à confirmer</strong>).</td>
+<td>MASVS-STORAGE-1/2</td>
+<td>Inspection de l'appareil (MASTG) ; MobSF sans constat critique.</td>
+</tr>
+<tr>
+<td style="white-space:nowrap">SEC-06</td>
+<td><strong>Aucun secret dans l'app</strong> : seules les clés publiques (URL Supabase, clé anonyme, clé publiable Stripe) sont embarquées. Clé secrète Stripe, clé <code>service_role</code> Supabase et secrets des webhooks uniquement côté serveur.</td>
+<td>Guide 2.4 ; M1</td>
+<td>gitleaks en CI ; décompilation du bundle sans secret trouvé.</td>
+</tr>
+<tr>
+<td style="white-space:nowrap">SEC-07</td>
+<td><strong>HTTPS partout</strong> ; aucune exception ATS / cleartext ; décision écrite sur le pinning (déconseillé par Android Developers, à évaluer avec MASVS-NETWORK-2).</td>
+<td>MASVS-NETWORK-1/2</td>
+<td>Vérification du manifeste et de l'Info.plist ; test d'interception.</td>
+</tr>
+<tr>
+<td style="white-space:nowrap">SEC-08</td>
+<td><strong>Webhooks Stripe</strong> : vérification de signature (<code>Stripe-Signature</code>, secret par point de terminaison) sur le corps brut ; rejet si la signature ou l'horodatage est invalide ; <strong>idempotence</strong> par <code>event.id</code> unique (table <code>stripe_events</code>) ; traitement tolérant au désordre des événements (relecture de l'objet chez Stripe si besoin).</td>
+<td>API8/API10</td>
+<td>Tests : événement non signé → 400 ; même événement reçu deux fois → un seul effet.</td>
+</tr>
+<tr>
+<td style="white-space:nowrap">SEC-09</td>
+<td><strong>Idempotence des appels sortants</strong> vers Stripe (clé d'idempotence pour les paiements, remboursements et transferts).</td>
+<td>Doc Stripe</td>
+<td>Test : double clic ou nouvel essai réseau → un seul paiement ou transfert.</td>
+</tr>
+<tr>
+<td style="white-space:nowrap">SEC-10</td>
+<td><strong>Aucune image biométrique stockée</strong> par Volis : seulement <code>identity_status</code> et l'ID de session Stripe. Durée de conservation minimale configurée chez Stripe ; <strong>effacement (redact) de la session Stripe Identity dès que la vérification est faite</strong> (voir 3.1 ; la doc Stripe indique que l'effacement peut prendre jusqu'à 4 jours et émet <code>identity.verification_session.redacted</code>).</td>
+<td>MASVS-PRIVACY-1 ; Loi 25</td>
+<td>Revue du schéma ; tests : aucun champ ni fichier d'image d'identité.</td>
+</tr>
+<tr>
+<td style="white-space:nowrap">SEC-11</td>
+<td><strong>Données bancaires jamais saisies dans nos écrans</strong> : onboarding hébergé Stripe ou composants intégrés ; Volis ne stocke que l'ID du compte connecté. Paiement par carte via PaymentSheet / Payment Element (les données de carte ne transitent pas par nos serveurs).</td>
+<td>Fiche de recherche ; volet légal 5</td>
+<td>Revue de code ; aucun champ de numéro de compte ou de carte dans l'app.</td>
+</tr>
+<tr>
+<td style="white-space:nowrap">SEC-12</td>
+<td><strong>Chiffrement au repos</strong> de la base, du stockage et des sauvegardes (fourni par l'hébergeur, <strong>à confirmer</strong> dans sa documentation) ; chiffrement supplémentaire au niveau des colonnes pour les champs les plus sensibles si nécessaire.</td>
+<td>MASVS-CRYPTO ; Loi 25</td>
+<td>Attestation de l'hébergeur ; revue de config.</td>
+</tr>
+<tr>
+<td style="white-space:nowrap">SEC-13</td>
+<td><strong>Journalisation sans données personnelles</strong> : identifiants techniques seulement ; masquage (scrubbing) dans Sentry ; aucun jeton, courriel, adresse ou contenu de message dans les journaux. Durées de conservation des journaux <strong>à décider</strong>.</td>
+<td>MASVS-STORAGE-2 ; guide 5.4</td>
+<td>Test : recherche de motifs (courriel, jeton) dans les journaux = 0.</td>
+</tr>
+<tr>
+<td style="white-space:nowrap">SEC-14</td>
+<td><strong>Limitation de débit</strong> sur l'authentification, la réinitialisation, l'envoi de messages, la création d'annonces et les fonctions coûteuses ; quotas par utilisateur, IP et appareil. Seuils <strong>à décider</strong>.</td>
+<td>API4/API6</td>
+<td>Test de charge ciblé : dépassement → 429.</td>
+</tr>
+<tr>
+<td style="white-space:nowrap">SEC-15</td>
+<td><strong>Anti-fraude</strong> : Stripe Radar sur les paiements ; <strong>vérification d'identité obligatoire avant la première transaction</strong> (expéditeur et voyageur, périmètre <strong>à confirmer</strong>) ; signalements d'utilisateurs ; suspension du transfert en cas d'alerte ; attestation d'app (Play Integrity / App Attest) à évaluer.</td>
+<td>API6 ; MASVS-RESILIENCE</td>
+<td>Test : réservation refusée sans <code>identity_status = verified</code>.</td>
+</tr>
+<tr>
+<td style="white-space:nowrap">SEC-16</td>
+<td><strong>Modération</strong> des photos et des messages : signalement depuis l'app, file de modération, blocage d'un utilisateur ; analyse automatique (service <strong>à confirmer</strong>).</td>
+<td>MASVS-PLATFORM-3 ; exigences des stores sur le contenu des utilisateurs (<strong>à confirmer</strong>)</td>
+<td>Test E2E : message signalé → masqué en attente de révision.</td>
+</tr>
+<tr>
+<td style="white-space:nowrap">SEC-17</td>
+<td><strong>Photos</strong> : compartiments privés ; URL signées de courte durée ; EXIF retiré ; types et tailles de fichiers validés côté serveur.</td>
+<td>MASVS-CODE-4 ; PRIVACY</td>
+<td>Test : URL d'une photo d'une autre réservation → refusée.</td>
+</tr>
+<tr>
+<td style="white-space:nowrap">SEC-18</td>
+<td><strong>Sauvegardes</strong> : sauvegardes automatiques et restauration testée ; fréquence et durée de rétention <strong>à décider</strong> selon l'offre de l'hébergeur.</td>
+<td>Guide 5.5</td>
+<td>Exercice de restauration documenté avant le lancement.</td>
+</tr>
+<tr>
+<td style="white-space:nowrap">SEC-19</td>
+<td><strong>Suppression du compte dans l'app</strong> (exigée par Apple, règle 5.1.1(v)) et <strong>export des données</strong> dans un format structuré (portabilité, Loi 25). Les données soumises à une obligation de conservation (paiements, preuves de litige, consentements, registre des incidents) sont conservées selon le tableau 3.1, puis détruites ou anonymisées.</td>
+<td>MASVS-PRIVACY-4</td>
+<td>Test E2E : suppression → session révoquée, données effacées ou anonymisées, export JSON disponible.</td>
+</tr>
+<tr>
+<td style="white-space:nowrap">SEC-20</td>
+<td><strong>Plan de réponse aux incidents</strong> : détection → confinement (révocation des jetons, désactivation de fonctions, version minimale) → correctif → évaluation du préjudice → avis à la CAI et aux personnes si risque de préjudice sérieux → <strong>registre des incidents</strong> (<code>security_incidents</code>).</td>
+<td>Guide 5.5 ; Loi 25</td>
+<td>Exercice sur table avant le lancement.</td>
+</tr>
+<tr>
+<td style="white-space:nowrap">SEC-21</td>
+<td><strong>Mise à jour forcée</strong> : version minimale renvoyée par le backend, qui bloque les versions vulnérables.</td>
+<td>MASVS-CODE-2</td>
+<td>Test : version inférieure au minimum → écran de mise à jour.</td>
+</tr>
+<tr>
+<td style="white-space:nowrap">SEC-22</td>
+<td><strong>Tests de sécurité</strong> : SAST (CodeQL ou Semgrep) et SCA (Dependabot/Renovate, <code>npm audit</code>, OSV-Scanner) à chaque PR ; scan de secrets ; analyse <strong>MobSF</strong> des builds de release ; <strong>test d'intrusion par un tiers avant le lancement</strong> (MASVS/MASTG + API).</td>
+<td>MASVS-CODE-3 ; guide 2.6–2.7</td>
+<td>CI verte sans vulnérabilité critique ; rapport de pentest avec constats corrigés.</td>
+</tr>
+<tr>
+<td style="white-space:nowrap">SEC-23</td>
+<td><strong>Liens profonds</strong> validés comme des entrées non fiables ; Universal Links / App Links pour les retours d'onboarding Stripe et d'authentification ; aucun jeton dans un lien.</td>
+<td>MASVS-PLATFORM-1</td>
+<td>Test : lien forgé → aucune action sensible sans confirmation.</td>
+</tr>
+<tr>
+<td style="white-space:nowrap">SEC-24</td>
+<td><strong>Permissions minimales</strong>, demandées en contexte (localisation, caméra, photos, notifications) ; sélecteur de photos du système de préférence.</td>
+<td>MASVS-PRIVACY-1</td>
+<td>Revue des permissions déclarées ; fiches vie privée des stores cohérentes.</td>
+</tr>
+<tr>
+<td style="white-space:nowrap">SEC-25</td>
+<td><strong>Purge et conservation automatisées</strong> : tâches planifiées (par ex. <code>pg_cron</code> ou fonction planifiée, <strong>à confirmer</strong>) qui appliquent les durées du tableau 3.1, puis détruisent ou anonymisent les données ; <strong>gel légal</strong> (<code>legal_hold</code>) qui suspend la purge des éléments liés à un litige ou à une rétrofacturation en cours ; journal des purges sans données personnelles.</td>
+<td>MASVS-PRIVACY-4 ; Loi 25 (art. 23)</td>
+<td>Test automatisé en CI : données fictives datées → purgées ou anonymisées à l'échéance ; données sous gel légal → conservées ; session Identity vérifiée → redact demandé.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="durées-de-conservation-et-purge-sec-19-sec-25">3.1 Durées de conservation et purge (SEC-19, SEC-25)</h3>
+<blockquote>
+<p><strong>À faire valider par l'avocat.</strong> Durées fournies par l'équipe juridique. Le point de départ de chaque délai doit être stocké explicitement (date de fin d'année fiscale, date de livraison, date de prise de connaissance de l'incident, date de fermeture du compte).</p>
+</blockquote>
+<table>
+
+<thead>
+<tr>
+<th>Données</th>
+<th>Durée de conservation</th>
+<th>Fondement (selon l'équipe juridique)</th>
+<th>Mise en œuvre technique</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Paiements, factures, commissions</td>
+<td>6 ans après la fin de l'année fiscale concernée</td>
+<td>Lois fiscales fédérale et québécoise</td>
+<td>Tables <code>payments</code>, <code>transfers</code>, reçus ; purge annuelle après l'échéance. Les objets chez Stripe suivent les règles de Stripe.</td>
+</tr>
+<tr>
+<td>Preuves de litige (photos de remise, confirmations, messages liés)</td>
+<td>3 ans après la livraison ; <strong>prolongé si un litige est en cours</strong></td>
+<td>Prescription, C.c.Q. art. 2925</td>
+<td><code>delivery_proofs</code>, <code>dispute_evidence</code>, messages rattachés ; gel légal actif tant que le litige ou la rétrofacturation n'est pas clos.</td>
+</tr>
+<tr>
+<td>Registre des incidents de confidentialité</td>
+<td>5 ans à partir de la prise de connaissance de l'incident</td>
+<td>Règlement de la Loi 25</td>
+<td><code>security_incidents.discovered_at</code> comme point de départ.</td>
+</tr>
+<tr>
+<td>Preuves de consentement</td>
+<td>Toute la durée du compte, puis 3 ans</td>
+<td>Équipe juridique</td>
+<td>Table <code>consents</code> (finalité, version du texte, date, retrait) ; purge 3 ans après la fermeture du compte.</td>
+</tr>
+<tr>
+<td>Géolocalisation et messages <strong>sans litige</strong></td>
+<td>Supprimés dès la fin de la livraison et du délai de contestation</td>
+<td>Minimisation (Loi 25)</td>
+<td>Purge déclenchée par la transition vers « Fonds libérés » (délai de contestation écoulé), sauf gel légal.</td>
+</tr>
+<tr>
+<td>Session Stripe Identity</td>
+<td>Effacée dès que la vérification est faite</td>
+<td>Minimisation (Loi 25) ; biométrie</td>
+<td>Appel <code>redact</code> à la réception de <code>identity.verification_session.verified</code> ; Volis ne garde que <code>identity_status</code> et l'ID de session. Traitement après un échec définitif : <strong>à faire valider par l'avocat</strong>.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Après ces délais : destruction ou anonymisation</strong> (Loi 25, art. 23). L'anonymisation doit être irréversible ; sinon, on détruit.</p>
+<p>Exigences techniques (SEC-25) :</p>
+<ul>
+<li><strong>Tâches de purge planifiées</strong>, idempotentes, exécutées côté serveur, avec un journal (catégorie, nombre d'éléments, date) sans données personnelles. Les fichiers du stockage sont supprimés en même temps que leurs lignes.</li>
+<li><strong>Gel légal</strong> : table <code>legal_holds</code> (ressource, motif, ouvert le, levé le), posé automatiquement à <code>charge.dispute.created</code> et à l'ouverture d'un litige interne, levé à la clôture. Toute purge vérifie l'absence de gel.</li>
+<li><strong>Sauvegardes</strong> : leur durée de rétention doit rester compatible avec ces délais (une donnée purgée disparaît des sauvegardes à leur expiration) : <strong>à confirmer</strong> selon l'offre Supabase.</li>
+<li><strong>Test automatisé</strong> en CI (critère de SEC-25).</li>
+</ul>
+<h2 id="monétisation-partie-technique">4. Monétisation — partie technique</h2>
+<blockquote>
+<p>Cette section décrit <strong>comment</strong> implémenter les sources de revenus. Le <strong>cadre légal</strong> (prix tout inclus, divulgation, assurance, taxes, remboursements, rétrofacturations, abonnements) est traité dans la section de l'équipe juridique, « Volet légal de la monétisation » (<code>cahier-legal-monetisation.md</code>), à laquelle ce texte renvoie. <strong>Tous les montants et taux (commission, marge, primes, prix d'abonnement) restent à décider par Faycal.</strong></p>
+</blockquote>
+<h3 id="prix-tout-inclus-et-détail-avant-paiement">4.1 Prix tout inclus et détail avant paiement</h3>
+<p>Voir volet légal, section 2.</p>
+<ul>
+<li>Le <strong>serveur calcule</strong> le détail du prix et le fige dans la réservation (<code>bookings</code>) : prix du transport, commission Volis, assurance si choisie, TPS/TVQ, total. L'app ne fait qu'afficher ce détail. Elle ne recalcule rien qui serve à facturer.</li>
+<li>Le prix affiché dans les listes et les fiches inclut tous les frais obligatoires. Seules les taxes s'ajoutent, conformément au volet légal.</li>
+<li>L'écran de confirmation (équipe UI) affiche le détail reçu du serveur. Le <code>PaymentIntent</code> est créé pour <strong>exactement</strong> le total figé ; toute différence bloque le paiement.</li>
+<li>Les montants sont stockés en unités mineures entières avec leur code de devise. Arrondis et règles de calcul des taxes : <strong>à confirmer avec le comptable</strong>.</li>
+<li><strong>Reçus en français</strong> (volet légal 2) générés par le serveur avec les numéros de TPS/TVQ dès l'inscription ; copie du contrat transmise à l'utilisateur (gabarit fourni par l'équipe juridique).</li>
+</ul>
+<h3 id="commission-de-la-plateforme">4.2 Commission de la plateforme</h3>
+<p>Voir volet légal, sections 1 et 3.</p>
+<ul>
+<li>Avec <strong>separate charges and transfers</strong>, il n'y a pas d'<code>application_fee_amount</code> standard sur le transfert. La plateforme <strong>transfère au voyageur un montant inférieur au paiement</strong>, et la différence reste sur son solde (doc Stripe « Collect fees when using separate charges and transfers »). La commission Volis = total payé − taxes perçues par Volis − part versée au voyageur − assurance reversée au partenaire. La formule exacte des taxes est <strong>à confirmer avec le comptable</strong>.</li>
+<li>Stripe propose une fonction de « funds segregation » (aperçu privé) qui permet un <code>application_fee_amount</code> sur le transfert. Elle est optionnelle et sur demande auprès de Stripe : <strong>à confirmer</strong>.</li>
+<li>Les frais de traitement Stripe sont débités du solde de la plateforme. Ils doivent être pris en compte dans le calcul, mais <strong>pas</strong> affichés comme « frais de Stripe » s'ils contiennent une marge (volet légal 5).</li>
+<li>Stripe recommande ce type de paiement seulement si la plateforme assume les soldes négatifs de ses comptes connectés (doc Stripe). Cela a un impact sur la configuration de Connect et sur la gestion des risques.</li>
+<li>Le modèle de comptabilité interne (registre <code>payments</code> / <code>transfers</code> / commission) permet de rapprocher chaque réservation avec les rapports Stripe.</li>
+</ul>
+<h3 id="frais-de-versement-instantané">4.3 Frais de versement instantané</h3>
+<p>Voir volet légal, section 5.</p>
+<ul>
+<li>Stripe permet de monétiser les versements instantanés de Connect par des <strong>frais d'application</strong> (méthode recommandée par Stripe) ou par un débit du compte, configurables avec le <strong>Platform Pricing Tool</strong>. Stripe facture aussi des frais à la plateforme pour chaque versement instantané (voir la grille tarifaire de Stripe Connect). Applicabilité exacte à la configuration de Volis : <strong>à confirmer avec Stripe</strong>.</li>
+<li>L'écran de versement montre les frais <strong>avant</strong> que le voyageur choisisse. Le <strong>virement standard sans frais Volis reste toujours offert</strong>. Si une marge s'ajoute aux frais de Stripe, elle est libellée comme frais Volis.</li>
+<li>Admissibilité : seulement si le compte connecté a une carte de débit admissible. Le statut est lu chez Stripe (<code>account.updated</code>) et non déduit par l'app.</li>
+<li>Statuts « en cours → déposé » alimentés par <code>payout.*</code> (point de terminaison Connect).</li>
+</ul>
+<h3 id="assurance-optionnelle-via-un-partenaire">4.4 Assurance optionnelle via un partenaire</h3>
+<p>Voir volet légal, section 4. Le partenaire, son API et le mode de distribution (option A « recommandation » ou option B « distribution sans représentant ») sont <strong>à confirmer</strong>.</p>
+<ul>
+<li><strong>Option A</strong> : lien ou redirection vers l'assureur, qui vend et encaisse lui-même. Côté technique : lien de recommandation suivi, puis retour éventuel d'un statut de police par API ou webhook du partenaire (<strong>à confirmer</strong>). Aucun encaissement de prime par Volis.</li>
+<li><strong>Option B</strong> : intégration API avec l'assureur (devis, émission, annulation). Le traitement de la prime (encaissée par Volis puis reversée, ou par l'assureur) est <strong>à confirmer avec l'avocat et l'assureur</strong> avant toute conception du flux de paiement.</li>
+<li>Exigences d'interface reprises du volet légal : case <strong>non cochée d'avance</strong>, prix montré à part, limites, exclusions et plafond affichés près de la valeur déclarée ; jamais obligatoire.</li>
+<li>Données transmises à l'assureur : minimales, couvertes par l'ÉFVP et le consentement (Loi 25).</li>
+</ul>
+<h3 id="mises-en-avant-ou-abonnement-plus-tard">4.5 Mises en avant ou abonnement (plus tard)</h3>
+<p>Voir volet légal, section 6 (contrats à exécution successive).</p>
+<ul>
+<li><strong>Mise en avant d'une annonce</strong> : achat ponctuel par un <code>PaymentIntent</code> de la plateforme (sans transfert) ; durée et prix <strong>à décider</strong>.</li>
+<li><strong>Abonnement</strong> : <strong>Stripe Billing</strong> (produits, prix, abonnements, portail client) ; webhooks <code>customer.subscription.*</code> et <code>invoice.*</code>. Le serveur contrôle les droits (jamais une simple valeur « premium » dans l'app, voir guide 2.2.3).</li>
+<li>Avis avant renouvellement, résiliation et prix clair : selon le volet légal.</li>
+<li>Si un achat se fait dans l'app mobile pour un contenu ou une fonction numérique, les règles des stores sur les achats intégrés peuvent s'appliquer : <strong>à confirmer</strong> avant de concevoir ces offres.</li>
+</ul>
+<h3 id="remboursements-et-litiges">4.6 Remboursements et litiges</h3>
+<p>Voir volet légal, section 6.</p>
+<ul>
+<li>Remboursement total ou partiel par <code>Refund</code> sur le paiement de la plateforme. S'il a déjà eu lieu, un transfert peut être annulé (reversal) selon les conditions acceptées par le voyageur (<strong>à confirmer avec l'équipe juridique</strong>).</li>
+<li>Quels frais sont remboursés : paramétrable côté serveur selon la politique de remboursement finale (volet légal).</li>
+<li><strong>Rétrofacturations</strong> : à <code>charge.dispute.created</code>, le serveur assemble les preuves (photos de remise, confirmations horodatées, messages pertinents) pour la réponse à Stripe. Perte assumée selon les conditions (volet légal 6).</li>
+<li><strong>Encaissement des fonds</strong> : le modèle « separate charges and transfers » fait transiter l'argent par le solde Stripe de Volis. Statut au regard de la Loi sur les activités associées aux paiements de détail : <strong>à confirmer par l'avocat</strong> (volet légal 6). Ne pas modifier ce flux sans cet avis.</li>
+</ul>
+<h2 id="exigences-non-fonctionnelles">5. Exigences non fonctionnelles</h2>
+<p>Les objectifs chiffrés ci-dessous sont <strong>à définir</strong> avec Faycal avant le MVP. Ce document fixe les indicateurs à mesurer, pas leurs seuils.</p>
+<table>
+
+<thead>
+<tr>
+<th>Domaine</th>
+<th>Exigence</th>
+<th>Mesure</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Performance</td>
+<td>Démarrage, temps d'affichage des listes de trajets et temps de réponse des API mesurés en continu ; pagination de toutes les listes ; images redimensionnées côté serveur.</td>
+<td>Sentry Performance ; seuils <strong>à définir</strong>.</td>
+</tr>
+<tr>
+<td>Disponibilité</td>
+<td>Objectif de disponibilité <strong>à définir</strong> ; dégradation contrôlée si Stripe ou le push est indisponible (les webhooks sont rejoués par Stripe, idempotence SEC-08).</td>
+<td>Surveillance de disponibilité ; alertes.</td>
+</tr>
+<tr>
+<td>Accessibilité</td>
+<td><strong>WCAG 2.2 niveau AA</strong> pour l'app et le web : contrastes, tailles des cibles, libellés des lecteurs d'écran (VoiceOver, TalkBack), navigation au clavier sur le web, respect de la taille de texte du système, mise en page RTL correcte en arabe.</td>
+<td>Audit d'accessibilité avant le lancement ; tests automatisés sur le web (<strong>outil à confirmer</strong>).</td>
+</tr>
+<tr>
+<td>Hors-ligne partiel</td>
+<td>Lecture des réservations, de l'historique et des messages déjà chargés hors connexion ; prise de photos de remise mise en file d'attente et envoyée au retour du réseau ; <strong>aucune transition de paiement ni de statut validée hors ligne</strong> (le serveur reste l'arbitre). Cache local sans données sensibles, purgé à la déconnexion.</td>
+<td>Tests E2E en mode avion.</td>
+</tr>
+<tr>
+<td>Compatibilité</td>
+<td>Versions minimales d'iOS et d'Android : <strong>à confirmer</strong> selon la version du SDK Expo retenue. Navigateurs web : versions récentes des principaux navigateurs (<strong>liste à confirmer</strong>).</td>
+<td>Matrice d'appareils de test.</td>
+</tr>
+<tr>
+<td>Conformité stores 2026</td>
+<td><strong>Google Play : cibler l'API 36 (Android 16)</strong> pour toute nouvelle app ou mise à jour depuis le 31 août 2026. <strong>Apple : builds avec Xcode 26 et le SDK iOS 26</strong> depuis le 28 avril 2026. Compatibilité de la version du SDK Expo retenue avec ces exigences : <strong>à confirmer</strong>. Fiches Sécurité des données (Google) et étiquettes de confidentialité + privacy manifest (Apple) exactes.</td>
+<td>Vérification à chaque release (pages officielles « Target API level requirements » et « Upcoming Requirements »).</td>
+</tr>
+<tr>
+<td>Internationalisation</td>
+<td>fr, en, ar (RTL) ; formats de date, nombre et devise selon la langue ; textes légaux en français disponibles en priorité.</td>
+<td>Revue linguistique ; tests visuels RTL.</td>
+</tr>
+<tr>
+<td>Maintenabilité</td>
+<td>TypeScript strict ; lint et formatage ; tests unitaires (domaine, ViewModels), tests RLS, tests E2E des parcours critiques (inscription, vérification, réservation, paiement, remise, litige).</td>
+<td>Couverture des parcours critiques en CI.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="environnements-jalons-et-risques">6. Environnements, jalons et risques</h2>
+<h3 id="environnements">6.1 Environnements</h3>
+<table>
+
+<thead>
+<tr>
+<th>Environnement</th>
+<th>Backend</th>
+<th>Stripe</th>
+<th>App</th>
+<th>Données</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>dev</strong></td>
+<td>Supabase local (CLI) ou projet de dev</td>
+<td>Mode test, Stripe CLI pour les webhooks</td>
+<td>Build de développement (Expo)</td>
+<td>Fictives</td>
+</tr>
+<tr>
+<td><strong>staging</strong></td>
+<td>Projet Supabase séparé (même région que la prod), mêmes migrations</td>
+<td>Mode test (ou bac à sable), webhooks réels de test</td>
+<td>Profil EAS « preview » ; TestFlight et piste de test interne Google Play</td>
+<td>Fictives ; aucune donnée réelle</td>
+</tr>
+<tr>
+<td><strong>prod</strong></td>
+<td>Projet Supabase de production, région <strong>Canada (Central)</strong> <code>ca-central-1</code>, accès restreint</td>
+<td><strong>Mode production</strong> (live), clés et secrets distincts</td>
+<td>Profil EAS « production » ; App Store et Google Play</td>
+<td>Réelles ; ÉFVP et sauvegardes en place</td>
+</tr>
+</tbody>
+</table>
+<p>Règles : secrets distincts par environnement dans les secrets de la CI et d'EAS ; migrations SQL appliquées dans l'ordre dev → staging → prod ; aucune copie de données de prod vers les autres environnements.</p>
+<h3 id="plan-de-livraison-en-jalons">6.2 Plan de livraison en jalons</h3>
+<p>Les dates sont <strong>à définir</strong>. L'ordre tient compte des préalables légaux de la fiche de recherche (notamment la déclaration de la banque biométrique à la CAI au moins 60 jours avant la mise en service).</p>
+<table>
+
+<thead>
+<tr>
+<th>Jalon</th>
+<th>Contenu</th>
+<th>Préalables</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>J0 — Cadrage</strong></td>
+<td>Modèle de menaces STRIDE ; inventaire des données ; début de l'ÉFVP ; choix définitifs (cartes, analytics, i18n) ; compte Stripe et Connect configurés en test ; squelette Expo + Supabase + CI.</td>
+<td>Avis initial de l'avocat ; calendrier de la déclaration à la CAI.</td>
+</tr>
+<tr>
+<td><strong>J1 — MVP Canada</strong></td>
+<td>Inscription/connexion (PKCE), profil, Stripe Identity, annonces de trajet et demandes d'envoi, réservation, paiement retenu (separate charges and transfers), preuves de remise, livraison, libération des fonds, versements standard, messagerie simple, avis, signalements, litige de base, suppression du compte et export, fr/en, notifications push.</td>
+<td>ÉFVP terminée ; politiques publiées ; Stripe en production ; pentest fait ; comptes stores ; déclaration à la CAI faite dans les délais.</td>
+</tr>
+<tr>
+<td><strong>J2 — Version 1.1</strong></td>
+<td>Versement instantané avec frais affichés ; assurance optionnelle (selon l'option A ou B validée) ; modération automatique ; amélioration du hors-ligne.</td>
+<td>Contrat avec l'assureur ; avis juridique sur la distribution.</td>
+</tr>
+<tr>
+<td><strong>J3 — Version 1.2</strong></td>
+<td>Arabe (RTL) ; devises locales ; mises en avant ou abonnement (Stripe Billing) si retenus.</td>
+<td>Volet légal sur les contrats à exécution successive.</td>
+</tr>
+<tr>
+<td><strong>J4 — International</strong></td>
+<td>Ouverture pays par pays selon la disponibilité de Stripe Connect et Stripe Identity ; exigences locales (RGPD, DSA, DAC7 en Europe) ; pays sous sanctions exclus.</td>
+<td>Avocat local par pays.</td>
+</tr>
+<tr>
+<td><strong>Plus tard</strong></td>
+<td>Interac (VoPay / Zum Rails) seulement après avis d'avocat (CANAFE, AMF, Banque du Canada).</td>
+<td>Avis juridique.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="estimation-qualitative-des-risques-techniques">6.3 Estimation qualitative des risques techniques</h3>
+<table>
+
+<thead>
+<tr>
+<th>Risque</th>
+<th>Probabilité</th>
+<th>Impact</th>
+<th>Atténuation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Erreur dans la logique de libération des fonds (double transfert, transfert sans livraison)</td>
+<td>Moyenne</td>
+<td>Élevé</td>
+<td>Machine d'états côté serveur, idempotence, tests automatisés, rapprochement avec Stripe, revue de code obligatoire.</td>
+</tr>
+<tr>
+<td>Faille d'autorisation (RLS absente ou trop permissive)</td>
+<td>Moyenne</td>
+<td>Élevé</td>
+<td>Tests RLS en CI, aucune table sans politique, pentest.</td>
+</tr>
+<tr>
+<td>Fraude (faux comptes, cartes volées, colis interdits)</td>
+<td>Moyenne</td>
+<td>Élevé</td>
+<td>Stripe Identity avant la première transaction, Radar, signalements, suspension des transferts, attestation du contenu.</td>
+</tr>
+<tr>
+<td>Rétrofacturations après le transfert au voyageur</td>
+<td>Moyenne</td>
+<td>Moyen à élevé</td>
+<td>Délai avant libération (à décider), preuves de remise, reversal selon les conditions.</td>
+</tr>
+<tr>
+<td>Limites de Stripe (durée de détention des fonds, pays pris en charge, versements transfrontaliers)</td>
+<td>Moyenne</td>
+<td>Moyen</td>
+<td>Validation avec Stripe avant J1 et avant chaque nouveau pays (<strong>à confirmer</strong>).</td>
+</tr>
+<tr>
+<td>Changements d'exigences des stores (API cible, SDK, confidentialité)</td>
+<td>Élevée (annuelle)</td>
+<td>Moyen</td>
+<td>Veille, mise à jour régulière du SDK Expo, vérification à chaque release.</td>
+</tr>
+<tr>
+<td>Dépendance à Supabase (fournisseur unique)</td>
+<td>Faible à moyenne</td>
+<td>Moyen</td>
+<td>PostgreSQL standard, logique métier en TypeScript, migrations versionnées, sauvegardes exportables.</td>
+</tr>
+<tr>
+<td>Fuite de données personnelles (journaux, photos, messages)</td>
+<td>Faible à moyenne</td>
+<td>Élevé</td>
+<td>SEC-13, SEC-17, chiffrement, registre et plan d'incident.</td>
+</tr>
+<tr>
+<td>Complexité de l'interface RTL et du multilingue</td>
+<td>Moyenne</td>
+<td>Faible à moyen</td>
+<td>RTL prévu dès le design system ; tests visuels.</td>
+</tr>
+<tr>
+<td>Différences de comportement entre mobile et web (Expo Router, Stripe, cartes)</td>
+<td>Moyenne</td>
+<td>Moyen</td>
+<td>Composants spécifiques par plateforme isolés dans la couche data/UI ; tests E2E web et mobile.</td>
+</tr>
+<tr>
+<td>Retard dû aux préalables légaux (ÉFVP, CAI 60 jours, avis juridiques)</td>
+<td>Moyenne</td>
+<td>Moyen</td>
+<td>Démarrage des démarches à J0, en parallèle du développement.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="annexe-références-officielles">Annexe — Références officielles</h2>
+<ul>
+<li>Expo Router : https://docs.expo.dev/router/introduction/</li>
+<li>Expo Notifications : https://docs.expo.dev/versions/latest/sdk/notifications/</li>
+<li>Expo SecureStore : https://docs.expo.dev/versions/latest/sdk/securestore/</li>
+<li>EAS Build : https://docs.expo.dev/build/introduction/ · EAS Submit : https://docs.expo.dev/submit/introduction/</li>
+<li>Stripe Connect, types de paiements : https://docs.stripe.com/connect/charges</li>
+<li>Separate charges and transfers : https://docs.stripe.com/connect/separate-charges-and-transfers</li>
+<li>Frais de plateforme (application fees) : https://docs.stripe.com/connect/marketplace/tasks/app-fees</li>
+<li>Durée des autorisations de carte : https://docs.stripe.com/payments/place-a-hold-on-a-payment-method</li>
+<li>Versements instantanés Connect : https://docs.stripe.com/connect/instant-payouts</li>
+<li>Platform Pricing Tool : https://docs.stripe.com/connect/platform-pricing-tools</li>
+<li>Stripe Identity, résultats de vérification : https://docs.stripe.com/identity/handle-verification-outcomes</li>
+<li>Stripe Identity, sessions et effacement : https://docs.stripe.com/identity/verification-sessions</li>
+<li>Webhooks Stripe : https://docs.stripe.com/webhooks</li>
+<li>Types d'événements Stripe : https://docs.stripe.com/api/events/types</li>
+<li>Stripe Billing : https://docs.stripe.com/billing</li>
+<li>Supabase, régions disponibles : https://supabase.com/docs/guides/platform/regions · Invocations régionales : https://supabase.com/docs/guides/functions/regional-invocation</li>
+<li>Supabase Auth : https://supabase.com/docs/guides/auth · RLS : https://supabase.com/docs/guides/database/postgres/row-level-security</li>
+<li>OWASP MASVS : https://mas.owasp.org/MASVS/ · MASTG : https://mas.owasp.org/MASTG/</li>
+<li>OWASP API Security Top 10 (2023) : https://owasp.org/API-Security/</li>
+<li>WCAG 2.2 : https://www.w3.org/TR/WCAG22/</li>
+<li>Google Play, niveau d'API cible : https://support.google.com/googleplay/android-developer/answer/11926878</li>
+<li>Apple, exigences à venir : https://developer.apple.com/news/upcoming-requirements/</li>
+</ul>
+<h1 id="partie-c-volet-légal-de-la-monétisation" class="part">Partie C — Volet légal de la monétisation</h1>
+<p><em>Préparé par Legal Team — 11 octobre 2026</em></p>
+<blockquote>
+<p><strong>Avertissement.</strong> Ce texte est une synthèse informative. Il ne constitue ni un avis juridique, ni un avis fiscal, ni un avis financier. Tout doit être validé par un avocat membre du Barreau du Québec, et par un comptable pour la fiscalité, avant le lancement.</p>
+</blockquote>
+<h2 id="sources-de-revenus-prévues">1. Sources de revenus prévues</h2>
+<table>
+
+<thead>
+<tr>
+<th>Source</th>
+<th>Qui paie</th>
+<th>Comment Stripe l'encaisse (voir section technique)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Commission sur chaque livraison</td>
+<td>L'expéditeur, ou une part du montant versé au voyageur</td>
+<td>Frais de plateforme prélevés par Stripe Connect</td>
+</tr>
+<tr>
+<td>Assurance optionnelle du colis</td>
+<td>L'expéditeur, s'il choisit l'option</td>
+<td>Prime versée à l'assureur partenaire. Volis touche au plus une rémunération que l'assureur lui verse et qui doit être divulguée</td>
+</tr>
+<tr>
+<td>Frais de versement instantané</td>
+<td>Le voyageur, s'il choisit le versement instantané</td>
+<td>Frais de Stripe, avec une éventuelle marge pour Volis</td>
+</tr>
+<tr>
+<td>Option future : abonnement ou mise en avant</td>
+<td>Selon l'offre</td>
+<td>À encadrer avant de lancer (voir 6)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="prix-et-transparence-loi-sur-la-protection-du-consommateur-et-loi-sur-la-concurrence">2. Prix et transparence (Loi sur la protection du consommateur et Loi sur la concurrence)</h2>
+<ul>
+<li><strong>Prix total annoncé.</strong> Le prix montré doit inclure tous les frais obligatoires : commission, frais de service et frais de traitement. Seules la TPS et la TVQ peuvent s'ajouter (LPC, art. 224 c). La Loi sur la concurrence interdit aussi d'annoncer un prix partiel en ajoutant des frais obligatoires plus tard.</li>
+<li><strong>Détail avant paiement.</strong> Avant de payer, l'utilisateur doit voir le prix du transport, la commission de Volis, l'assurance si elle est choisie, les taxes et le total. Ce détail correspond à l'écran de paiement de la partie A (écran 11).</li>
+<li><strong>Contrat conclu à distance</strong> (LPC, art. 54.1 et suivants). Avant la conclusion, l'utilisateur doit recevoir certaines informations : l'identité et l'adresse de Volis, une description du service, le prix détaillé, les modalités de paiement et la politique d'annulation et de remboursement. Il faut ensuite lui transmettre une copie du contrat dans les 15 jours. Si ces informations manquent, le consommateur peut annuler le contrat et demander une rétrofacturation à l'émetteur de sa carte.</li>
+<li><strong>Pas de publicité trompeuse</strong> (LPC, art. 219 et suivants). Les messages comme « livraison garantie » ou « assuré » sont interdits si l'assurance n'est pas choisie.</li>
+<li><strong>Langue.</strong> Les prix, les reçus, les factures et les conditions doivent être en français (Charte de la langue française).</li>
+</ul>
+<h2 id="commission-de-la-plateforme-1">3. Commission de la plateforme</h2>
+<ul>
+<li><strong>Rôle d'intermédiaire.</strong> Les conditions d'utilisation doivent dire clairement que la commission paie un service de mise en relation et de paiement, pas un service de transport.</li>
+<li><strong>Statut des voyageurs.</strong> Les voyageurs sont des utilisateurs autonomes. Volis ne doit pas leur imposer d'horaires, de quotas ni de prix fixes, sinon un tribunal pourrait les considérer comme des salariés (Loi sur les normes du travail, cotisations sociales). Les règles de sécurité et la liste d'objets interdits restent permises.</li>
+<li><strong>Taxes sur la commission.</strong> La commission et les frais de service sont des fournitures taxables. Volis doit s'inscrire à la TPS/TVQ dès que ses revenus dépassent 30 000 $ sur quatre trimestres civils consécutifs, ou plus tôt de façon volontaire. Les reçus doivent indiquer les numéros de TPS et de TVQ. <strong>À confirmer avec un comptable :</strong> les règles qui obligent les exploitants de plateformes numériques à percevoir les taxes à la place de certains fournisseurs pourraient s'appliquer à Volis.</li>
+<li><strong>Revenus des voyageurs.</strong> Ils sont imposables pour les voyageurs. Le régime de déclaration de l'ARC pour les plateformes (en vigueur depuis 2024) pourrait obliger Volis à déclarer chaque année ce que touchent les voyageurs. <strong>À confirmer avec un comptable.</strong> Il faut donc prévoir dès maintenant de recueillir les renseignements requis (nom, adresse, NAS ou numéro d'entreprise), avec le consentement prévu par la Loi 25.</li>
+</ul>
+<h2 id="assurance-optionnelle">4. Assurance optionnelle</h2>
+<ul>
+<li><strong>Ce que Volis ne doit pas faire.</strong> Vendre de l'assurance en son propre nom ou conseiller les utilisateurs sur une assurance, à moins d'être inscrit auprès de l'AMF.</li>
+<li><strong>Option A, la plus simple : la recommandation.</strong> Volis renvoie l'utilisateur vers l'assureur partenaire, qui vend lui-même l'assurance. Si l'assureur verse une rémunération de recommandation à Volis, il faut l'encadrer par contrat et la divulguer à l'utilisateur.</li>
+<li><strong>Option B : la distribution sans représentant</strong> (Loi sur la distribution de produits et services financiers, titre VIII). Ce régime permet de proposer une assurance liée au service. L'assureur doit l'avoir déclaré à l'AMF, Volis doit remettre le guide de distribution de l'assureur et l'utilisateur garde un droit de résolution prévu par la loi. <strong>À valider avec l'avocat et l'assureur.</strong></li>
+<li><strong>Interface.</strong> Il faut une case d'acceptation qui n'est pas cochée d'avance, un prix montré à part, et les limites, exclusions et plafonds écrits clairement. L'assurance ne doit jamais être obligatoire pour utiliser le service.</li>
+<li><strong>Lien avec la politique de litiges.</strong> Le plafond d'indemnisation de Volis s'applique quand l'assurance n'est pas choisie. Il ne peut jamais servir à exclure la responsabilité de Volis pour une faute lourde ou intentionnelle, ni pour un préjudice corporel ou moral (C.c.Q., art. 1474).</li>
+</ul>
+<h2 id="frais-de-versement-instantané-1">5. Frais de versement instantané</h2>
+<ul>
+<li>Le montant ou le pourcentage doit être montré avant que le voyageur choisisse. Le virement standard gratuit reste toujours offert.</li>
+<li>Si Volis ajoute une marge aux frais de Stripe, elle doit être divulguée. Le terme « frais de Stripe » ne peut pas désigner un montant qui contient une marge pour Volis.</li>
+<li>Les données bancaires sont saisies seulement dans l'inscription hébergée par Stripe, et jamais sur les serveurs de Volis (Loi 25, minimisation des données).</li>
+</ul>
+<h2 id="paiement-retenu-remboursements-et-litiges">6. Paiement retenu, remboursements et litiges</h2>
+<ul>
+<li><strong>Encaissement des fonds.</strong> Avec les « separate charges and transfers » de Stripe Connect, l'argent transite par le solde Stripe de Volis. Il faut faire confirmer par l'avocat que Volis peut compter sur l'inscription de Stripe comme fournisseur de services de paiement, ou qu'une exemption s'applique. Sinon, Volis devrait peut-être s'inscrire elle-même à la Banque du Canada (Loi sur les activités associées aux paiements de détail).</li>
+<li><strong>Politique de remboursement.</strong> Elle doit préciser quand un remboursement s'applique (annulation, colis non remis), son délai, et quels frais sont remboursés ou non. Une clause qui empêcherait le consommateur d'exercer ses recours prévus par la LPC est sans effet.</li>
+<li><strong>Rétrofacturations.</strong> Il faut prévoir comment Volis répond aux contestations de carte, en joignant les preuves de remise (photos et confirmation). Il faut aussi prévoir qui assume la perte, sans la transférer au voyageur sans son accord prévu dans les conditions.</li>
+<li><strong>Abonnement ou mise en avant payante (plus tard).</strong> Ce sont des contrats à exécution successive selon la LPC. Il faudra des règles sur la résiliation, un avis avant chaque renouvellement automatique et un prix clair.</li>
+</ul>
+<h2 id="marketing-et-données">7. Marketing et données</h2>
+<ul>
+<li><strong>Courriels et notifications promotionnels.</strong> Ils demandent un consentement exprès, un lien de désabonnement et l'identification de l'expéditeur (LCAP, la loi anti-pourriel).</li>
+<li><strong>Publicité ciblée ou traçage.</strong> La Loi 25 exige que ce soit désactivé par défaut avec un consentement distinct. Il faut aussi les fiches vie privée des stores.</li>
+<li><strong>Pas de vente de données personnelles</strong> sans consentement exprès.</li>
+<li><strong>Sous-traitants qui reçoivent des données</strong> : Stripe (paiements et vérification d'identité), Sentry (suivi des erreurs), le service de notifications d'Expo, l'outil d'analytics s'il y en a un, et l'assureur partenaire. Chacun doit figurer dans l'évaluation des facteurs relatifs à la vie privée (ÉFVP) et dans la politique de confidentialité, avec un contrat de traitement des données. Ceux qui traitent les données hors du Québec doivent faire l'objet d'une évaluation du transfert (Loi 25, art. 17). Supabase est hébergé au Canada (Central).</li>
+</ul>
+<h2 id="clauses-à-prévoir-dans-les-conditions-dutilisation">8. Clauses à prévoir dans les conditions d'utilisation</h2>
+<ol type="1">
+<li>L'objet du service : une mise en relation et un paiement sécurisé, pas un service de transport.</li>
+<li>Le prix, la commission, les taxes et le moment du prélèvement.</li>
+<li>Le paiement retenu, sa libération à la remise et ses délais.</li>
+<li>L'annulation, le remboursement et les frais non remboursables, dans les limites de la LPC.</li>
+<li>La valeur déclarée, le plafond d'indemnisation et le renvoi à l'assurance optionnelle.</li>
+<li>Les objets interdits, l'attestation du contenu et la responsabilité douanière du voyageur, présentée comme une information.</li>
+<li>Les frais de versement et les conditions de Stripe Connect, que l'utilisateur accepte.</li>
+<li>La suspension et la fermeture du compte, avec la suppression de compte dans l'application.</li>
+<li>Le droit applicable (Québec) et la juridiction. Une clause d'arbitrage obligatoire est interdite pour les consommateurs québécois (LPC, art. 11.1).</li>
+<li>La modification des conditions, avec un préavis aux utilisateurs.</li>
+</ol>
+<h2 id="à-faire-valider-par-lavocat-et-le-comptable">9. À faire valider par l'avocat et le comptable</h2>
+<ul class="task-list">
+<li><label><input type="checkbox" />Le mode de distribution de l'assurance (option A ou B) et la rémunération reçue de l'assureur.</label></li>
+<li><label><input type="checkbox" />La perception de la TPS/TVQ par Volis comme plateforme, et la déclaration à l'ARC des revenus des voyageurs.</label></li>
+<li><label><input type="checkbox" />Le statut de Volis selon la loi sur les paiements de détail, avec le modèle Stripe Connect.</label></li>
+<li><label><input type="checkbox" />Le statut de travailleur autonome des voyageurs.</label></li>
+<li><label><input type="checkbox" />L'ÉFVP et l'évaluation des transferts pour chaque sous-traitant (Stripe, Sentry, Expo, analytics, assureur).</label></li>
+<li><label><input type="checkbox" />La version finale des conditions d'utilisation, de la politique de remboursement et de litiges, et de la politique de confidentialité.</label></li>
+</ul>
+</body></html>
