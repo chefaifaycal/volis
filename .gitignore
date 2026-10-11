@@ -1,0 +1,49 @@
+# Dépendances
+node_modules/
+
+# Expo / React Native
+.expo/
+dist/
+web-build/
+expo-env.d.ts
+.metro-health-check*
+*.tsbuildinfo
+/app/ios/
+/app/android/
+.kotlin/
+*.orig.*
+
+# Signature et clés (ne jamais versionner)
+*.jks
+*.p8
+*.p12
+*.key
+*.pem
+*.mobileprovision
+google-services.json
+GoogleService-Info.plist
+
+# Variables d'environnement (seul .env.example est versionné)
+.env
+.env.*
+!.env.example
+
+# Supabase local
+supabase/.branches/
+supabase/.temp/
+
+# Logs
+npm-debug.*
+yarn-debug.*
+yarn-error.*
+*.log
+
+# Python / fichiers temporaires
+__pycache__/
+*.pyc
+*.tmp
+*~
+
+# Systèmes
+.DS_Store
+Thumbs.db
