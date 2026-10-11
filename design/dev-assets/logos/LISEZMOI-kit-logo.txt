@@ -1,0 +1,41 @@
+VOLIS — KIT LOGO (v1, octobre 2026)
+=====================================
+
+Logo principal : mot-symbole « Colis caché » (o = colis en 3D en réserve, point du i = pastille corail avec avion découpé).
+Icône d'app : « Signature » harmonisée (v Plus Jakarta Sans ExtraBold + même pastille-avion que le logo + paraphe corail).
+
+Couleurs : Crème #F5F1E8 · Encre #1E2A3A · Sarcelle #0F766E · Corail #FF7A59 (accent, texte foncé dessus)
+Typographies : Plus Jakarta Sans (titres, base du logo) · Inter (texte) · JetBrains Mono (codes) · Caveat (annotations)
+
+01-logo-principal/
+  svg/                       Vectoriel (texte vectorisé), fond transparent
+  png-4000px-transparent/    PNG 4000 px de large, fond transparent
+  pdf/                       PDF vectoriel, une page au format du logo (fond de la couleur prévue)
+  apercus-avec-fond/         Aperçus 1600 px avec leur fond (présentations)
+  Versions : couleur-fond-creme · fond-encre · fond-sarcelle · mono-noir · mono-blanc
+
+02-symbole/                  Symbole autonome (o-colis + pastille-avion) : avatar réseaux sociaux, tampon, petit format
+                             (l'icône d'app reste « Signature »)
+
+03-icone-app/
+  ios/volis-icone-ios-1024.png              App Store / Xcode : carré, opaque, sans coins arrondis
+  ios/volis-icone-ios-sombre-1024-transparent.png   Variante sombre iOS 18+ (fond transparent, le système ajoute le fond)
+  ios/volis-icone-ios-sombre-1024-fond-encre.png    Variante sombre avec fond encre (aperçu / anciennes cibles)
+  ios/volis-icone-ios-teinte-1024-niveaux-de-gris.png  Variante teintée iOS 18+ (niveaux de gris sur noir)
+  ios/tailles/               180, 167, 152, 120, 87, 80, 60, 58, 40, 29 px (≤ 40 px : version simplifiée sans paraphe)
+  android/res/               Icône adaptative : calques 108 dp (avant-plan / arrière-plan / monochrome thématique),
+                             contenu dans la zone sûre de 66 dp ; mipmap-anydpi-v26/ic_launcher.xml ; icônes héritées
+  android/svg-calques-108dp/ Calques en SVG
+  android/volis-play-store-512.png
+  favicon/                   favicon.ico (16/32/48), favicon.svg, favicon-16/32/48.png, apple-touch-icon.png (180), icon-192/512.png
+  volis-icone-apercu-tailles.png   Test visuel 256 / 180 / 60 / 29 / 16 px
+
+04-charte/                   Charte d'une page (PNG 3200 px + PDF)
+
+Règles : zone de protection = x (diamètre de la pastille) tout autour · logo min. 100 px / 25 mm · symbole min. 24 px / 7 mm.
+Ne pas étirer, recolorer, ajouter d'effets, ni poser sur un fond chargé.
+
+Balises HTML favicon :
+  <link rel="icon" href="/favicon.ico" sizes="48x48">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">

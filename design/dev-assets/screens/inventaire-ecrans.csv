@@ -1,0 +1,51 @@
+﻿id,fichier,nom,parcours,objectif,composants_cles,barre_onglets
+01,01-splash.png,Splash,"A · Accueil, connexion et compte",Ouverture de l’appli; affichage du logo pendant le chargement,"Logo principal, illustration voyageur, tagline confiance",—
+02,02-onboarding-envoyez.png,Onboarding 1 · Envoyez,"A · Accueil, connexion et compte",Expliquer l’envoi par voyageur,"Illustration, titre souligné, pagination, CTA Suivant, lien Passer",—
+03,03-onboarding-voyagez.png,Onboarding 2 · Voyagez et gagnez,"A · Accueil, connexion et compte",Recruter des voyageurs,"Illustration, pagination, CTA",—
+04,04-onboarding-confiance.png,Onboarding 3 · Livré en confiance,"A · Accueil, connexion et compte",Rassurer : séquestre + identité vérifiée,"Illustration, badges séquestre/ID, CTA Commencer",—
+05,05-connexion.png,Connexion,"A · Accueil, connexion et compte",Se connecter,"Apple, Google, clé d’accès, champs courriel/mot de passe, lien mot de passe oublié, Explorer sans compte",—
+06,06-inscription.png,Inscription,"A · Accueil, connexion et compte",Créer un compte,"Puces de rôle, champs, téléphone +1, case conditions, note vérification ID",—
+07,07-accueil.png,Accueil,C · Recherche et réservation,Point d’entrée : envoyer ou voyager,"Cartes d’entrée, barre de recherche De/À/date, mini-carte envoi actif, carrousel voyageurs, barre d’onglets",Accueil
+08,08-resultats-recherche.png,Résultats de recherche,C · Recherche et réservation,Comparer les voyageurs d’un trajet,"Pastille trajet, puces filtres, cartes voyageur (badges, note, kg, prix), feuille Trier / Carte",Accueil
+09,09-profil-voyageur.png,Profil voyageur,C · Recherche et réservation,Évaluer la confiance avant de demander,"Avatar, stats, vérifications par niveaux, carte voyage (détails masqués), avis, CTA Demander l’envoi",—
+10,10-creer-envoi.png,Créer un envoi · étape 2/4,C · Recherche et réservation,Décrire le colis,"Stepper, photos, poids, dimensions, valeur déclarée (plafond 1 000 $), puces contenu, alerte objets interdits, attestation",—
+11,11-paiement-protege.png,Paiement protégé,C · Recherche et réservation,Payer en séquestre avec option assurance,"Résumé, interrupteur assurance partenaire, détail des frais, explication séquestre, Apple Pay / carte, CTA",—
+12,12-suivi-colis.png,Suivi du colis,"D · Envoi, remise et suivi",Suivre l’envoi en temps réel,"Carte vol (AT 201, À l’heure), frise verticale 7 étapes avec étape active, carte destinataire",Envois
+13,13-remise.png,Remise (QR + code),"D · Envoi, remise et suivi",Remettre le colis au voyageur,"QR, code 4821 en JetBrains Mono, photo du colis scellé, liste de vérification, CTA",—
+14,14-messages.png,Messages,"D · Envoi, remise et suivi",Discuter avec le voyageur en sécurité,"Bannière « Ne payez jamais en dehors de l’appli », bulles, numéro masqué, carte remise proposée, réponses rapides, champ",Messages
+15,15-publier-voyage.png,Publier un voyage,E · Côté voyageur,Côté voyageur : offrir de la place,"Trajet, date, billet privé, compteur kg, puces articles acceptés, prix/kg suggéré",Voyages
+16,16-profil-portefeuille.png,Profil / Portefeuille,"G · Profil, portefeuille et réglages","Compte, confiance et argent","Badges, niveau de vérification, carte portefeuille (solde, séquestre, Virer), liste de réglages",Profil
+17,17-verif-identite-intro.png,Vérification d’identité · intro,B · Vérification d’identité (Stripe Identity),Expliquer la vérification avant de commencer,"Illustration, 3 étapes, mention Stripe Identity, CTA",—
+18,18-verif-identite-consentement-biometrique.png,Consentement biométrique exprès,B · Vérification d’identité (Stripe Identity),Obtenir un consentement exprès (Loi 25) avant Stripe,"Liste quoi/pourquoi/qui/où/durée/droits, alternative manuelle, case non cochée par défaut, CTA désactivé",—
+19,19-verif-identite-stripe.png,Stripe Identity (hébergé),B · Vérification d’identité (Stripe Identity),Montrer la page externe Stripe (feuille web),"Barre navigateur verify.stripe.com, capture de pièce, étiquette « page externe »",—
+20,20-verif-identite-verifiee.png,Vérification · réussie,B · Vérification d’identité (Stripe Identity),Confirmer le succès,"Icône succès, niveau de confiance, prochaine étape",—
+21,21-verif-identite-en-attente.png,Vérification · en attente,B · Vérification d’identité (Stripe Identity),Gérer l’attente,"Icône horloge, ce qui se passe ensuite, contact",—
+22,22-verif-identite-echec.png,Vérification · échec,B · Vérification d’identité (Stripe Identity),Récupérer après un échec,"Causes, conseils, compteur d’essais, Réessayer, vérification manuelle",—
+23,23-mot-de-passe-oublie.png,Mot de passe oublié,"A · Accueil, connexion et compte",Demander un lien de réinitialisation,"Champ courriel (focus), CTA, alternative clé d’accès, clavier",—
+24,24-mot-de-passe-lien-envoye.png,Lien envoyé,"A · Accueil, connexion et compte",Confirmer l’envoi du lien sans divulguer l’existence du compte,"Illustration, message neutre, ouvrir Courriel, renvoyer avec minuterie",—
+25,25-verif-telephone-sms.png,Vérification téléphone (SMS),"A · Accueil, connexion et compte",Valider le numéro par code à 6 chiffres,"Cases de code, renvoi minuté, appel vocal, suggestion de remplissage auto, pavé numérique",—
+26,26-demande-detail-voyageur.png,Demande · côté voyageur,E · Côté voyageur,Accepter ou refuser une demande d’envoi,"Délai d’expiration, expéditeur vérifié, détails colis, gain, capacité restante, Refuser/Accepter",—
+27,27-envoi-detail-en-attente.png,Envoi · en attente,"D · Envoi, remise et suivi",Statut expéditeur en attente de réponse,"Progression 4 étapes, bannière avertissement, pré-autorisation, annuler",—
+28,28-envoi-detail-accepte.png,Envoi · accepté,"D · Envoi, remise et suivi","Statut accepté, préparer la remise","Bannière succès, séquestre, remise, vol, CTA Préparer la remise",—
+29,29-envoi-detail-refuse.png,Envoi · refusé,"D · Envoi, remise et suivi",Rebondir après un refus,"Bannière erreur avec motif, aucuns frais, voyageurs alternatifs",—
+30,30-mes-envois.png,Mes envois,"D · Envoi, remise et suivi",Liste des envois avec statuts,"Contrôle segmenté, cartes avec badges (Embarqué, En attente, Brouillon, Livré), progression",Envois
+31,31-mes-voyages.png,Mes voyages,E · Côté voyageur,Gérer ses voyages publiés,"Carte vol, jauge de capacité (accepté/en attente/libre), demandes, gain prévu",Voyages
+32,32-notifications.png,Notifications,"G · Profil, portefeuille et réglages",Centre d’activité,"Groupes par date, icônes sémantiques, point non lu, préférences",—
+33,33-livraison-confirmee-notation.png,Livraison confirmée + avis,"D · Envoi, remise et suivi",Clore et noter en double aveugle,"Illustration, étoiles, puces qualités, champ, explication double aveugle, signaler un problème",—
+34,34-vol-annule-reattribuer.png,Vol annulé · réattribuer,"F · Imprévus, litiges et aide",Gérer un vol annulé ou retardé,"Carte vol annulé, argent protégé, options radio réattribuer/reporter/rembourser",—
+35,35-signaler-probleme-litige.png,Signaler un problème / litige,"F · Imprévus, litiges et aide",Ouvrir un litige avec preuves,"Puces motif, photos de remise horodatées, description, plafond d’indemnisation, délais",—
+36,36-etat-vide-alerte.png,État vide · aucun voyageur,C · Recherche et réservation,Créer une alerte quand aucun résultat,"Illustration, explication, carte alerte avec interrupteurs, élargir",Accueil
+37,37-remise-hors-ligne.png,Remise hors ligne,"D · Envoi, remise et suivi",Utiliser le code sans réseau,"Bandeau hors ligne, QR signé, code, explication, dernière synchro",—
+38,38-filtres-bottom-sheet.png,Filtres (bottom sheet),C · Recherche et réservation,Affiner les résultats,"Feuille modale, tri, segmenté dates, curseur prix, interrupteurs confiance, note, CTA avec compte",—
+39,39-vue-carte.png,Vue carte,C · Recherche et réservation,Choisir par point de remise,"Carte, épingles prix/avatar, position, segmenté Liste/Carte, carte voyageur sélectionné",Accueil
+40,40-assurance-optionnelle.png,Assurance optionnelle,C · Recherche et réservation,Détail de l’assurance du partenaire,"Feuille modale, valeur, couverture, plafond, prime, couvert/non couvert, commission divulguée",—
+41,41-versements.png,Versements,"G · Profil, portefeuille et réglages",Retirer ses gains,"Solde, compte géré par Stripe, standard gratuit vs instantané avec frais, historique avec statuts",—
+42,42-versements-configurer-stripe.png,Configurer versements (Stripe),"G · Profil, portefeuille et réglages",Ajouter un compte bancaire via Stripe Connect hébergé,"Illustration, 3 étapes, mention confidentialité, CTA Stripe",—
+43,43-ajouter-destinataire.png,Ajouter un destinataire,"D · Envoi, remise et suivi",Saisir le destinataire et partager le lien de suivi,"Champs, indicatif +213, puces lien, carte lien de suivi, interrupteur texto",—
+44,44-centre-aide.png,Centre d’aide,"F · Imprévus, litiges et aide",Trouver de l’aide,"Recherche, grille de catégories, FAQ, soutien, urgence sécurité",Profil
+45,45-objets-interdits.png,Objets interdits,"F · Imprévus, litiges et aide",Informer des règles,"Listes Toujours interdit / Sous conditions, icônes sémantiques",—
+46,46-reglages.png,Réglages,"G · Profil, portefeuille et réglages","Préférences, paiement, confidentialité","Groupes de lignes, langue, consentements, données, supprimer",—
+47,47-supprimer-compte.png,Supprimer mon compte,"G · Profil, portefeuille et réglages",Expliquer les conséquences et les blocages,"Bannière blocage, supprimé vs conservé, motif, CTA destructif secondaire",—
+48,48-supprimer-compte-confirmation.png,Suppression · confirmation,"G · Profil, portefeuille et réglages",Confirmer une action irréversible,"Modale, saisie « SUPPRIMER », bouton danger, délai de grâce 30 jours",—
+49,49-attestation-douane-voyageur.png,Attestation douane (voyageur),E · Côté voyageur,Responsabiliser le voyageur avant d’accepter,"Bandeau responsabilité, contenu déclaré, cases d’attestation, Refuser / Accepter (désactivé)",—
+50,50-live-activity-ecran-verrouille.png,Live Activity iOS,"D · Envoi, remise et suivi",Suivi depuis l’écran verrouillé et l’îlot dynamique,"Îlot dynamique compact, Live Activity, notification",—
